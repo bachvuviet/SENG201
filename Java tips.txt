@@ -1,0 +1,4 @@
+Message and Optionbox: https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html#features
+AWSD movement: https://www.youtube.com/watch?v=GCMm_O7JzR0
+Game in java: https://www.youtube.com/watch?v=XAowXcmQ-kA
+
