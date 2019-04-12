@@ -32,6 +32,7 @@ public class MissionFrame {
 	public JFrame frame; 
 	private JSlider slider = new JSlider(3, 10, 6);//min, max, initVal
 	private int Days = slider.getValue();
+	Image IMG;
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -103,7 +104,7 @@ public class MissionFrame {
 		panelMid.add(lblChoosingCrewMembers);
 		
 		JLabel lblTotal = new JLabel("");
-		Image IMG = StaticObjects.SelfResizeImage("../Doctor Strange.png", this, 174, 207);
+		IMG = StaticObjects.SelfResizeImage("../Doctor Strange.png", this, 174, 207);
 		JButton btnCrewMember1 = new JButton(new ImageIcon(IMG));
 		btnCrewMember1.setToolTipText("<html><h2><center>Doctor</center><h4>He/She heals your health</html>");
 		btnCrewMember1.addMouseListener(new MouseListener() {
@@ -111,7 +112,7 @@ public class MissionFrame {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.DOCTOR, lblTotal);
+					addCrew(CrewRank.DOCTOR, lblTotal, IMG);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.DOCTOR, lblTotal);
 			}
@@ -136,7 +137,7 @@ public class MissionFrame {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.MECHANIC, lblTotal);
+					addCrew(CrewRank.MECHANIC, lblTotal, IMG);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.MECHANIC, lblTotal);
 			}
@@ -161,7 +162,7 @@ public class MissionFrame {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.CAPTAIN, lblTotal);
+					addCrew(CrewRank.CAPTAIN, lblTotal, IMG);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.CAPTAIN, lblTotal);
 			}
@@ -187,7 +188,7 @@ public class MissionFrame {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.SCIENTIST, lblTotal);
+					addCrew(CrewRank.SCIENTIST, lblTotal, IMG);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.SCIENTIST, lblTotal);
 			}
@@ -213,7 +214,7 @@ public class MissionFrame {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.CHEF, lblTotal);
+					addCrew(CrewRank.CHEF, lblTotal, IMG);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.CHEF, lblTotal);
 			}
@@ -238,7 +239,7 @@ public class MissionFrame {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.HELMS_MAN, lblTotal);
+					addCrew(CrewRank.HELMS_MAN, lblTotal, IMG);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.HELMS_MAN, lblTotal);
 			}
@@ -354,7 +355,7 @@ public class MissionFrame {
 	
 	ArrayList<Crew> tempCrew = new ArrayList<Crew>();
     int[] Array = {0, 0, 0, 0, 0, 0};
-	void addCrew(CrewRank Rank, JLabel lbl) {
+	void addCrew(CrewRank Rank, JLabel lbl, Image img) {
 		int total = 0;
 		for (int num:Array) {
 			total += num;
@@ -385,7 +386,7 @@ public class MissionFrame {
 			break;
 		}
 		
-		Crew newCrew = new Crew("Anything", Rank, 100, 100, 100);
+		Crew newCrew = new Crew("Anything", Rank, 100, 100, 100, new ImageIcon(img));
 		tempCrew.add(newCrew);
 		updateCrewlabel(lbl);
 	}

@@ -17,13 +17,14 @@ public class Crew {
     private ImageIcon avatar;
     
     public Crew() { Real = false; }
-    public Crew(String name, CrewRank rank, int health, int hunger, int morale) {
+    public Crew(String name, CrewRank rank, int health, int hunger, int morale, ImageIcon img) {
     	this.ID = 0;
     	this.Name = name;
     	this.Rank = rank;
     	this.Health = health;
     	this.Hunger = hunger;
     	this.Morale = morale;
+    	this.avatar = img;
     	Real = true;
     }
     
@@ -39,6 +40,9 @@ public class Crew {
     }
     public int getHunger() {
     	return Hunger;
+    }
+    public ImageIcon getAvatar() {
+    	return avatar;
     }
     
     
