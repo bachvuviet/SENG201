@@ -1,6 +1,6 @@
 package SpaceVessel;
 
-//import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 public class Crew {
@@ -14,7 +14,7 @@ public class Crew {
     private int Morale;
     
     private ArrayList<String> crewAction = new ArrayList<String>();
-    //private ImageIcon avatar;
+    private ImageIcon avatar;
     
     public Crew() { Real = false; }
     public Crew(String name, CrewRank rank, int health, int hunger, int morale) {
