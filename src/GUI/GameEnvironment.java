@@ -311,7 +311,7 @@ class Galaxy extends JPanel  implements KeyListener{
 							
 						} else if (en instanceof CelestialBody) {
 							StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
-							//lol
+							
 						}
 						break found;
 					}
