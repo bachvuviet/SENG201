@@ -15,8 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.JSeparator;
-import javax.swing.BoxLayout;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class OutpostTradeFrame {
 
@@ -55,10 +55,41 @@ public class OutpostTradeFrame {
 		
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
+		splitPane.setDividerLocation(frame.getWidth()/2);
+		
+		JPanel panelLeft = new JPanel();
+		panelLeft.setBounds(0, 0, frame.getWidth()/2, frame.getHeight()/2);
+		splitPane.setLeftComponent(panelLeft);
+		panelLeft.setLayout(null);
+		
+		JList list = new JList();
+		list.setBounds(10, 11, 204, 196);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Linh", "Lol", "Luu", "Lil"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		panelLeft.add(list);
 		
 		JPanel panelRight = new JPanel();
-		panelRight.setBounds(0, 0, frame.getWidth()/2, frame.getHeight()/2);
-		splitPane.setLeftComponent(panelRight);
+		splitPane.setRightComponent(panelRight);
+		panelRight.setLayout(null);
+		
+		JList list_1 = new JList();
+		list_1.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Big", "bang", "bomb"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list_1.setBounds(10, 11, 204, 196);
+		panelRight.add(list_1);
 	}
-
 }
