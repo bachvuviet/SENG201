@@ -135,24 +135,33 @@ public class PauseFrame extends JFrame {
 		lblInventory.setBounds(497, 11, 241, 445);
 		panelStatus.add(lblInventory);
 		
-		panelCrew.setBackground(Color.YELLOW);
-		panelCrew.setOpaque(true);
-		panelCrew.setLayout(null);
 		
-		JPanel crew = CrewPanel();
-		panelCrew.add(crew);
-		panelCrew.revalidate();
-		panelCrew.repaint();
 
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
+		
+		panelCrew.setBackground(Color.YELLOW);
+		//panelCrew.setOpaque(true);
+		panelCrew.setLayout(null);
+		
+		/*for (int i = 0; i < 2; i++) {} */
+			//(720, 610)
+		
+		JPanel crew1 = CrewPanel(0, 302, 366, 234);
+		//JPanel crew2 = CrewPanel(0, 302, 366, 234);
+		//JPanel crew3 = CrewPanel(260, 0, 385, 310);
+		panelCrew.add(crew1);
+		//panelCrew.add(crew2);
+		//panelCrew.add(crew3);
+		//panelCrew.revalidate();
+		//panelCrew.repaint();
 		
 		JPanel panelLog = new JPanel();
 		tabbedPane.addTab("Mission Log", null, panelLog, null);
 	}
 	
-	JPanel CrewPanel() {
+	JPanel CrewPanel(int x, int y, int w, int h) {
 		JPanel frame = new JPanel();
-        frame.setBounds(0, 0, 385, 235);
+        frame.setBounds(0, 0, 366, 234);
         frame.setLayout(null);
         frame.setVisible(true);
         
