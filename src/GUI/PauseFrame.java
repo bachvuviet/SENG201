@@ -25,11 +25,13 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 
 public class PauseFrame extends JFrame {
 	/**
@@ -38,6 +40,7 @@ public class PauseFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public JFrame frame;
 	private JTextField txtShipname;
+	GridBagConstraints gbc = new GridBagConstraints();
 
 	JPanel panelCrew = new JPanel();
 	/**
@@ -133,97 +136,27 @@ public class PauseFrame extends JFrame {
 		lblInventory.setVerticalAlignment(SwingConstants.TOP);
 		lblInventory.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblInventory.setBounds(497, 11, 241, 445);
-		panelStatus.add(lblInventory);
-		
-		
-
-		tabbedPane.addTab("Crew Status", null, panelCrew, null);
+		panelStatus.add(lblInventory);		
 		
 		panelCrew.setBackground(Color.YELLOW);
-		//panelCrew.setOpaque(true);
 		panelCrew.setLayout(null);
 		
-		/*for (int i = 0; i < 2; i++) {} */
-			//(720, 610)
+		int halfX = (int) 760/2;
+		int halfY = (int) 530/2;
+		System.out.println(halfX + " " + halfY);
 		
-		JPanel crew1 = CrewPanel(0, 302, 366, 234);
-		//JPanel crew2 = CrewPanel(0, 302, 366, 234);
-		//JPanel crew3 = CrewPanel(260, 0, 385, 310);
-		panelCrew.add(crew1);
-		//panelCrew.add(crew2);
-		//panelCrew.add(crew3);
-		//panelCrew.revalidate();
-		//panelCrew.repaint();
+		tabbedPane.addTab("Crew Status", null, panelCrew, null);
+		
+		for (int i=0; i < 2; i++) {
+			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY);
+			panelCrew.add(crew1.contentPan);
+			
+			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY);
+			panelCrew.add(crew2.contentPan);
+		}
 		
 		JPanel panelLog = new JPanel();
 		tabbedPane.addTab("Mission Log", null, panelLog, null);
 	}
-	
-	JPanel CrewPanel(int x, int y, int w, int h) {
-		JPanel frame = new JPanel();
-        frame.setBounds(0, 0, 366, 234);
-        frame.setLayout(null);
-        frame.setVisible(true);
-        
-	    JLabel lblAvatar = new JLabel();
-	    Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
-	    lblAvatar.setBorder(border);
-        lblAvatar.setBackground(Color.GRAY);
-        lblAvatar.setForeground(Color.RED);
-        lblAvatar.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAvatar.setBounds(12, 12, 111, 169);
-        frame.add(lblAvatar);
-        
-        JTextField txtName = new JTextField();
-        txtName.setHorizontalAlignment(SwingConstants.CENTER);
-        txtName.setBounds(138, 12, 210, 19);
-        frame.add(txtName);
-        txtName.setColumns(10);
-        
-        JComboBox<String> cboAction1 = new JComboBox<String>();
-        cboAction1.setBounds(188, 131, 160, 19);
-        frame.add(cboAction1);
-        
-        JComboBox<String> cboAction2 = new JComboBox<String>();
-        cboAction2.setBounds(188, 162, 160, 19);
-        frame.add(cboAction2);
-        
-        JLabel lblActions = new JLabel("Action");
-        lblActions.setFont(new Font("Dialog", Font.BOLD, 10));
-        lblActions.setBounds(137, 131, 51, 50);
-        frame.add(lblActions);
-        
-        JLabel lblHealth1 = new JLabel("Health");
-        lblHealth1.setFont(new Font("Dialog", Font.BOLD, 11));
-        lblHealth1.setBounds(137, 43, 49, 15);
-        frame.add(lblHealth1);
-        
-        JLabel lblHunger1 = new JLabel("Hunger");
-        lblHunger1.setFont(new Font("Dialog", Font.BOLD, 11));
-        lblHunger1.setBounds(137, 67, 49, 15);
-        frame.add(lblHunger1);
-        
-        JProgressBar progHunger = new JProgressBar();
-        progHunger.setBounds(188, 67, 160, 15);
-        frame.add(progHunger);
-        
-        JProgressBar progHealth = new JProgressBar();
-        progHealth.setBounds(188, 43, 160, 15);
-        frame.add(progHealth);
-        
-        JLabel lblMorale = new JLabel("Morale");
-        lblMorale.setFont(new Font("Dialog", Font.BOLD, 11));
-        lblMorale.setBounds(137, 90, 49, 15);
-        frame.add(lblMorale);
-        
-        JProgressBar progMorale = new JProgressBar();
-        progMorale.setBounds(188, 90, 160, 15);
-        frame.add(progMorale);
-        
-        JButton btnGiveOrder = new JButton("Give Order");
-        btnGiveOrder.setBounds(138, 197, 210, 25);
-        frame.add(btnGiveOrder);
-        
-        return frame;
-	}
 }
+
