@@ -300,7 +300,9 @@ class Galaxy extends JPanel  implements KeyListener{
 					
 					if (X && Y) {
 						if (en instanceof Outpost) {
-							OutpostTradeFrame trade = new OutpostTradeFrame((Outpost) en);
+							frame.setFocusable(false);
+							frame.setEnabled(false);
+							OutpostTradeFrame trade = new OutpostTradeFrame(frame, (Outpost) en);
 							trade.frame.setVisible(true);
 							trade.frame.setLocationRelativeTo(null);
 						}

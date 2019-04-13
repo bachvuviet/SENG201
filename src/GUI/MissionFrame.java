@@ -335,7 +335,7 @@ public class MissionFrame {
 		ArrayList<ShipModule> CoreMod = new ArrayList<ShipModule>(Arrays.asList(thrust3, ammour, bridge));//Core
 		ArrayList<ShipModule> SupMod = new ArrayList<ShipModule>(Arrays.asList(thrust1, thrust2, engine1, engine2, fusioner));
 		Collections.shuffle(SupMod);
-		for (int i=0; i < (int)DaysOnMission/3; i++) {
+		for (int i=0; i < (int) 2*DaysOnMission/3-1; i++) {
 			SupMod.get(SupMod.size() -1 -i).setActive(false);
 		}
 		for (ShipModule mod:SupMod) {
