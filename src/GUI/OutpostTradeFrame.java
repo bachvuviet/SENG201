@@ -13,10 +13,10 @@ import SpaceVessel.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 
 public class OutpostTradeFrame {
 
@@ -25,7 +25,7 @@ public class OutpostTradeFrame {
 	/**
 	 * Create the application.
 	 */
-	public OutpostTradeFrame(JFrame parent, Outpost outpost) {
+	public OutpostTradeFrame(JFrame parent, Outpost outpost, Outpost ship) {
 		frame = new JFrame();
 		frame.setAlwaysOnTop(true);
 		frame.setBounds(200, 300, 450, 300);
@@ -61,35 +61,17 @@ public class OutpostTradeFrame {
 		panelLeft.setBounds(0, 0, frame.getWidth()/2, frame.getHeight()/2);
 		splitPane.setLeftComponent(panelLeft);
 		panelLeft.setLayout(null);
-		
-		JList list = new JList();
-		list.setBounds(10, 11, 204, 196);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Linh", "Lol", "Luu", "Lil"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		panelLeft.add(list);
+
+		JList<Stock> listLeft = new JList<Stock>(ship.getItemList());
+		listLeft.setBounds(10, 11, 204, 196);
+		panelLeft.add(listLeft);
 		
 		JPanel panelRight = new JPanel();
 		splitPane.setRightComponent(panelRight);
 		panelRight.setLayout(null);
-		
-		JList list_1 = new JList();
-		list_1.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Big", "bang", "bomb"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		list_1.setBounds(10, 11, 204, 196);
-		panelRight.add(list_1);
+				
+		JList<Stock> listRight = new JList<Stock>(outpost.getItemList());
+		listRight.setBounds(10, 11, 204, 196);
+		panelRight.add(listRight);
 	}
 }

@@ -37,6 +37,15 @@ public class Outpost extends Entity {
     public ArrayList<Stock> getInventory(){
     	return INVENTORY;
     }
+    public Stock[] getItemList(){
+    	int size = INVENTORY.size();
+    	Stock[] arr = new Stock[size];
+    	for (int i = 0; i < size; i++) {
+			arr[i] = INVENTORY.get(i);
+		} 
+    	return arr;
+    }
+    
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
