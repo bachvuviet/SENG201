@@ -48,4 +48,9 @@ public class Stock_Medicine implements Stock{
 		// TODO Auto-generated method stub
 		this.amount = amount;
 	}
+
+	@Override
+	public String getStockName() {
+		return Name;
+	}
 }

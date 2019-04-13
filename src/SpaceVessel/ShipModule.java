@@ -56,4 +56,10 @@ public class ShipModule implements Stock {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String getStockName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

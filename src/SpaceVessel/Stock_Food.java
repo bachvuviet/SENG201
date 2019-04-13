@@ -19,6 +19,10 @@ public class Stock_Food implements Stock{
 	public String toString() {
 		return amount +"x " +Name + " (" + CATEGORY + "):<p> --> Effect: Crew Hunger +" +boostValue;
 	}
+	
+	public String getStockName() {
+		return Name;
+	}
 
 	public String getName() {
 		return Name;
