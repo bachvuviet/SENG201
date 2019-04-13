@@ -167,7 +167,7 @@ public class GameEnvironment {
 	}
 }
 
-class Galaxy extends JPanel  implements KeyListener{
+class Galaxy extends JPanel implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	/**
 	 * This class contains Game components and controls
