@@ -31,16 +31,21 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-public class PauseFrame {
+public class PauseFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public JFrame frame;
 	private JTextField txtShipname;
 
+	JPanel panelCrew = new JPanel();
 	/**
 	 * Create the frame.
 	 */
 	public PauseFrame(JFrame parent, Spaceship MyShip) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 769, 617);
+		frame.setBounds(100, 100, 770, 620);
 		frame.setAlwaysOnTop(true);
 
 		JPanel contentPane = new JPanel();
@@ -130,50 +135,37 @@ public class PauseFrame {
 		lblInventory.setBounds(497, 11, 241, 445);
 		panelStatus.add(lblInventory);
 		
-		JPanel panelCrew = new JPanel();
-		tabbedPane.addTab("Crew Status", null, panelCrew, null);
+		panelCrew.setBackground(Color.YELLOW);
+		panelCrew.setOpaque(true);
 		panelCrew.setLayout(null);
 		
-		for (int i = 0; i < 4; i++) {
-			CrewStatus crew = new CrewStatus(385*i, 310*i, 385, 310);
-			panelCrew.add(crew);
-			
-		}
-		
-		
-		
+		JPanel crew = CrewPanel();
+		panelCrew.add(crew);
+		panelCrew.revalidate();
+		panelCrew.repaint();
+
+		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
 		JPanel panelLog = new JPanel();
 		tabbedPane.addTab("Mission Log", null, panelLog, null);
-		
 	}
 	
-}
-class CrewStatus extends JPanel {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	public JPanel frame;
-    private JTextField txtName;
-    
-    public CrewStatus(int x, int y, int w, int h) {
-        frame = new JPanel();
-        frame.setBounds(x, y, w, h);
+	JPanel CrewPanel() {
+		JPanel frame = new JPanel();
+        frame.setBounds(0, 0, 385, 235);
         frame.setLayout(null);
+        frame.setVisible(true);
         
 	    JLabel lblAvatar = new JLabel();
 	    Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
 	    lblAvatar.setBorder(border);
-        //Image backImg = new ImageIcon(this.getClass().getResource("Kirk.png")).getImage();
-        //lblPhoto1.setIcon(new ImageIcon(backImg));
         lblAvatar.setBackground(Color.GRAY);
         lblAvatar.setForeground(Color.RED);
         lblAvatar.setHorizontalAlignment(SwingConstants.CENTER);
         lblAvatar.setBounds(12, 12, 111, 169);
         frame.add(lblAvatar);
         
-        txtName = new JTextField();
+        JTextField txtName = new JTextField();
         txtName.setHorizontalAlignment(SwingConstants.CENTER);
         txtName.setBounds(138, 12, 210, 19);
         frame.add(txtName);
@@ -220,7 +212,9 @@ class CrewStatus extends JPanel {
         frame.add(progMorale);
         
         JButton btnGiveOrder = new JButton("Give Order");
-	        btnGiveOrder.setBounds(138, 197, 210, 25);
-	        frame.add(btnGiveOrder);
-    }
+        btnGiveOrder.setBounds(138, 197, 210, 25);
+        frame.add(btnGiveOrder);
+        
+        return frame;
+	}
 }
