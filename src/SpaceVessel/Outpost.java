@@ -22,6 +22,11 @@ public class Outpost extends Entity {
     public void addStock(Stock st) {
     	INVENTORY.add(st);
     }
+
+    public ArrayList<Stock> getInventory(){
+    	return INVENTORY;
+    }
+    
     public String ListofStock() {
     	String mystr = "";
     	int totalStock = 0;
@@ -34,9 +39,6 @@ public class Outpost extends Entity {
 				+ mystr + "</html>";
     	return mystr;
     }
-    public ArrayList<Stock> getInventory(){
-    	return INVENTORY;
-    }
     public Stock[] getItemList(){
     	int size = INVENTORY.size();
     	Stock[] arr = new Stock[size];
@@ -48,7 +50,6 @@ public class Outpost extends Entity {
     
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Welcome to " + Name;
 	}
 }

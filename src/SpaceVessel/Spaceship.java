@@ -73,7 +73,6 @@ public class Spaceship extends Outpost {
 			default:
 				break;
 		}
-		//System.out.println("Speed: " +x+" - "+  y+"-"+velocity);
 	}
 	
 	public void forward() {
@@ -111,13 +110,7 @@ public class Spaceship extends Outpost {
 		return direction;
 	}
 	
-	//Supply Ship Methods - getter
-	public int getHull() {
-		return HullStrength;
-	}
-	public int getFuel() {
-		return baseFuel;
-	}
+	//tostrings
 	public String ShipStatus() {
 		return "<html>"
 				+ "<h1>Ship Status:"
@@ -130,9 +123,6 @@ public class Spaceship extends Outpost {
 	}
 	public String toString() {
 		return "";
-	}
-	public String getVesselName() {
-		return Name;
 	}
 	public String getModules() {
 		int active = 0;
@@ -148,13 +138,25 @@ public class Spaceship extends Outpost {
 		return mystr;
 	}
 	
-	//Supply Ship Methods - setter
+	//Supply Ship Methods - getter
+	public int getHull() {
+		return HullStrength;
+	}
+	public int getFuel() {
+		return baseFuel;
+	}
+	public String getVesselName() {
+		return Name;
+	}
+	
+	//setter
 	public void setHull(int value) {
 		HullStrength += value;
 	}
 	public void RenameShip(String name) {
 		Name = name;
 	}
+	
 	
 	//Crew Related
 	public Crew getCrew(int ID) {

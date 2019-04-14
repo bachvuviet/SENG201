@@ -1,5 +1,7 @@
 package GUI;
 
+import SpaceVessel.*;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -23,6 +25,7 @@ import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 
@@ -35,6 +38,7 @@ import javax.swing.JTextField;
 public class OutpostTrade {
 
 	public JFrame frame;
+	
 	private JTextField txtFood1;
 	private JTextField txtFood2;
 	private JTextField txtFood3;
@@ -44,9 +48,11 @@ public class OutpostTrade {
 	private JTextField txMed1;
 	private JTextField txtMed2;
 	private JTextField txtMed3;
+	
+	private ArrayList<Stock> StockList;
 
 	public OutpostTrade(JFrame parent, Outpost outpost, Outpost ship) {
-		
+		StockList
 		frame = new JFrame();
 		frame.setAlwaysOnTop(true);
 		frame.setBounds(200, 300, 501, 447);
