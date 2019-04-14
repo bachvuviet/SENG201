@@ -17,8 +17,8 @@ public class Stock_Medicine implements Stock{
         return boostValue*amount;
     }
     
-    public String toString() {
-		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
+    public String getStockName() {
+    	return Name;
     }
 
 	public String getName() {
@@ -50,7 +50,7 @@ public class Stock_Medicine implements Stock{
 	}
 
 	@Override
-	public String getStockName() {
-		return Name;
+	public String getStockStatus() {
+		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
 	}
 }

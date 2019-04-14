@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JList;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.GridLayout;
 
 public class OutpostTradeFrame {
 
@@ -56,22 +59,24 @@ public class OutpostTradeFrame {
 		JSplitPane splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		splitPane.setDividerLocation(frame.getWidth()/2);
+		splitPane.setEnabled(false);
 		
 		JPanel panelLeft = new JPanel();
 		panelLeft.setBounds(0, 0, frame.getWidth()/2, frame.getHeight()/2);
 		splitPane.setLeftComponent(panelLeft);
-		panelLeft.setLayout(null);
+		panelLeft.setLayout(new GridLayout(1, 0, 0, 0));
 
 		JList<Stock> listLeft = new JList<Stock>(ship.getItemList());
 		listLeft.setBounds(10, 11, 204, 196);
 		panelLeft.add(listLeft);
 		
 		JPanel panelRight = new JPanel();
+		panelRight.setBorder(null);
 		splitPane.setRightComponent(panelRight);
 		panelRight.setLayout(null);
-				
-		JList<Stock> listRight = new JList<Stock>(outpost.getItemList());
-		listRight.setBounds(10, 11, 204, 196);
-		panelRight.add(listRight);
+		
+		//JList<Stock> listRight = new JList<Stock>(outpost.getItemList());
+		//listRight.setBounds(10, 11, 204, 196);
+		//panelRight.add(listRight);
 	}
 }

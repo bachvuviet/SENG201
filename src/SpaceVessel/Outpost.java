@@ -26,7 +26,7 @@ public class Outpost extends Entity {
     	String mystr = "";
     	int totalStock = 0;
     	for (Stock stock:INVENTORY) {
-    		mystr += "<p>"+ stock.toString();
+    		mystr += "<p>"+ stock.getStockStatus();
     		totalStock += stock.getAmount();
     	}
     	

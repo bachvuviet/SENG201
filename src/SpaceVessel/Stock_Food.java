@@ -16,15 +16,15 @@ public class Stock_Food implements Stock{
         return amount*boostValue;
 	}
 	
-	public String toString() {
+	public String getStockStatus() {
 		return amount +"x " +Name + " (" + CATEGORY + "):<p> --> Effect: Crew Hunger +" +boostValue;
 	}
 	
-	public String getStockName() {
+	public String getName() {
 		return Name;
 	}
 
-	public String getName() {
+	public String toString() {
 		return Name;
 	}
 
