@@ -6,18 +6,13 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.jdi.event.EventQueue;
 
 import CustomUIELmt.StaticObjects;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,13 +20,11 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
-import java.awt.GridBagLayout;
 
 public class PauseFrame extends JFrame {
 	/**
@@ -40,7 +33,6 @@ public class PauseFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public JFrame frame;
 	private JTextField txtShipname;
-	GridBagConstraints gbc = new GridBagConstraints();
 
 	JPanel panelCrew = new JPanel();
 	/**
@@ -49,7 +41,7 @@ public class PauseFrame extends JFrame {
 	public PauseFrame(JFrame parent, Spaceship MyShip) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 770, 620);
-		frame.setAlwaysOnTop(true);
+		//frame.setAlwaysOnTop(true);
 
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -148,10 +140,10 @@ public class PauseFrame extends JFrame {
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
 		for (int i=0; i < 2; i++) {
-			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY);
+			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, 2*i);
 			panelCrew.add(crew1.contentPan);
 			
-			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY);
+			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, 2*i+1);
 			panelCrew.add(crew2.contentPan);
 		}
 		

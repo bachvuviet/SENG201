@@ -12,11 +12,13 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CrewPanel {
 	public JPanel contentPan;
 
-	public CrewPanel(int x, int y, int w, int h) {
+	public CrewPanel(int x, int y, int w, int h, int index) {
 		contentPan = new JPanel();
 		contentPan.setBounds(x, y, w, h);
 		contentPan.setLayout(null);
@@ -78,10 +80,19 @@ public class CrewPanel {
         contentPan.add(progMorale);
         
         JButton btnGiveOrder = new JButton("Give Order");
+        btnGiveOrder.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		GiveOrder(index);
+        	}
+        });
         btnGiveOrder.setBounds(138, 197, 210, 25);
         contentPan.add(btnGiveOrder);
         
         contentPan.revalidate();
         contentPan.repaint();
+	}
+	
+	void GiveOrder(int index) {
+		System.out.println("Crew "+index+" received order!");
 	}
 }
