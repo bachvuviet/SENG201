@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -139,11 +140,12 @@ public class PauseFrame extends JFrame {
 		
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
+		ArrayList<Crew> crew = MyShip.getCrewList();
 		for (int i=0; i < 2; i++) {
-			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, 2*i);
+			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, crew.get(i));
 			panelCrew.add(crew1.contentPan);
 			
-			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, 2*i+1);
+			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, crew.get(i*2));
 			panelCrew.add(crew2.contentPan);
 		}
 		

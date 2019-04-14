@@ -12,13 +12,18 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+
+import com.sun.javadoc.ProgramElementDoc;
+
+import SpaceVessel.Crew;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CrewPanel {
 	public JPanel contentPan;
 
-	public CrewPanel(int x, int y, int w, int h, int index) {
+	public CrewPanel(int x, int y, int w, int h, Crew crew) {
 		contentPan = new JPanel();
 		contentPan.setBounds(x, y, w, h);
 		contentPan.setLayout(null);
@@ -34,6 +39,9 @@ public class CrewPanel {
         contentPan.add(lblAvatar);
         
         JTextField txtName = new JTextField();
+        //txtName.setText(crew.getName());
+        txtName.setText(crew.getName());
+        
         txtName.setHorizontalAlignment(SwingConstants.CENTER);
         txtName.setBounds(138, 12, 210, 19);
         contentPan.add(txtName);
@@ -62,29 +70,36 @@ public class CrewPanel {
         lblHunger1.setBounds(137, 67, 49, 15);
         contentPan.add(lblHunger1);
         
-        JProgressBar progHunger = new JProgressBar();
-        progHunger.setBounds(188, 67, 160, 15);
-        contentPan.add(progHunger);
-        
-        JProgressBar progHealth = new JProgressBar();
-        progHealth.setBounds(188, 43, 160, 15);
-        contentPan.add(progHealth);
-        
         JLabel lblMorale = new JLabel("Morale");
         lblMorale.setFont(new Font("Dialog", Font.BOLD, 11));
         lblMorale.setBounds(137, 90, 49, 15);
         contentPan.add(lblMorale);
         
+        JProgressBar progHunger = new JProgressBar();
+        progHunger.setBounds(188, 67, 160, 15);
+        contentPan.add(progHunger);
+        progHunger.setValue(crew.getHunger());
+        progHunger.setForeground(Color.BLUE);
+        
+        JProgressBar progHealth = new JProgressBar();
+        progHealth.setBounds(188, 43, 160, 15);
+        contentPan.add(progHealth);
+        progHealth.setValue(crew.getHealth());
+        progHealth.setForeground(Color.RED);   
+        
         JProgressBar progMorale = new JProgressBar();
         progMorale.setBounds(188, 90, 160, 15);
         contentPan.add(progMorale);
+        progMorale.setValue(crew.getMorale());
+        progMorale.setForeground(Color.YELLOW);
         
         JButton btnGiveOrder = new JButton("Give Order");
         btnGiveOrder.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		GiveOrder(index);
+        		GiveOrder();
         	}
         });
+        
         btnGiveOrder.setBounds(138, 197, 210, 25);
         contentPan.add(btnGiveOrder);
         
