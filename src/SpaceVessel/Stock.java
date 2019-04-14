@@ -3,9 +3,12 @@ package SpaceVessel;
 public interface Stock {
     public static String CATERGORY="";
     
-    public int use(int amount);
+    public String getName();
     public int getAmount();
-    public void setAmount(int amount);
+
     public String getStockStatus();
     public String toString();
+
+    public int use(int amount);
+    public void setAmount(int amount);
 }
