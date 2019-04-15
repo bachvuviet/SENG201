@@ -21,7 +21,7 @@ public class Outpost extends Entity {
     
     public void addStock(Stock st) {
     	INVENTORY.add(st);
-    }
+    }//Intial Game Stocklist
 
     public ArrayList<Stock> getInventory(){
     	return INVENTORY;

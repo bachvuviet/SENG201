@@ -9,6 +9,6 @@ public interface Stock {
     public String getStockStatus();
     public String toString();
 
-    public int use(int amount);
-    public void setAmount(int amount);
+    public int use(int amount);//decrease amount, return int
+    public void setAmount(int amount);//increase amount
 }

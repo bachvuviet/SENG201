@@ -3,25 +3,14 @@ package GUI;
 import SpaceVessel.*;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-
-
-import javax.swing.ImageIcon;
-
-//import SpaceVessel.Stock;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -40,7 +29,7 @@ public class OutpostTrade {
 	public JFrame frame;
 	
 	private ArrayList<Stock> StockList;
-	private ArrayList<JTextField> textFieldList;
+	private ArrayList<JTextField> textFieldList = new ArrayList<JTextField>();
 
 	public OutpostTrade(JFrame parent, Outpost outpost, Outpost ship) {
 		StockList = ship.getInventory();
@@ -105,7 +94,8 @@ public class OutpostTrade {
 		
 		int y = 0; int row = 0;
 		for(int i=1; i <= StockList.size(); i++) {
-			Stock st = StockList.get(i-1);
+			int index=i-1;
+			Stock st = StockList.get(index);
 			JLabel lblFood = new JLabel("");
 			lblFood.setBorder(new LineBorder(new Color(0, 0, 0)));
 			lblFood.setDoubleBuffered(true);
@@ -119,58 +109,28 @@ public class OutpostTrade {
 			txtFood.setBounds(33 + (i-1-row)*86, 121+y*91, 50, 20);
 			txtFood.setColumns(10);
 			txtFood.setText(Integer.toString(st.getAmount()));
-			panelLeft.add(txtFood);
 			textFieldList.add(txtFood);
+			panelLeft.add(txtFood);
+			
+			JButton btnFood = new JButton();
+			btnFood.setToolTipText("Burger");
+			btnFood.setBounds(20 + (i-1-row)*60, 73+y*91, 50, 50);
+			btnFood.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					updateStockAmount(st, index);
+				}
+			});
+			panelRight.add(btnFood);
 			
 			if (i%3 == 0) {
 				row += 3;
 				y += 1;
 			}
 		}
-        
-		JButton btnFood1 = new JButton();
-		btnFood1.setToolTipText("Burger");
-		btnFood1.setBounds(20, 71, 50, 50);
-		panelRight.add(btnFood1);
-		
-		JButton btnFood2 = new JButton();
-		btnFood2.setToolTipText("Burger");
-		btnFood2.setBounds(80, 71, 50, 50);
-		panelRight.add(btnFood2);
-		
-		JButton btnFood3 = new JButton();
-		btnFood3.setToolTipText("Burger");
-		btnFood3.setBounds(140, 71, 50, 50);
-		panelRight.add(btnFood3);
-		
-		JButton btnFood4 = new JButton("");
-		btnFood4.setToolTipText("Healing potion");
-		btnFood4.setBounds(20, 164, 50, 50);
-		panelRight.add(btnFood4);
-		
-		JButton btnFood5 = new JButton("");
-		btnFood5.setToolTipText("Power-up syringe");
-		btnFood5.setBounds(80, 164, 50, 50);
-		panelRight.add(btnFood5);
-		
-		JButton btnFood6 = new JButton("");
-		btnFood6.setToolTipText("Power-up syringe");
-		btnFood6.setBounds(140, 164, 50, 50);
-		panelRight.add(btnFood6);
-		
-		JButton btnMed1 = new JButton("");
-		btnMed1.setToolTipText("Healing potion");
-		btnMed1.setBounds(20, 260, 50, 50);
-		panelRight.add(btnMed1);
-		
-		JButton btnMed2 = new JButton("");
-		btnMed2.setToolTipText("Power-up syringe");
-		btnMed2.setBounds(80, 260, 50, 50);
-		panelRight.add(btnMed2);
-		
-		JButton btnMed3 = new JButton("");
-		btnMed3.setToolTipText("Power-up syringe");
-		btnMed3.setBounds(140, 260, 50, 50);
-		panelRight.add(btnMed3);
+	}
+	
+	void updateStockAmount(Stock st, int index) {
+		st.setAmount(st.getAmount()+1);
+		textFieldList.get(index).setText(Integer.toString(st.getAmount()));
 	}
 }
