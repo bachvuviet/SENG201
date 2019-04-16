@@ -96,7 +96,7 @@ public class OutpostTrade {
 		for(int i=1; i <= StockList.size(); i++) {
 			int index=i-1;
 			Stock st = StockList.get(index);
-			JLabel lblFood = new JLabel("");
+			JLabel lblFood = new JLabel(st.getImage());
 			lblFood.setBorder(new LineBorder(new Color(0, 0, 0)));
 			lblFood.setDoubleBuffered(true);
 			lblFood.setBounds(33 + (i-1-row)*86, 73+y*91, 50, 50);
@@ -112,8 +112,8 @@ public class OutpostTrade {
 			textFieldList.add(txtFood);
 			panelLeft.add(txtFood);
 			
-			JButton btnFood = new JButton();
-			btnFood.setToolTipText("Burger");
+			JButton btnFood = new JButton(st.getImage());
+			btnFood.setToolTipText(st.getName());
 			btnFood.setBounds(20 + (i-1-row)*60, 73+y*91, 50, 50);
 			btnFood.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

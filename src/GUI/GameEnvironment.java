@@ -127,19 +127,21 @@ public class GameEnvironment {
 	}
 	
 	private ArrayList<Stock> generateStock(){
-		Stock food1 = new Stock_Food("Burger", 10);
-		Stock food2 = new Stock_Food("Chips", 10);
-		Stock food3 = new Stock_Food("Potato", 10);
-		Stock food4 = new Stock_Food("Chicken", 10);
-		Stock food5 = new Stock_Food("Beef", 10);
+		Stock food1 = new Stock_Food("Burger", 10, "../burger.png");
+		Stock food2 = new Stock_Food("Bread", 10, "../bread.png");
+		Stock food3 = new Stock_Food("Pizza", 10, "../pizza.png");
+		Stock food4 = new Stock_Food("Chicken", 10, "../Chicken.png");
+		Stock food5 = new Stock_Food("Steak", 10, "../steak.png");
+		Stock food6 = new Stock_Food("Sushi", 10, "../sushi.png");
 		
-		Stock medi1 = new Stock_Medicine("Paracetamon", "Headache", 10);
-		Stock medi2 = new Stock_Medicine("dau bung", "Stomachache", 10);
-		Stock medi3 = new Stock_Medicine("thuoc ngu", "Sleepless", 10);
+		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 10, "../healpotion.png");
+		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 10, "../painkiller.png");
+		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, "../syringe.png");
 		
 		ArrayList<Stock> STOCK = new ArrayList<Stock>();
 		STOCK.add(food1);STOCK.add(food2);
-		STOCK.add(food3);STOCK.add(food4);STOCK.add(food5);
+		STOCK.add(food3);STOCK.add(food4);
+		STOCK.add(food5);STOCK.add(food6);
 		STOCK.add(medi1);STOCK.add(medi2);
 		STOCK.add(medi3);
 		

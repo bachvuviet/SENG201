@@ -1,5 +1,7 @@
 package SpaceVessel;
 
+import javax.swing.ImageIcon;
+
 public class ShipModule implements Stock {
 	private String Name;
     private String Boost;
@@ -33,6 +35,9 @@ public class ShipModule implements Stock {
 		else
 			return Name + ": Broken";
     }
+	public ImageIcon getImage() {
+		return null;
+	}
 
 	//Setter
 	public void setActive(boolean active) {
