@@ -32,6 +32,8 @@ public class MissionFrame {
 	public JFrame frame; 
 	private JSlider slider = new JSlider(3, 10, 6);//min, max, initVal
 	private int Days = slider.getValue();
+	JLabel lblTotal = new JLabel("");
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -102,158 +104,39 @@ public class MissionFrame {
 		lblChoosingCrewMembers.setBounds(481, 115, 400, 68);
 		panelMid.add(lblChoosingCrewMembers);
 		
-		JLabel lblTotal = new JLabel("");
+		String[] AvatarArr = {"../Doctor Strange.png","../Gamora.png","../Groot.png","../Kirk.png","../Spock.png",
+				"../Star Lord.png","","","","","",""};
+		String[] TooltipArr = {"<html><h2><center>Doctor</center><h4>He/She heals your health</html>",
+								"<html><h2><center>Mechanic</center><h4>He/She fixes your ship</html>",
+								"<html><h2><center>Captain</center><h4>He/She is ... </html>",
+								"<html><h2><center>Scientist</center><h4>He/She researches stuff</html>",
+								"<html><h2><center>Chef</center><h4>He/She boosts your hunger</html>",
+								"<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel</center></html>"};
+		CrewRank RankArr[] = CrewRank.values();
+				
+		for (int i=0; i<6; i++) {
+			Image IMG = StaticObjects.SelfResizeImage(AvatarArr[i], this, 174, 207);
+			JButton btnCrewMember = new JButton(new ImageIcon(IMG));
+			btnCrewMember.setText(Integer.toString(i));
+			btnCrewMember.setToolTipText(TooltipArr[i]);
+			btnCrewMember.addMouseListener(new MouseListener() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					int index = Integer.parseInt(btnCrewMember.getText());
+					if (SwingUtilities.isLeftMouseButton(e))
+						addCrew(RankArr[index], IMG);
+					else if (SwingUtilities.isRightMouseButton(e))
+						removeCrew(RankArr[index]);
+				}
 
-		Image IMG1 = StaticObjects.SelfResizeImage("../Doctor Strange.png", this, 174, 207);
-		JButton btnCrewMember1 = new JButton(new ImageIcon(IMG1));
-		btnCrewMember1.setToolTipText("<html><h2><center>Doctor</center><h4>He/She heals your health</html>");
-		btnCrewMember1.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.DOCTOR, lblTotal, IMG1);
-				else if (SwingUtilities.isRightMouseButton(e))
-					removeCrew(CrewRank.DOCTOR, lblTotal);
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-		btnCrewMember1.setBounds(37, 194, 174, 207);
-		panelMid.add(btnCrewMember1);
-		
-
-		Image IMG2 = StaticObjects.SelfResizeImage("../Gamora.png", this, 174, 207);
-		JButton btnCrewMember2 = new JButton(new ImageIcon(IMG2));
-		btnCrewMember2.setToolTipText("<html><h2><center>Mechanic</center><h4>He/She fixes your ship</html>");		
-		btnCrewMember2.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.MECHANIC, lblTotal, IMG2);
-				else if (SwingUtilities.isRightMouseButton(e))
-					removeCrew(CrewRank.MECHANIC, lblTotal);
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-		btnCrewMember2.setBounds(258, 194, 174, 207);
-		panelMid.add(btnCrewMember2);
-		
-		Image IMG3 = StaticObjects.SelfResizeImage("../Groot.png", this, 174, 207);
-		JButton btnCrewMember3 = new JButton(new ImageIcon(IMG3));
-		btnCrewMember3.setToolTipText("<html><h2><center>Captain</center><h4>He/She is ... </html>");
-		btnCrewMember3.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.CAPTAIN, lblTotal, IMG3);
-				else if (SwingUtilities.isRightMouseButton(e))
-					removeCrew(CrewRank.CAPTAIN, lblTotal);
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-		btnCrewMember3.setBounds(481, 194, 174, 207);
-		panelMid.add(btnCrewMember3);
-		
-		Image IMG4 = StaticObjects.SelfResizeImage("../Kirk.png", this, 174, 207);		
-		JButton btnCrewMember4 = new JButton(new ImageIcon(IMG4));
-		btnCrewMember4.setToolTipText("<html><h2><center>Scientist</center><h4>He/She researches stuff</html>");
-		btnCrewMember4.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.SCIENTIST, lblTotal, IMG4);
-				else if (SwingUtilities.isRightMouseButton(e))
-					removeCrew(CrewRank.SCIENTIST, lblTotal);
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-		btnCrewMember4.setBounds(707, 194, 174, 207);
-		panelMid.add(btnCrewMember4);
-		
-		Image IMG5 = StaticObjects.SelfResizeImage("../Spock.png", this, 174, 207);		
-		JButton btnCrewMember5 = new JButton(new ImageIcon(IMG5));
-		btnCrewMember5.setToolTipText("<html><h2><center>Chef</center><h4>He/She boosts your hunger</html>");
-		btnCrewMember5.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.CHEF, lblTotal, IMG5);
-				else if (SwingUtilities.isRightMouseButton(e))
-					removeCrew(CrewRank.CHEF, lblTotal);
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-		btnCrewMember5.setBounds(928, 194, 174, 207);
-		panelMid.add(btnCrewMember5);
-		
-		Image IMG6 = StaticObjects.SelfResizeImage("../Star Lord.png", this, 174, 207);
-		JButton btnCrewMember6 = new JButton(new ImageIcon(IMG6));
-		btnCrewMember6.setToolTipText("<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel</center></html>");
-		btnCrewMember6.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.HELMS_MAN, lblTotal, IMG6);
-				else if (SwingUtilities.isRightMouseButton(e))
-					removeCrew(CrewRank.HELMS_MAN, lblTotal);
-			}
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
-		btnCrewMember6.setBounds(1149, 194, 174, 207);
-		panelMid.add(btnCrewMember6);
+				public void mouseReleased(MouseEvent e) {}
+				public void mouseExited(MouseEvent e) {}
+				public void mouseEntered(MouseEvent e) {}
+				public void mouseClicked(MouseEvent e) {}
+			});
+			btnCrewMember.setBounds(37+i*221, 194, 174, 207);
+			panelMid.add(btnCrewMember);
+		}
 
 		lblTotal.setForeground(Color.GREEN);
 		lblTotal.setFont(new Font("Cambria", Font.BOLD, 18));
@@ -354,7 +237,7 @@ public class MissionFrame {
 	
 	ArrayList<Crew> tempCrew = new ArrayList<Crew>();
     int[] Array = {0, 0, 0, 0, 0, 0};
-	void addCrew(CrewRank Rank, JLabel lbl, Image img) {
+	void addCrew(CrewRank Rank, Image img) {
 		int total = 0;
 		for (int num:Array) {
 			total += num;
@@ -386,9 +269,9 @@ public class MissionFrame {
 		}
 		Crew newCrew = new Crew("Rename here", Rank, 100, 100, 100, new ImageIcon(img));
 		tempCrew.add(newCrew);
-		updateCrewlabel(lbl);
+		updateCrewlabel();
 	}
-	void removeCrew(CrewRank Rank, JLabel lbl) {
+	void removeCrew(CrewRank Rank) {
 		switch (Rank) {
 		case SCIENTIST:
 			if (Array[0] > 0)
@@ -424,9 +307,9 @@ public class MissionFrame {
 				break;
 			}
 		}
-		updateCrewlabel(lbl);
+		updateCrewlabel();
 	}
-	void updateCrewlabel(JLabel lbl) {
+	void updateCrewlabel() {
 		String[] Rank = {"Scientist", "Mechanic", "Captain", "Doctor", "Chef", "Helms"};
 		String mystr = "";
 		for (int i=0; i < 6; i++) {
@@ -434,7 +317,7 @@ public class MissionFrame {
 				mystr += Rank[i] + ": " + Array[i] + " ";
 			}
 		}
-		lbl.setText("<html><h2>Your selected Crew(s):<p>" + mystr + "</html>");
+		lblTotal.setText("<html><h2>Your selected Crew(s):<p>" + mystr + "</html>");
 	}
 }
 

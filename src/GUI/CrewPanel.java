@@ -1,14 +1,12 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Desktop.Action;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
