@@ -48,6 +48,11 @@ public class Crew {
     	return avatar;
     }
     
+    //setter
+    public void setName(String name) {
+    	Name = name;
+    }
+    
     
 	//Crew Action
     public void useSupply(int amount, Stock stock) {

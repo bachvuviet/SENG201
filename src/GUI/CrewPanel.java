@@ -1,35 +1,41 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Desktop.Action;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import SpaceVessel.Crew;
-import SpaceVessel.Stock;
+import SpaceVessel.*;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class CrewPanel {
 	public JPanel contentPan;
-	JComboBox<String> cboAction1 = new JComboBox<String>();
-	JComboBox<String> cboAction2 = new JComboBox<String>();
-	JComboBox<String> useSupplyAction = new JComboBox<String>();
-	JProgressBar progHealth = new JProgressBar();
-	JProgressBar progHunger = new JProgressBar();
-	JProgressBar progMorale = new JProgressBar();
 	
-	public CrewPanel(int x, int y, int w, int h, Crew crew, ArrayList<Stock> stock) {
+
+    JTextField txtName = new JTextField();
+	JComboBox<String> cboAction1;
+	JComboBox<String> cboAction2;
+	JComboBox<Stock> cboSupply;
+	JProgressBar progHealth = new JProgressBar();;
+	JProgressBar progHunger = new JProgressBar();;
+	JProgressBar progMorale = new JProgressBar();;
+
+	public CrewPanel(int x, int y, int w, int h, Crew crew, ArrayList<Stock> stock, Spaceship ship) {
 		contentPan = new JPanel();
 		contentPan.setBounds(x, y, w, h);
 		contentPan.setLayout(null);
@@ -44,108 +50,110 @@ public class CrewPanel {
         lblAvatar.setBounds(12, 12, 111, 169);
         contentPan.add(lblAvatar);
         
-        JTextField txtName = new JTextField();
-        //txtName.setText(crew.getName());
-        txtName.setText(crew.getName());
-        
+        txtName.setText(crew.getName());        
         txtName.setHorizontalAlignment(SwingConstants.CENTER);
-        txtName.setBounds(138, 12, 210, 19);
+        txtName.setBounds(138, 12, 100, 19);
+        txtName.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (txtName.getText().length() >= 15 ) // limit to 15 characters
+                    e.consume();
+            }
+        });
         contentPan.add(txtName);
-        txtName.setColumns(10);
         
-       
-        cboAction1.setBounds(188, 131, 160, 19);
-        cboAction1.addItem("");
-        cboAction1.addItem("Sleep");
-        cboAction1.addItem("Repair");
-        cboAction1.addItem("Pilot");
-        cboAction1.addItem("Use stock");
-        cboAction1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if (cboAction1.getSelectedItem().equals("Use stock")) {
-					useSupplyAction.setVisible(true);
-				} else {
-					useSupplyAction.setVisible(false);
-				}
-			}
-		});
-        contentPan.add(cboAction1);
+        JLabel lblRank = new JLabel(crew.getRank().name());
+        lblRank.setFont(new Font("Dialog", Font.BOLD, 12));
+        lblRank.setBounds(248, 12, 110, 15);
+        contentPan.add(lblRank);
         
-        cboAction2.setBounds(188, 162, 160, 19);
-        cboAction2.addItem("");
-        cboAction2.addItem("Sleep");
-        cboAction2.addItem("Repair");
-        cboAction2.addItem("Pilot");
-        cboAction2.addItem("Use stock");
-        cboAction2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if (cboAction2.getSelectedItem().equals("Use stock")) {
-					useSupplyAction.setVisible(true);
-				} else {
-					useSupplyAction.setVisible(false);
-				}
-			}
-		});
-        contentPan.add(cboAction2);
+        JLabel lblHealth = new JLabel("Health");
+        lblHealth.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblHealth.setBounds(137, 43, 49, 15);
+        contentPan.add(lblHealth);
         
-        JLabel lblActions = new JLabel("Action");
-        lblActions.setFont(new Font("Dialog", Font.BOLD, 10));
-        lblActions.setBounds(137, 131, 51, 50);
-        contentPan.add(lblActions);
-        
-        JLabel lblHealth1 = new JLabel("Health");
-        lblHealth1.setFont(new Font("Dialog", Font.BOLD, 11));
-        lblHealth1.setBounds(137, 43, 49, 15);
-        contentPan.add(lblHealth1);
-        
-        JLabel lblHunger1 = new JLabel("Hunger");
-        lblHunger1.setFont(new Font("Dialog", Font.BOLD, 11));
-        lblHunger1.setBounds(137, 67, 49, 15);
-        contentPan.add(lblHunger1);
+        JLabel lblHunger = new JLabel("Hunger");
+        lblHunger.setFont(new Font("Dialog", Font.BOLD, 11));
+        lblHunger.setBounds(137, 67, 49, 15);
+        contentPan.add(lblHunger);
         
         JLabel lblMorale = new JLabel("Morale");
         lblMorale.setFont(new Font("Dialog", Font.BOLD, 11));
         lblMorale.setBounds(137, 90, 49, 15);
         contentPan.add(lblMorale);
         
-       
+        JLabel lblActions = new JLabel("Action");
+        lblActions.setFont(new Font("Dialog", Font.BOLD, 13));
+        lblActions.setBounds(137, 131, 51, 50);
+        contentPan.add(lblActions);
+        
         progHunger.setBounds(188, 67, 160, 15);
-        contentPan.add(progHunger);
         progHunger.setValue(crew.getHunger());
         progHunger.setForeground(Color.BLUE);
-        
+        contentPan.add(progHunger);
         
         progHealth.setBounds(188, 43, 160, 15);
-        contentPan.add(progHealth);
         progHealth.setValue(crew.getHealth());
-        progHealth.setForeground(Color.RED);   
+        progHealth.setForeground(Color.RED);
+        contentPan.add(progHealth);   
         
-       
         progMorale.setBounds(188, 90, 160, 15);
-        contentPan.add(progMorale);
         progMorale.setValue(crew.getMorale());
         progMorale.setForeground(Color.YELLOW);
+        contentPan.add(progMorale);
+
+        String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement"};
+        cboAction1 = new JComboBox<String>(ActionSet);
+        cboAction1.setBounds(188, 131, 160, 19);
+        cboAction1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				String choice = "";
+				if (cboAction1.getItemCount() > 0)
+        			choice = cboAction1.getSelectedItem().toString();
+				
+				cboAction2.removeAllItems();
+				for (String str:ActionSet) {
+					if (!choice.equals(str))
+						cboAction2.addItem(str);
+				}
+				cboAction2.setEnabled(true);
+
+				if (choice.equals(ActionSet[4])) {
+					cboSupply.setVisible(true);
+				} else {
+					cboSupply.setVisible(false);
+				}
+			}
+		});
+        contentPan.add(cboAction1);
         
-        //useSupplyAction.setFont(new Font("Dialog", Font.BOLD, 10));
-        useSupplyAction.setBounds(12, 200, 111, 20);
-        for (Stock i: stock) {
-        	useSupplyAction.addItem(i.getName());
-        };
-        useSupplyAction.setVisible(false);
-        contentPan.add(useSupplyAction);
+        cboAction2 = new JComboBox<String>(ActionSet);
+        cboAction2.setEnabled(false);
+        cboAction2.setBounds(188, 162, 160, 19);
+        cboAction2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String choice = "";
+        		if (cboAction2.getItemCount() > 0)
+        			choice = cboAction2.getSelectedItem().toString();
+				if (choice.equals(ActionSet[4])) {
+					cboSupply.setVisible(true);
+				} else {
+					cboSupply.setVisible(false);
+				}
+				cboAction1.setEnabled(false);
+			}
+		});
+        contentPan.add(cboAction2);
         
-        
+        cboSupply = new JComboBox<Stock>(stock.toArray(new Stock[stock.size()]));
+        cboSupply.setBounds(12, 200, 111, 20);        
+        cboSupply.setVisible(false);
+        contentPan.add(cboSupply);
         
         JButton btnGiveOrder = new JButton("Give Order");
         btnGiveOrder.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	    GiveOrder(crew);
+        	public void actionPerformed(ActionEvent e) {        		
+        		GiveOrder(crew, stock, ship);
         	}
         });
         
@@ -156,19 +164,59 @@ public class CrewPanel {
         contentPan.repaint();
 	}
 	
-	void GiveOrder(Crew crew) {
-		// TODO Auto-generated method stub
-		if (cboAction1.getSelectedItem().equals("Sleep") || cboAction2.getSelectedItem().equals("Sleep")) {
-		    crew.sleep();
-		    progHealth.setValue(crew.getHealth());
-		    progHunger.setValue(crew.getHunger());
-		
-		}
-		else if (cboAction1.getSelectedItem().equals("Repair") || cboAction2.getSelectedItem().equals("Repair")) {
+	
+	void GiveOrder(Crew crew, ArrayList<Stock> stock, Spaceship ship) {
+		switch (cboAction1.getSelectedItem().toString()) {
+		case "Sleep":
+			crew.sleep();
+			break;
+		case "Repair":
+			crew.repair(ship);
+			break;
+		case "Pilot":
 			crew.pilotShip();
-			progMorale.setValue(crew.getMorale());
+			break;
+		case "Use Supplement":
+			for (Stock st: stock) {
+				if (cboSupply.getSelectedItem().equals(st)) {
+					crew.useSupply(1, st);
+		        } else {
+			        System.out.println("false");
+		        }
+			}
+			break;	
+		default:
+			break;
 		}
+		
+		switch (cboAction2.getSelectedItem().toString()) {
+		case "Sleep":
+			crew.sleep();
+			break;
+		case "Repair":
+			crew.repair(ship);
+			break;
+		case "Pilot":
+			crew.pilotShip();
+			break;
+		case "Use Supplement":
+			for (Stock st: stock) {
+				if (cboSupply.getSelectedItem().equals(st)) {
+					crew.useSupply(1, st);
+		        } else {
+			        System.out.println("false");
+		        }
+			}
+			break;	
+		default:
+			break;
+		}
+
+	    crew.setName(txtName.getText());
+	    
+		progHealth.setValue(crew.getHealth());
+	    progHunger.setValue(crew.getHunger());
+	    progMorale.setValue(crew.getMorale());
+	    txtName.setText(crew.getName());
 	}
-	
-	
 }
