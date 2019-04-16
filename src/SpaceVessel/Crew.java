@@ -7,7 +7,7 @@ public class Crew {
     public int ID;
     public boolean Real;
     
-    private static String Name;
+    private String Name;
     private CrewRank Rank;
     private int Health;
     private int Hunger;
@@ -19,7 +19,7 @@ public class Crew {
     public Crew() { Real = false; }
     public Crew(String name, CrewRank rank, int health, int hunger, int morale, ImageIcon img) {
     	this.ID = 0;
-    	Crew.Name = name;
+    	this.Name = name;
     	this.Rank = rank;
     	this.Health = health;
     	this.Hunger = hunger;
