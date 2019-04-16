@@ -141,11 +141,13 @@ public class PauseFrame extends JFrame {
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
 		ArrayList<Crew> crew = MyShip.getCrewList();
+		System.out.println(crew);
+		ArrayList<Stock> stock = MyShip.getInventory();
 		for (int i=0; i < 2; i++) {
-			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, crew.get(2*i));
+			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, crew.get(2*i), stock);
 			panelCrew.add(crew1.contentPan);
 			
-			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, crew.get(i*2+1));
+			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, crew.get(i*2+1), stock);
 			panelCrew.add(crew2.contentPan);
 		}
 		

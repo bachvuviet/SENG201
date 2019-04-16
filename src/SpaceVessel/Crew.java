@@ -32,7 +32,6 @@ public class Crew {
     public String getName( ) {
     	return Name;
     }
-    
     public CrewRank getRank() {
     	return Rank;
     }
@@ -52,7 +51,7 @@ public class Crew {
     
 	//Crew Action
     public void useSupply(int amount, Stock stock) {
-    	if (stock.getAmount() > 0) { //&& currShip.getInventory().contains(stock)) {
+    	if (stock.getAmount() > 0) {
     		stock.setAmount(stock.getAmount()-amount);
     		if (stock instanceof Stock_Food)
     			Hunger += stock.use(amount);
@@ -65,7 +64,7 @@ public class Crew {
     }
     public void sleep() {
     	Health += 25;
-    	Hunger += 25;
+    	Hunger -= 25;
     	crewAction.add("Sleeping");
     }
     public void repair(Spaceship Ship) {

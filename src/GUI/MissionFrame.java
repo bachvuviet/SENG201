@@ -32,7 +32,6 @@ public class MissionFrame {
 	public JFrame frame; 
 	private JSlider slider = new JSlider(3, 10, 6);//min, max, initVal
 	private int Days = slider.getValue();
-	Image IMG;
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -104,15 +103,16 @@ public class MissionFrame {
 		panelMid.add(lblChoosingCrewMembers);
 		
 		JLabel lblTotal = new JLabel("");
-		IMG = StaticObjects.SelfResizeImage("../Doctor Strange.png", this, 174, 207);
-		JButton btnCrewMember1 = new JButton(new ImageIcon(IMG));
+
+		Image IMG1 = StaticObjects.SelfResizeImage("../Doctor Strange.png", this, 174, 207);
+		JButton btnCrewMember1 = new JButton(new ImageIcon(IMG1));
 		btnCrewMember1.setToolTipText("<html><h2><center>Doctor</center><h4>He/She heals your health</html>");
 		btnCrewMember1.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.DOCTOR, lblTotal, IMG);
+					addCrew(CrewRank.DOCTOR, lblTotal, IMG1);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.DOCTOR, lblTotal);
 			}
@@ -129,15 +129,16 @@ public class MissionFrame {
 		btnCrewMember1.setBounds(37, 194, 174, 207);
 		panelMid.add(btnCrewMember1);
 		
-		IMG = StaticObjects.SelfResizeImage("../Gamora.png", this, 174, 207);
-		JButton btnCrewMember2 = new JButton(new ImageIcon(IMG));
+
+		Image IMG2 = StaticObjects.SelfResizeImage("../Gamora.png", this, 174, 207);
+		JButton btnCrewMember2 = new JButton(new ImageIcon(IMG2));
 		btnCrewMember2.setToolTipText("<html><h2><center>Mechanic</center><h4>He/She fixes your ship</html>");		
 		btnCrewMember2.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.MECHANIC, lblTotal, IMG);
+					addCrew(CrewRank.MECHANIC, lblTotal, IMG2);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.MECHANIC, lblTotal);
 			}
@@ -154,15 +155,15 @@ public class MissionFrame {
 		btnCrewMember2.setBounds(258, 194, 174, 207);
 		panelMid.add(btnCrewMember2);
 		
-		IMG = StaticObjects.SelfResizeImage("../Groot.png", this, 174, 207);
-		JButton btnCrewMember3 = new JButton(new ImageIcon(IMG));
+		Image IMG3 = StaticObjects.SelfResizeImage("../Groot.png", this, 174, 207);
+		JButton btnCrewMember3 = new JButton(new ImageIcon(IMG3));
 		btnCrewMember3.setToolTipText("<html><h2><center>Captain</center><h4>He/She is ... </html>");
 		btnCrewMember3.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.CAPTAIN, lblTotal, IMG);
+					addCrew(CrewRank.CAPTAIN, lblTotal, IMG3);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.CAPTAIN, lblTotal);
 			}
@@ -179,16 +180,15 @@ public class MissionFrame {
 		btnCrewMember3.setBounds(481, 194, 174, 207);
 		panelMid.add(btnCrewMember3);
 		
-		IMG = StaticObjects.SelfResizeImage("../Kirk.png", this, 174, 207);
-		
-		JButton btnCrewMember4 = new JButton(new ImageIcon(IMG));
+		Image IMG4 = StaticObjects.SelfResizeImage("../Kirk.png", this, 174, 207);		
+		JButton btnCrewMember4 = new JButton(new ImageIcon(IMG4));
 		btnCrewMember4.setToolTipText("<html><h2><center>Scientist</center><h4>He/She researches stuff</html>");
 		btnCrewMember4.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.SCIENTIST, lblTotal, IMG);
+					addCrew(CrewRank.SCIENTIST, lblTotal, IMG4);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.SCIENTIST, lblTotal);
 			}
@@ -205,16 +205,15 @@ public class MissionFrame {
 		btnCrewMember4.setBounds(707, 194, 174, 207);
 		panelMid.add(btnCrewMember4);
 		
-		IMG = StaticObjects.SelfResizeImage("../Spock.png", this, 174, 207);
-		
-		JButton btnCrewMember5 = new JButton(new ImageIcon(IMG));
+		Image IMG5 = StaticObjects.SelfResizeImage("../Spock.png", this, 174, 207);		
+		JButton btnCrewMember5 = new JButton(new ImageIcon(IMG5));
 		btnCrewMember5.setToolTipText("<html><h2><center>Chef</center><h4>He/She boosts your hunger</html>");
 		btnCrewMember5.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.CHEF, lblTotal, IMG);
+					addCrew(CrewRank.CHEF, lblTotal, IMG5);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.CHEF, lblTotal);
 			}
@@ -231,15 +230,15 @@ public class MissionFrame {
 		btnCrewMember5.setBounds(928, 194, 174, 207);
 		panelMid.add(btnCrewMember5);
 		
-		IMG = StaticObjects.SelfResizeImage("../Star Lord.png", this, 174, 207);
-		JButton btnCrewMember6 = new JButton(new ImageIcon(IMG));
+		Image IMG6 = StaticObjects.SelfResizeImage("../Star Lord.png", this, 174, 207);
+		JButton btnCrewMember6 = new JButton(new ImageIcon(IMG6));
 		btnCrewMember6.setToolTipText("<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel</center></html>");
 		btnCrewMember6.addMouseListener(new MouseListener() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (SwingUtilities.isLeftMouseButton(e))
-					addCrew(CrewRank.HELMS_MAN, lblTotal, IMG);
+					addCrew(CrewRank.HELMS_MAN, lblTotal, IMG6);
 				else if (SwingUtilities.isRightMouseButton(e))
 					removeCrew(CrewRank.HELMS_MAN, lblTotal);
 			}
@@ -306,7 +305,7 @@ public class MissionFrame {
 		//Always put background at the END
 		JLabel Background = new JLabel("");
 		Background.setBounds(0, 0, 1366, 768);
-		IMG = StaticObjects.SelfResizeImage("../Mission.jpg", this, 1366, 768);
+		Image IMG = StaticObjects.SelfResizeImage("../Mission.jpg", this, 1366, 768);
 		Background.setVerticalAlignment(SwingConstants.BOTTOM);
 		Background.setIcon(new ImageIcon(IMG));
 		frame.getContentPane().add(Background);
@@ -345,7 +344,7 @@ public class MissionFrame {
 		
 		//SpaceShip
 		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, tempCrew, CoreMod);				
-		
+		System.out.println(tempCrew);
 		GameEnvironment game = new GameEnvironment(width, height, SpaceShip);
 		game.frame.setVisible(true);
 		game.frame.setLocationRelativeTo(null);
@@ -385,8 +384,7 @@ public class MissionFrame {
 		default:
 			break;
 		}
-		
-		Crew newCrew = new Crew("Anything", Rank, 100, 100, 100, new ImageIcon(img));
+		Crew newCrew = new Crew("Rename here", Rank, 100, 100, 100, new ImageIcon(img));
 		tempCrew.add(newCrew);
 		updateCrewlabel(lbl);
 	}
