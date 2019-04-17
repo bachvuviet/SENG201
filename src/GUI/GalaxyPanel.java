@@ -21,16 +21,24 @@ import SpaceVessel.Outpost;
 import SpaceVessel.Spaceship;
 import SpaceVessel.Stock;
 
-
+/** Class Intro:
+ * @author Bach Vu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This class make instances of JPanel, which Game Environment can initiate multiple galaxies.
+ * Process User input and update controls in ControlPanel (bottom right) of Game environment
+ */
 public class GalaxyPanel extends JPanel implements KeyListener{
 	private static final long serialVersionUID = 1L;
-	/**
-	 * This class contains Game components and controls
-	 * Keyevents to allow player interact
-	 */
-	private JFrame frame;//just to control focus
+	
+	/** Game environment frame, control focus when pause, trade or scan*/
+	private JFrame frame;
+	/** JPanel contain paintable graphics and update when user interact Keypress events*/
 	private JPanel contentPane;	
+	/** A small fraction of SpaceObjects in game environment which belongs to this (current panel) galaxy*/
 	private ArrayList<Entity> SpaceObjects; 
+	/** Same Spaceship generated from MissionFrame*/
 	private Spaceship SpaceShip;
 	
 	//private Timer mainTimer;
@@ -39,11 +47,22 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 	private double x, y;
 	private int direction = 0;
 	
+	/** Fuel level of ship*/
 	private JProgressBar Fuel;
+	/** Ship's hull strength*/
 	private JProgressBar Hull;
+	/** Current turn display in control Panel*/
 	private JLabel Days;
+	/** Current turn to display via Jlabel Days*/
 	private int currDay = 1;
 	
+	/**
+	 * 
+	 * @param width Same width as frame
+	 * @param height Same height as frame
+	 * @param frame GameEnvironment frame
+	 * @param game GameEnvironment object to access fields
+	 */
 	public GalaxyPanel(int width, int height, JFrame frame, GameEnvironment game) {
 		this.frame = frame;
 		this.width = width;
@@ -68,6 +87,9 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 	}
 	
 	//KeyListener Action
+	/**
+	 * Called via repaint() method of JPanel, update graphics location
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);		
@@ -79,6 +101,13 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 	}
 	
 	int speed = 4;
+	/**
+	 * Keypress event
+	 * WSAD for ship's movement
+	 * ESC to pause, view ship and crew status
+	 * X to Scan, trade, change universe
+	 * Enter: move to next turn
+	 */
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		//Ship control
@@ -145,37 +174,13 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 		}
 		
 		if (key == KeyEvent.VK_X) {
-			found: {//for else loop in python
-				for (Entity en:SpaceObjects) {
-					int scanRad = en.getScanRadius();
-					boolean X = Math.abs(en.getcenterX() - x) <= scanRad;
-					boolean Y = Math.abs(en.getcenterY() - y) <= scanRad;
-					//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterX()+":"+x+":"+scanRad);
-					//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterY()+":"+y+":"+scanRad);
-					
-					if (X && Y) {
-						if (en instanceof Outpost) {
-							frame.setFocusable(false);
-							frame.setEnabled(false);
-							OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, (Outpost) SpaceShip);
-							trade.frame.setVisible(true);
-							trade.frame.setLocationRelativeTo(null);
-						}
-						else if (en instanceof Planet) {
-							Stock st = ((Planet) en).getHiddenTreasure();
-							StaticObjects.MessBox("Found "+st.toString(), "Scan Success", "");
-							
-						} else if (en instanceof CelestialBody) {
-							StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
-							
-						}
-						break found;
-					}
-				}
-				StaticObjects.MessBox("Scan failed, not close enough!", "Scan Failed", "Warning");
-			} 
+			Interact();
 		}
 	}
+	
+	/**
+	 * Pause the ship when key is released
+	 */
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		SpaceShip.turning = false;
@@ -191,6 +196,10 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 		
 	}	
 	
+	/**
+	 * Press Enter
+	 * Update Control panel, summary of turn and move to next day, reset fuel and SpaceEvent
+	 */
 	private void EndTurn() {
 		if (currDay < SpaceShip.daysOnMission) {
 			//Update Control Panel
@@ -209,5 +218,41 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 		} else {
 			StaticObjects.MessBox("MissionFail", "Time Elapsed", "");
 		}
+	}
+	
+	/**
+	 * Press X
+	 * Conduct Scan planets, trade, or Enter Warp holes
+	 */
+	private void Interact() {
+		found: {//for else loop in python
+		for (Entity en:SpaceObjects) {
+			int scanRad = en.getScanRadius();
+			boolean X = Math.abs(en.getcenterX() - x) <= scanRad;
+			boolean Y = Math.abs(en.getcenterY() - y) <= scanRad;
+			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterX()+":"+x+":"+scanRad);
+			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterY()+":"+y+":"+scanRad);
+			
+			if (X && Y) {
+				if (en instanceof Outpost) {
+					frame.setFocusable(false);
+					frame.setEnabled(false);
+					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, (Outpost) SpaceShip);
+					trade.frame.setVisible(true);
+					trade.frame.setLocationRelativeTo(null);
+				}
+				else if (en instanceof Planet) {
+					Stock st = ((Planet) en).getHiddenTreasure();
+					StaticObjects.MessBox("Found "+st.toString(), "Scan Success", "");
+					
+				} else if (en instanceof CelestialBody) {
+					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
+					
+				}
+				break found;
+			}
+		}
+		StaticObjects.MessBox("Scan failed, not close enough!", "Scan Failed", "Warning");
+		} 
 	}
 }

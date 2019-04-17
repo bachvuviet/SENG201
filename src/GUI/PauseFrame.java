@@ -27,17 +27,26 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
 
+/** Class Intro:
+ * @author Bach Vu, Linh Luu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This is the pause frame, if player press ESC at anytime.
+ * Game environment is disabled (no control until resume)
+ * User can view ship status and give crew order within this frame, since both action must be performed when the game is paused.
+ */
 public class PauseFrame extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JFrame frame;
 	private JTextField txtShipname;
 
 	JPanel panelCrew = new JPanel();
+	
 	/**
-	 * Create the frame.
+	 * Load all data of ship: ship status, stock, crew and modules
+	 * @param parent Galaxy to be paused (disable control in game environment)
+	 * @param MyShip ship Current ship
 	 */
 	public PauseFrame(JFrame parent, Spaceship MyShip) {
 		frame = new JFrame();
@@ -141,12 +150,11 @@ public class PauseFrame extends JFrame {
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
 		ArrayList<Crew> crew = MyShip.getCrewList();
-		ArrayList<Stock> stock = MyShip.getInventory();
 		for (int i=0; i < 2; i++) {
-			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, crew.get(2*i), stock, MyShip);
+			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, crew.get(2*i), MyShip);
 			panelCrew.add(crew1.contentPan);
 			
-			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, crew.get(i*2+1), stock, MyShip);
+			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, crew.get(i*2+1), MyShip);
 			panelCrew.add(crew2.contentPan);
 		}
 		

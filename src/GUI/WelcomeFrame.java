@@ -1,3 +1,6 @@
+/**
+ * GUI package contain all Graphical Implement of the game, upgrade from commandline game
+ */
 package GUI;
 
 import CustomUIELmt.*;
@@ -21,6 +24,7 @@ import java.awt.Color;
  * @category SpaceShip game
  * @version 0.30
  * @location Lab133
+ * @date 10/04/2019
  * This is the First and Begin Frame, player choose New game, Load game or view Credits.
  * This take user to different frames.
  */

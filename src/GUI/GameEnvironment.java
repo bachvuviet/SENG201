@@ -19,25 +19,40 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Font;
 
-
-
+/** Class Intro:
+ * @author Bach Vu, Linh Luu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This is the third frame, player actually start their game 
+ * Storyline and HowToPlay added here
+ * 
+ * Start Game in a strange Galaxy, has multiple Galaxy panel overlaps 
+ * Only generate Graphics and Space Objects, don't process user input
+ */
 public class GameEnvironment {
-	/**
-	 * 
-	 */
 	public JFrame frame;
-	public ArrayList<Entity> SpaceObjects = new ArrayList<Entity>();
-
-	public Spaceship SpaceShip;
 	public JProgressBar Fuel;
 	public JProgressBar Hull;
 	public JLabel lblDay = new JLabel("");
+	
+	/** All Space objects (from Backend package) is stored here*/
+	public ArrayList<Entity> SpaceObjects = new ArrayList<Entity>();
+	/** All Galaxy Panel is stored here*/
+	public ArrayList<GalaxyPanel> Galaxy = new ArrayList<GalaxyPanel>();
+	/** Spaceship generated from MissionFrame*/
+	public Spaceship SpaceShip;
 
+	/**
+	 * Initialize Gaming environment
+	 * Initialize default stock for Spaceship
+	 * Initialize default Space objects
+	 * 
+	 * @param x Width of the frame (always fullscreen)
+	 * @param y Height of the frame (always fullscreen)
+	 * @param ship Receive Spaceship object pass from Mission Frame
+	 */
 	public GameEnvironment(int x, int y, Spaceship ship) {
-		/**
-		 * This class generate game environment from MissionFrame input
-		 * Only generate Graphics and Objects, don't process user input
-		 */
 		frame = new JFrame();
 		frame.setBounds(0, 0, x, y);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,6 +136,10 @@ public class GameEnvironment {
 		frame.getContentPane().add(galaBack);
 	}
 	
+	/**
+	 * Default stock list generate for ship
+	 * @return ArrayList<Stock> before adding the whole list to ship
+	 */
 	private ArrayList<Stock> generateStock(){
 		Stock food1 = new Stock_Food("Burger", 10, "../burger.png");
 		Stock food2 = new Stock_Food("Bread", 10, "../bread.png");
@@ -143,6 +162,9 @@ public class GameEnvironment {
 		return STOCK;
 	}
 	
+	/**
+	 * Add Celestial bodies and Outpost to SpaceObjects
+	 */
 	private void makeSpaceObjects() {		
 		//Space objects
 		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "../EldarSpaceStation.png");

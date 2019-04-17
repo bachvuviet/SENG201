@@ -23,14 +23,27 @@ import SpaceVessel.Outpost;
 import java.awt.Color;
 import javax.swing.JTextField;
 
-
+/** Class Intro:
+ * @author Bach Vu, Linh Luu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This is the trade frame, if player's spaceship get close to one of the outpost and interact (X)
+ * Player can buy more ship supply here
+ */
 public class OutpostTrade {
-
 	public JFrame frame;
 	
+	/** Ship current stock*/
 	private ArrayList<Stock> StockList;
 	private ArrayList<JTextField> textFieldList = new ArrayList<JTextField>();
 
+	/**
+	 * Make Trade frame with stock load from ship
+	 * @param parent Galaxy to be paused (disable control in game environment)
+	 * @param outpost Outpost interacted (press X)
+	 * @param ship Current ship
+	 */
 	public OutpostTrade(JFrame parent, Outpost outpost, Outpost ship) {
 		StockList = ship.getInventory();
 		frame = new JFrame();
@@ -129,6 +142,12 @@ public class OutpostTrade {
 		}
 	}
 	
+	/**
+	 * Update visual amount of ship current stock
+	 * Called when user buy any of the stock in the spacestation
+	 * @param st Stock user buy
+	 * @param index Index of stock, which can be used to find what textbox to be updated
+	 */
 	void updateStockAmount(Stock st, int index) {
 		st.setAmount(st.getAmount()+1);
 		textFieldList.get(index).setText(Integer.toString(st.getAmount()));

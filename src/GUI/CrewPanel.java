@@ -21,19 +21,35 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+/** Class Intro:
+ * @author Linh Luu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This class make instances of JPanel, which is used to create 4 instances (for each crew) in the pause frame, Crew tab.
+ * User can give crew order individually, and view crew status.
+ */
 public class CrewPanel {
 	public JPanel contentPan;
-	
 
     JTextField txtName = new JTextField();
 	JComboBox<String> cboAction1;
 	JComboBox<String> cboAction2;
 	JComboBox<Stock> cboSupply;
-	JProgressBar progHealth = new JProgressBar();;
-	JProgressBar progHunger = new JProgressBar();;
-	JProgressBar progMorale = new JProgressBar();;
+	JProgressBar progHealth = new JProgressBar();
+	JProgressBar progHunger = new JProgressBar();
+	JProgressBar progMorale = new JProgressBar();
 
-	public CrewPanel(int x, int y, int w, int h, Crew crew, ArrayList<Stock> stock, Spaceship ship) {
+	/**
+	 * Create a crew panel before added to crew tab in Pause frame (4 in total)
+	 * @param x Horizontal location of the panel (relative to tabcontrol in Pause frame, not to the entire frame)
+	 * @param y Vertical location of the panel (relative to tabcontrol in Pause frame, not to the entire frame)
+	 * @param w Panel width, half of screen by default
+	 * @param h Panel height, half of screen by default
+	 * @param crew Individual crew's data to be display by panel
+	 * @param ship Current ship to get crew list and inventory if needed
+	 */
+	public CrewPanel(int x, int y, int w, int h, Crew crew, Spaceship ship) {
 		contentPan = new JPanel();
 		contentPan.setBounds(x, y, w, h);
 		contentPan.setLayout(null);
@@ -143,6 +159,7 @@ public class CrewPanel {
 		});
         contentPan.add(cboAction2);
         
+        ArrayList<Stock> stock = ship.getInventory();
         cboSupply = new JComboBox<Stock>(stock.toArray(new Stock[stock.size()]));
         cboSupply.setBounds(12, 200, 111, 20);        
         cboSupply.setVisible(false);
@@ -151,7 +168,7 @@ public class CrewPanel {
         JButton btnGiveOrder = new JButton("Give Order");
         btnGiveOrder.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {        		
-        		GiveOrder(crew, stock, ship);
+        		GiveOrder(crew, ship);
         	}
         });
         
@@ -162,8 +179,14 @@ public class CrewPanel {
         contentPan.repaint();
 	}
 	
-	
-	void GiveOrder(Crew crew, ArrayList<Stock> stock, Spaceship ship) {
+	/**
+	 * Called when btn GiveOrder is clicked
+	 * @param crew The crew whom the panel show status
+	 * @param ship current ship
+	 */
+	void GiveOrder(Crew crew, Spaceship ship) {
+		ArrayList<Stock> stock = ship.getInventory();
+		//Action1
 		switch (cboAction1.getSelectedItem().toString()) {
 		case "Sleep":
 			crew.sleep();
@@ -187,6 +210,7 @@ public class CrewPanel {
 			break;
 		}
 		
+		//Action2
 		switch (cboAction2.getSelectedItem().toString()) {
 		case "Sleep":
 			crew.sleep();

@@ -48,6 +48,9 @@ public class MissionFrame {
 	
 	/**
 	 * Initialize the contents of the frame.
+	 * Initialize Game environment
+	 * Initialize Modules and crew of Spaceship
+	 * Initialize new Spaceship
 	 */
 	public MissionFrame() {		
 		GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
