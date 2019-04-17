@@ -55,6 +55,6 @@ public class Stock_Medicine implements Stock {
 		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
 	}
 	public String toString() {
-		return Name + " x"+amount;
+		return Name + " x"+ boostValue;
 	}
 }

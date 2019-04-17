@@ -8,9 +8,9 @@ public class Planet_GasGiant extends Planet implements CelestialBody {
 	}
 
 	@Override
-	public void getRadius() {
+	public int getRadius() {
+		return radius;
 		// TODO Auto-generated method stub
 		
 	}
-
 }

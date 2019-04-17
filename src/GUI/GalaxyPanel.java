@@ -230,7 +230,7 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 			boolean Y = Math.abs(en.getcenterY() - y) <= scanRad;
 			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterX()+":"+x+":"+scanRad);
 			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterY()+":"+y+":"+scanRad);
-			
+			//boolean check1 = true;
 			if (X && Y) {
 				if (en instanceof Outpost) {
 					frame.setFocusable(false);
@@ -241,7 +241,9 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 				}
 				else if (en instanceof Planet) {
 					Stock st = ((Planet) en).getHiddenTreasure();
-					StaticObjects.MessBox("Found "+st.toString(), "Scan Success", "");
+					StaticObjects.MessBox("Found "+ st, "Scan Successed", "");
+					//check1 = false;
+					
 					
 				} else if (en instanceof CelestialBody) {
 					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
