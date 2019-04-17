@@ -12,7 +12,7 @@ public class Stock_Medicine implements Stock {
     public int amount = 30;
     
     public Stock_Medicine(String name, String healCategory, int boost, String path) { 
-        this.setName(name);
+        this.Name = name;
         this.healCategory = healCategory;
         this.boostValue = boost;
         this.Image = new ImageIcon(StaticObjects.SelfResizeImage(path, this, 50, 50));
@@ -51,6 +51,6 @@ public class Stock_Medicine implements Stock {
 		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
 	}
 	public String toString() {
-		return Name + " x"+amount;
+		return Name + " x"+ boostValue;
 	}
 }
