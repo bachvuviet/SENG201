@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.awt.Font;
 
 import javax.swing.JLabel;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -17,18 +16,25 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
-public class WelcomeFrame {
+/** Class Intro:
+ * @author Bach Vu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This is the First and Begin Frame, player choose New game, Load game or view Credits.
+ * This take user to different frames.
+ */
 
+public class WelcomeFrame {
+	/** Field Intro:
+	 * First frame
+	 */
 	public JFrame frame;
-	/**
-	 * Create the application.
+
+	/** Method Intro:
+	 * Create controls in the frame
 	 */
 	public WelcomeFrame() {
-		initialize();
-	}
-
-	//Initialize the contents of the frame.	 
-	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("SENG");
 		frame.setResizable(false);
@@ -93,11 +99,10 @@ public class WelcomeFrame {
 		lblBackground.setBounds(0, 0, 631, 386);
 		lblBackground.setIcon(new ImageIcon(backImg));
 		frame.getContentPane().add(lblBackground);
-		
 	}
 	
 	/**
-	 * Launch the application.
+	 * Game Entry point, create a Welcome page which is the first page of the game
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

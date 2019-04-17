@@ -28,10 +28,22 @@ import java.awt.Image;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
+/** Class Intro:
+ * @author Bach Vu, Linh Luu
+ * @category SpaceShip game
+ * @version 0.30
+ * @location Lab133
+ * This is the second frame, if player choose new game.
+ * It ask for user input to make a new spaceship and new journey
+ */
+
 public class MissionFrame {
 	public JFrame frame; 
-	private JSlider slider = new JSlider(3, 10, 6);//min, max, initVal
-	private int Days = slider.getValue();
+	/** Slider to select day of journeys get value in other support method of class.*/
+	private JSlider slideJourneyDay = new JSlider(3, 10, 6);//min, max, initVal
+	/** Variable to support get slideJourneyDay value.*/
+	private int Days = slideJourneyDay.getValue();
+	/** This label tell user how many crew they have selected.*/
 	JLabel lblTotal = new JLabel("");
 	
 	/**
@@ -88,15 +100,16 @@ public class MissionFrame {
 		panelMid.add(lblEnterDays);
 		
 		//Experiment Slider	
-		slider.setSize(221, 43);
-		slider.setLocation(928, 88);
-		slider.setMajorTickSpacing(3);
-		slider.setMinorTickSpacing(1);
-		slider.setPaintTicks(true);
-		panelMid.add(slider);
+		slideJourneyDay.setSize(221, 43);
+		slideJourneyDay.setLocation(928, 88);
+		slideJourneyDay.setMajorTickSpacing(3);
+		slideJourneyDay.setMinorTickSpacing(1);
+		slideJourneyDay.setPaintTicks(true);
+		panelMid.add(slideJourneyDay);
 		
+		//Crew Selection
 		JLabel lblChoosingCrewMembers = new JLabel("");
-		lblChoosingCrewMembers.setText("<html><p>CHOOSING 4 CREW MEMBERS<p>(or right-click to undo choice)</html>");
+		lblChoosingCrewMembers.setText("<html><p>CHOOSING 4 CREW MEMBERS<p>(or right-click to undo)</html>");
 		lblChoosingCrewMembers.setVerticalAlignment(SwingConstants.TOP);
 		lblChoosingCrewMembers.setForeground(Color.WHITE);
 		lblChoosingCrewMembers.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,7 +184,7 @@ public class MissionFrame {
 		JButton btnAcceptStart = new JButton("Accept & Start");		
 		btnAcceptStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Days = slider.getValue();
+				Days = slideJourneyDay.getValue();
 				if (Days >= 3  && Days <= 10) {
 				    InitGame(width, height, Days, txtShipName.getText());					
 				}
@@ -194,6 +207,17 @@ public class MissionFrame {
 		frame.getContentPane().add(Background);
 	}
 	
+	/**
+	 * Called via btnAccept&Start click action
+	 * @param width Get the default screen pixel width
+	 * @param height Get the default screen pixel width
+	 * @param Days Get total day on mission
+	 * @param name Get name of SpaceShip
+	 * 
+	 * Initiate Game environment
+	 * Initiate Modules and crew of Spaceship
+	 * Initiate new Spaceship
+	 */
 	void InitGame(int width, int height, int Days, String name) {
 		int DaysOnMission = Days;
 		if (name == "")
@@ -235,8 +259,17 @@ public class MissionFrame {
 		frame.dispose();
 	}
 	
+	/** Crew list contain crew via button choose crew*/
 	ArrayList<Crew> tempCrew = new ArrayList<Crew>();
+	/** Check amount of total crew in spaceship and amount of each type of crew*/
     int[] Array = {0, 0, 0, 0, 0, 0};
+    
+    /**
+     * Called via click action on a crew type
+     * Add crew of that type to ArrayList tempCrew
+     * @param Rank Specify Type of crew to add (button argument)
+     * @param img Specify default avatar of crew (button argument)
+     */
 	void addCrew(CrewRank Rank, Image img) {
 		int total = 0;
 		for (int num:Array) {
@@ -271,6 +304,11 @@ public class MissionFrame {
 		tempCrew.add(newCrew);
 		updateCrewlabel();
 	}
+	
+	/**
+	 * Called via right-click button select crew to remove a specific type of crew out of Crew list
+	 * @param Rank Specify Type of crew to remove (button argument)
+	 */
 	void removeCrew(CrewRank Rank) {
 		switch (Rank) {
 		case SCIENTIST:
@@ -309,6 +347,11 @@ public class MissionFrame {
 		}
 		updateCrewlabel();
 	}
+	
+	/**
+	 * Update totalLabel, display current selected crew list
+	 * Called every time a button is left-clicked/right-clicked
+	 */
 	void updateCrewlabel() {
 		String[] Rank = {"Scientist", "Mechanic", "Captain", "Doctor", "Chef", "Helms"};
 		String mystr = "";
