@@ -21,13 +21,11 @@ import SpaceVessel.Outpost;
 import SpaceVessel.Spaceship;
 import SpaceVessel.Stock;
 
-/** Class Intro:
- * @author Bach Vu
- * @category SpaceShip game
- * @version 0.30
- * @location Lab133
+/**
  * This class make instances of JPanel, which Game Environment can initiate multiple galaxies.
  * Process User input and update controls in ControlPanel (bottom right) of Game environment
+ * @author Bach Vu
+ * @version 0.30
  */
 public class GalaxyPanel extends JPanel implements KeyListener{
 	private static final long serialVersionUID = 1L;

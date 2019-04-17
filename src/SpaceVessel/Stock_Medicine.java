@@ -4,24 +4,31 @@ import javax.swing.ImageIcon;
 
 import CustomUIELmt.StaticObjects;
 
+/**
+ * Medicine Improve health of crews
+ * @author Bach Vu, Linh Luu
+ * @version 0.30
+ */
 public class Stock_Medicine implements Stock {
+	/** Name of medicine*/
     private String Name; 
+    /** Desease heal*/
     private String healCategory;
+    /** amount of Health recover*/
     private int boostValue;
+    /** image of medicine*/
     private ImageIcon Image;
-    public int amount = 30;
+    /** Amount current have in ship's inventory*/
+    private int amount = 30;
     
     public Stock_Medicine(String name, String healCategory, int boost, String path) { 
-        this.setName(name);
+        this.Name = name;
         this.healCategory = healCategory;
         this.boostValue = boost;
         this.Image = new ImageIcon(StaticObjects.SelfResizeImage(path, this, 50, 50));
     }
     
     //getter
-    public String getStockName() {
-    	return Name;
-    }
 	public String getName() {
 		return Name;
 	}
@@ -36,9 +43,6 @@ public class Stock_Medicine implements Stock {
 	}
 	
 	//setter
-	public void setName(String name) {
-		this.Name = name;
-	}
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}

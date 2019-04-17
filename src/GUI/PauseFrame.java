@@ -27,14 +27,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-/** Class Intro:
- * @author Bach Vu, Linh Luu
- * @category SpaceShip game
- * @version 0.30
- * @location Lab133
+/** 
  * This is the pause frame, if player press ESC at anytime.
- * Game environment is disabled (no control until resume)
+ * Game environment is disabled (no control until resume).
  * User can view ship status and give crew order within this frame, since both action must be performed when the game is paused.
+ * @author Bach Vu, Linh Luu
+ * @version 0.30
  */
 public class PauseFrame extends JFrame {
 	private static final long serialVersionUID = 1L;

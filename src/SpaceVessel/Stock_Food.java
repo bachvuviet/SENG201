@@ -1,5 +1,10 @@
 package SpaceVessel;
 
+/**
+ * Food improve crew hunger
+ * @author Bach Vu, Linh Luu
+ * @version 0.30
+ */
 import javax.swing.ImageIcon;
 
 import CustomUIELmt.StaticObjects;
@@ -29,9 +34,6 @@ public class Stock_Food implements Stock{
 	}
 
 	//setter
-	public void setName(String name) {
-		this.Name = name;
-	}
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}	

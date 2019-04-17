@@ -12,11 +12,4 @@ public class Planet_Terrestrial extends Planet implements CelestialBody {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void getHiddenTreasure() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

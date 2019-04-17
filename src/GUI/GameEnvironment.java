@@ -19,16 +19,14 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Font;
 
-/** Class Intro:
+/** 
+ * This is the third frame, player actually start their game.
+ * Storyline and HowToPlay added here.
+ * <p>
+ * Start Game in a strange Galaxy, has multiple Galaxy panel overlaps.
+ * Only generate Graphics and Space Objects, don't process user input.
  * @author Bach Vu, Linh Luu
- * @category SpaceShip game
  * @version 0.30
- * @location Lab133
- * This is the third frame, player actually start their game 
- * Storyline and HowToPlay added here
- * 
- * Start Game in a strange Galaxy, has multiple Galaxy panel overlaps 
- * Only generate Graphics and Space Objects, don't process user input
  */
 public class GameEnvironment {
 	public JFrame frame;

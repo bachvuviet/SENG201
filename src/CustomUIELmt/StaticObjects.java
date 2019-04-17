@@ -10,12 +10,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+/**
+ * This class contain only static methods to support gaming experience
+ * @author Bach Vu
+ * @version 1.0
+ */
 public class StaticObjects {
 	
 	/**
-	 * 
-	 * @param infoMessage
-	 * @param titleBar
+	 * Quick way to use pop up messbox, only show details, no decision process
+	 * @param infoMessage String to display as message
+	 * @param titleBar Title of box
 	 * @param type Default blank, INFO, Warning, Error
 	 */
     public static void MessBox(String infoMessage, String titleBar, String type)
@@ -35,10 +40,26 @@ public class StaticObjects {
 	            JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.PLAIN_MESSAGE);	    		
     	}
     }
+    
+    /**
+     * Not Implemented
+	 * @param infoMessage String to display as message
+	 * @param titleBar Title of box
+	 * @param type Default blank, INFO, Warning, Error
+     */
     public static void OptionBox(String infoMessage, String titleBar, String type)
     {
     	
     }
+    
+    /**
+     * Quick way to resize background imag, avatar crew, stock icon ...
+     * @param path path to Image (../sth.png)
+     * @param obj Current class using this static method (normally send this)
+     * @param x width
+     * @param y height
+     * @return Resized Image
+     */
     public static Image SelfResizeImage(String path, Object obj, int x, int y) {
     	BufferedImage img = null;
     	try {
@@ -49,6 +70,14 @@ public class StaticObjects {
 		Image IMG = img.getScaledInstance(x , y, Image.SCALE_SMOOTH);
 		return IMG;
     }
+    
+    /**
+     * Running message, for game tutorial and incoming message of storyline
+     * @param heading Header of message
+     * @param message Message
+     * @param PS Regards tip of message
+     * @param messLabel The label use to display the message
+     */
 	public static void IncomingMessage(String heading, String message, String PS, JLabel messLabel) {
 		//String OutputMessage = String.format("<html><h1> %s:</h1><p>	Greeting Captain,<p>%s<p>%s</html>", heading, message, PS);
 		

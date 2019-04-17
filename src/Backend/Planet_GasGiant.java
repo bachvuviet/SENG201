@@ -13,10 +13,4 @@ public class Planet_GasGiant extends Planet implements CelestialBody {
 		
 	}
 
-	@Override
-	public void getHiddenTreasure() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

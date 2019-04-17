@@ -9,6 +9,11 @@ import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
 
+/**
+ * This class Make pretty button
+ * @author Bach Vu
+ * @version 1.0
+ */
 public class TranslucentButton extends JButton{
 	private static final long serialVersionUID = 1L;
 	private static final Color TL = new Color(1f,1f,1f,.2f);

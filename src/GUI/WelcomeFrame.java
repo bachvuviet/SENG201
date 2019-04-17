@@ -19,14 +19,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
-/** Class Intro:
- * @author Bach Vu
- * @category SpaceShip game
- * @version 0.30
- * @location Lab133
- * @date 10/04/2019
+/**
+ * Class Intro:
  * This is the First and Begin Frame, player choose New game, Load game or view Credits.
  * This take user to different frames.
+ * @author Bach Vu
+ * @version 0.30
  */
 
 public class WelcomeFrame {
@@ -107,6 +105,7 @@ public class WelcomeFrame {
 	
 	/**
 	 * Game Entry point, create a Welcome page which is the first page of the game
+	 * @param args Initial argument (potential save)
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

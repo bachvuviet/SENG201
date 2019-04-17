@@ -28,13 +28,11 @@ import java.awt.Image;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
-/** Class Intro:
- * @author Bach Vu, Linh Luu
- * @category SpaceShip game
- * @version 0.30
- * @location Lab133
+/** 
  * This is the second frame, if player choose new game.
- * It ask for user input to make a new spaceship and new journey
+ * It ask for user input to make a new spaceship and new journey.
+ * @author Bach Vu, Linh Luu
+ * @version 0.30
  */
 
 public class MissionFrame {

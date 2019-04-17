@@ -21,13 +21,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-/** Class Intro:
- * @author Linh Luu
- * @category SpaceShip game
- * @version 0.30
- * @location Lab133
+/** 
  * This class make instances of JPanel, which is used to create 4 instances (for each crew) in the pause frame, Crew tab.
  * User can give crew order individually, and view crew status.
+ * @author Linh Luu
+ * @version 0.30
  */
 public class CrewPanel {
 	public JPanel contentPan;

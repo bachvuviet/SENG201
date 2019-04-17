@@ -23,13 +23,11 @@ import SpaceVessel.Outpost;
 import java.awt.Color;
 import javax.swing.JTextField;
 
-/** Class Intro:
+/**
+ * This is the trade frame, if player's spaceship get close to one of the outpost and interact (X).
+ * Player can buy more ship supply here.
  * @author Bach Vu, Linh Luu
- * @category SpaceShip game
  * @version 0.30
- * @location Lab133
- * This is the trade frame, if player's spaceship get close to one of the outpost and interact (X)
- * Player can buy more ship supply here
  */
 public class OutpostTrade {
 	public JFrame frame;
