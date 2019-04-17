@@ -17,7 +17,8 @@ import SpaceVessel.Stock_Medicine;
 public class Planet extends Entity implements CelestialBody {
 	protected int radius;
     protected Stock hiddenStock;
-    private Random num = new Random();
+    protected boolean check=false;
+    protected Random num = new Random();
 	
 	public Planet (int x, int y, int r, String Name, String path) {
 		super(x, y, r, r, Name, path);
@@ -28,7 +29,8 @@ public class Planet extends Entity implements CelestialBody {
 	}
 	
 	public void setHiddenTreasure() {
-		int val = num.nextInt(20);
+		for (int i=1; i <= 20; i++) {
+			int val = num.nextInt(i);
 		Stock food1 = new Stock_Food("Burger", val, "../burger.png");
 		Stock food2 = new Stock_Food("Bread", val, "../bread.png");
 		Stock food3 = new Stock_Food("Pizza", val, "../pizza.png");
@@ -50,13 +52,18 @@ public class Planet extends Entity implements CelestialBody {
 		Collections.shuffle(STOCK);
 		for (Stock st: STOCK) {
 			hiddenStock = st;
-		}
+		}}
 		//System.out.println(STOCK);
 		//System.out.println(val);
 	}
 	
+	public boolean getScan() {
+		return check;
+	}
+	
 	public Stock getHiddenTreasure() {
 		setHiddenTreasure();
+		check = true;
 		return hiddenStock;
 	}
 	

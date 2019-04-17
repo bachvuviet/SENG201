@@ -224,13 +224,13 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 	 */
 	private void Interact() {
 		found: {//for else loop in python
+		
 		for (Entity en:SpaceObjects) {
 			int scanRad = en.getScanRadius();
 			boolean X = Math.abs(en.getcenterX() - x) <= scanRad;
 			boolean Y = Math.abs(en.getcenterY() - y) <= scanRad;
 			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterX()+":"+x+":"+scanRad);
 			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterY()+":"+y+":"+scanRad);
-			//boolean check1 = true;
 			if (X && Y) {
 				if (en instanceof Outpost) {
 					frame.setFocusable(false);
@@ -238,21 +238,26 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, (Outpost) SpaceShip);
 					trade.frame.setVisible(true);
 					trade.frame.setLocationRelativeTo(null);
+					
+				
 				}
-				else if (en instanceof Planet) {
+				
+				else if (!((Planet) en).getScan() && en instanceof Planet) {
 					Stock st = ((Planet) en).getHiddenTreasure();
 					StaticObjects.MessBox("Found "+ st, "Scan Successed", "");
-					//check1 = false;
-					
-					
 				} else if (en instanceof CelestialBody) {
 					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
 					
-				}
+				} 
 				break found;
 			}
 		}
 		StaticObjects.MessBox("Scan failed, not close enough!", "Scan Failed", "Warning");
-		} 
+		}
+	}
+
+	private Object Planet(Entity en) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
