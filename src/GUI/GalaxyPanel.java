@@ -239,13 +239,16 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 					trade.frame.setVisible(true);
 					trade.frame.setLocationRelativeTo(null);
 					
+				
 				}
-				else if (!((Backend.Planet) Planet(en)).getScan() && en instanceof Planet) {
+				
+				else if (!((Planet) en).getScan() && en instanceof Planet) {
 					Stock st = ((Planet) en).getHiddenTreasure();
 					StaticObjects.MessBox("Found "+ st, "Scan Successed", "");
 				} else if (en instanceof CelestialBody) {
 					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
-				}
+					
+				} 
 				break found;
 			}
 		}
