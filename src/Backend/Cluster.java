@@ -1,5 +1,10 @@
 package Backend;
 
+/**
+ * A type of entity
+ * @author Bach Vu, Linh Luu
+ * @version 0.30
+ */
 public class Cluster extends Entity implements CelestialBody {
 
 	public Cluster(int x, int y, int w, int h, String Name, String path) {

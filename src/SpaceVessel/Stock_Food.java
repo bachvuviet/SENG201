@@ -1,14 +1,14 @@
 package SpaceVessel;
 
+import javax.swing.ImageIcon;
+
+import CustomUIELmt.StaticObjects;
+
 /**
  * Food improve crew hunger
  * @author Bach Vu, Linh Luu
  * @version 0.30
  */
-import javax.swing.ImageIcon;
-
-import CustomUIELmt.StaticObjects;
-
 public class Stock_Food implements Stock{
 	private String Name;
 	private final String CATEGORY = "FOOD";
