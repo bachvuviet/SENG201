@@ -1,6 +1,7 @@
 package SpaceVessel;
 
 import javax.swing.ImageIcon;
+
 import java.util.ArrayList;
 
 /**
@@ -102,13 +103,14 @@ public class Crew {
     public void useSupply(int amount, Stock stock) {
     	if (stock.getAmount() > 0) {
     		stock.setAmount(stock.getAmount()-amount);
-    		if (stock instanceof Stock_Food)
+    		if (stock instanceof Stock_Food) {
     			Hunger += stock.use(amount);
-    		else if (stock instanceof Stock_Medicine)
+        		crewAction.add("Eating");    			
+    		}
+    		else if (stock instanceof Stock_Medicine) {
     			Health += stock.use(amount);
-    		crewAction.add("Eating");
-    	} else {
-    		
+        		crewAction.add("Healing");    	
+    		}
     	}    	
     }
     /**
@@ -128,15 +130,22 @@ public class Crew {
     	Hunger -= 20;
     	crewAction.add("Repairing Ship");
     	if (Rank == CrewRank.MECHANIC)
-    		Ship.increaseHull(Ship.getHull() + 25);
+    		Ship.increaseHull(25);
     	else
-    		Ship.increaseHull(Ship.getHull() + 15);
+    		Ship.increaseHull(15);
     }
     /**
      * crew must have action to pilot ship at anytime, otherwise ship cannot move
      */
     public void pilotShip() {
     	crewAction.add("Driving Ship");
+    }
+    /**
+     * Get Assigned order of each crew
+     * @return Crew current task
+     */
+    public ArrayList<String> getCrewActivity(){
+    	return crewAction;
     }
     /**
      * Quick output to check Crew status when testing

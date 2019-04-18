@@ -62,13 +62,17 @@ public class StaticObjects {
      */
     public static Image SelfResizeImage(String path, Object obj, int x, int y) {
     	BufferedImage img = null;
-    	try {
-			img = ImageIO.read(obj.getClass().getResource(path));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		Image IMG = img.getScaledInstance(x , y, Image.SCALE_SMOOTH);
-		return IMG;
+    	if (path!="") {
+        	try {
+    			img = ImageIO.read(obj.getClass().getResource(path));
+    		} catch (IOException e1) {
+    			e1.printStackTrace();
+    		}
+    		Image IMG = img.getScaledInstance(x , y, Image.SCALE_SMOOTH);
+    		return IMG;
+    	} else {
+    		return null;
+    	}
     }
     
     /**
