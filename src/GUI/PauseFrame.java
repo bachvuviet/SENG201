@@ -112,7 +112,7 @@ public class PauseFrame extends JFrame {
 		lblShipvisiual.setOpaque(true);
 		lblShipvisiual.setBackground(new Color(0, 0, 128));
 		lblShipvisiual.setBounds(230, 11, 257, 482);
-		Image IMG = StaticObjects.SelfResizeImage("../spaceshipOrg.png", this, lblShipvisiual.getWidth(), lblShipvisiual.getHeight());	
+		Image IMG = StaticObjects.SelfResizeImage("/spaceshipOrg.png", this, lblShipvisiual.getWidth(), lblShipvisiual.getHeight());	
 		lblShipvisiual.setIcon(new ImageIcon(IMG));
 		panelStatus.add(lblShipvisiual);		
 		

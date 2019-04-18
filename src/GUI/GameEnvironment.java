@@ -129,7 +129,7 @@ public class GameEnvironment {
 		JLabel galaBack = new JLabel("");
 		galaBack.setBounds(0, 0, x, y);
 		galaBack.setVerticalAlignment(SwingConstants.BOTTOM);
-		Image IMG = StaticObjects.SelfResizeImage("../giphy.gif", this, x, y);	
+		Image IMG = StaticObjects.SelfResizeImage("/giphy.gif", this, x, y);	
 		galaBack.setIcon(new ImageIcon(IMG));
 		frame.getContentPane().add(galaBack);
 	}
@@ -139,16 +139,16 @@ public class GameEnvironment {
 	 * @return ArrayList<Stock> before adding the whole list to ship
 	 */
 	private ArrayList<Stock> generateStock(){
-		Stock food1 = new Stock_Food("Burger", 10, "../burger.png");
-		Stock food2 = new Stock_Food("Bread", 10, "../bread.png");
-		Stock food3 = new Stock_Food("Pizza", 10, "../pizza.png");
-		Stock food4 = new Stock_Food("Chicken", 10, "../Chicken.png");
-		Stock food5 = new Stock_Food("Steak", 10, "../steak.png");
-		Stock food6 = new Stock_Food("Sushi", 10, "../sushi.png");
+		Stock food1 = new Stock_Food("Burger", 10, "/burger.png");
+		Stock food2 = new Stock_Food("Bread", 10, "/bread.png");
+		Stock food3 = new Stock_Food("Pizza", 10, "/pizza.png");
+		Stock food4 = new Stock_Food("Chicken", 10, "/Chicken.png");
+		Stock food5 = new Stock_Food("Steak", 10, "/steak.png");
+		Stock food6 = new Stock_Food("Sushi", 10, "/sushi.png");
 		
-		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 10, "../healpotion.png");
-		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 10, "../painkiller.png");
-		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, "../syringe.png");
+		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 10, "/healpotion.png");
+		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 10, "/painkiller.png");
+		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, "/syringe.png");
 		
 		ArrayList<Stock> STOCK = new ArrayList<Stock>();
 		STOCK.add(food1);STOCK.add(food2);
@@ -165,21 +165,21 @@ public class GameEnvironment {
 	 */
 	private void makeSpaceObjects() {		
 		//Space objects
-		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "../EldarSpaceStation.png");
+		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/EldarSpaceStation.png");
 		SpaceObjects.add(post1);
-		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "../SpaceMarineStation.png");
+		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/SpaceMarineStation.png");
 		SpaceObjects.add(post2);
-		BlackHole hole1 = new BlackHole(20, 30, 150, 150, "MegaBlack", "../BlueHole.png");
+		BlackHole hole1 = new BlackHole(20, 30, 150, 150, "MegaBlack", "/BlueHole.png");
 		SpaceObjects.add(hole1);
-		BlackHole hole2 = new BlackHole(1450, 700, 200, 200, "MediumBlue", "../smallBlueHole.png");
+		BlackHole hole2 = new BlackHole(1450, 700, 200, 200, "MediumBlue", "/smallBlueHole.png");
 		SpaceObjects.add(hole2);
-		Planet earth = new Planet_Terrestrial(1000, 1000, 400, "Earth", "../Earth.png");
+		Planet earth = new Planet_Terrestrial(1000, 1000, 400, "Earth", "/Earth.png");
 		SpaceObjects.add(earth);
-		Planet oceanPlanet = new Planet_Ocean(600, 500, 250, "Ocean", "../Ocean Planet.png");
+		Planet oceanPlanet = new Planet_Ocean(600, 500, 250, "Ocean", "/Ocean Planet.png");
 		SpaceObjects.add(oceanPlanet);
-		Planet colorfulPlanet = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","../Colorful Planet1.png");
+		Planet colorfulPlanet = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","/Colorful Planet1.png");
 		SpaceObjects.add(colorfulPlanet);
-		Planet saturn = new Planet_GasGiant(200, 180, 350, "Saturn", "../saturn.png");
+		Planet saturn = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
 		SpaceObjects.add(saturn);
 	}
 }

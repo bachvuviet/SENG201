@@ -32,7 +32,7 @@ public class Spaceship extends Outpost {
 	
 	//Constructor
 	public Spaceship(double x, double y, String name, int day, ArrayList<Crew> crew, ArrayList<ShipModule> mod) {
-		super(x, y, name, "../spaceshipUp.png");
+		super(x, y, name, "/spaceshipUp.png");
 		Width = 40; Height = 70;
 		daysOnMission = day;
 		CREW = crew;
@@ -47,16 +47,16 @@ public class Spaceship extends Outpost {
 	public void render(Graphics g) {
 		switch (direction) {
 		case 1: 
-			visual = new ImageIcon(this.getClass().getResource("../spaceshipLeft.png")).getImage();
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipLeft.png")).getImage();
 			break;
 		case 2:
-			visual = new ImageIcon(this.getClass().getResource("../spaceshipDown.png")).getImage();
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipDown.png")).getImage();
 			break;
 		case 3:
-			visual = new ImageIcon(this.getClass().getResource("../spaceshipRight.png")).getImage();
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipRight.png")).getImage();
 			break;
 		default:
-			visual = new ImageIcon(this.getClass().getResource("../spaceshipUp.png")).getImage();
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipUp.png")).getImage();
 			break;
 		}
 		g.drawImage(visual, (int) x, (int) y, null);

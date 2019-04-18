@@ -118,8 +118,8 @@ public class MissionFrame {
 		lblChoosingCrewMembers.setBounds(481, 115, 400, 68);
 		panelMid.add(lblChoosingCrewMembers);
 		
-		String[] AvatarArr = {"../Doctor Strange.png","../Gamora.png","../Groot.png","../Kirk.png","../Spock.png",
-				"../Star Lord.png","","","","","",""};
+		String[] AvatarArr = {"/Doctor Strange.png","/Gamora.png","/Groot.png","/Kirk.png","/Spock.png",
+				"/Star Lord.png","","","","","",""};
 		String[] TooltipArr = {"<html><h2><center>Doctor</center><h4>He/She heals your health</html>",
 								"<html><h2><center>Mechanic</center><h4>He/She fixes your ship</html>",
 								"<html><h2><center>Captain</center><h4>He/She is ... </html>",
@@ -202,7 +202,7 @@ public class MissionFrame {
 		//Always put background at the END
 		JLabel Background = new JLabel("");
 		Background.setBounds(0, 0, 1366, 768);
-		Image IMG = StaticObjects.SelfResizeImage("../Mission.jpg", this, 1366, 768);
+		Image IMG = StaticObjects.SelfResizeImage("/Mission.jpg", this, 1366, 768);
 		Background.setVerticalAlignment(SwingConstants.BOTTOM);
 		Background.setIcon(new ImageIcon(IMG));
 		frame.getContentPane().add(Background);
