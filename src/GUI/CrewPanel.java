@@ -102,16 +102,19 @@ public class CrewPanel {
         progHunger.setBounds(188, 67, 160, 15);
         progHunger.setValue(crew.getHunger());
         progHunger.setForeground(Color.BLUE);
+        progHunger.setStringPainted(true);
         contentPan.add(progHunger);
         
         progHealth.setBounds(188, 43, 160, 15);
         progHealth.setValue(crew.getHealth());
         progHealth.setForeground(Color.RED);
+        progHealth.setStringPainted(true);
         contentPan.add(progHealth);   
         
         progMorale.setBounds(188, 90, 160, 15);
         progMorale.setValue(crew.getMorale());
         progMorale.setForeground(Color.YELLOW);
+        progMorale.setStringPainted(true);
         contentPan.add(progMorale);
 
         String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement"};
@@ -167,6 +170,9 @@ public class CrewPanel {
         btnGiveOrder.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {        		
         		GiveOrder(crew, ship);
+        		if (cboAction2.getSelectedIndex() != 0) {
+        			cboAction2.setEnabled(false);
+        		}
         	}
         });
         
