@@ -31,6 +31,7 @@ public class Planet extends Entity implements CelestialBody {
 	public void setHiddenTreasure() {
 		for (int i=1; i <= 20; i++) {
 			int val = num.nextInt(i);
+			//"lol"
 		Stock food1 = new Stock_Food("Burger", val, "/burger.png");
 		Stock food2 = new Stock_Food("Bread", val, "/bread.png");
 		Stock food3 = new Stock_Food("Pizza", val, "/pizza.png");

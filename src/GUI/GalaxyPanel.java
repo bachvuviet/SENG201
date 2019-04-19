@@ -13,6 +13,7 @@ import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import Backend.BlackHole;
 import Backend.CelestialBody;
 import Backend.Entity;
 import Backend.Planet;
@@ -238,17 +239,18 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, (Outpost) SpaceShip);
 					trade.frame.setVisible(true);
 					trade.frame.setLocationRelativeTo(null);
-					
-				
 				}
-				
 				else if (!((Planet) en).getScan() && en instanceof Planet) {
 					Stock st = ((Planet) en).getHiddenTreasure();
-					StaticObjects.MessBox("Found "+ st, "Scan Successed", "");
-				} else if (en instanceof CelestialBody) {
-					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
+					StaticObjects.MessBox("Found "+ st, "Scanned ", "");
 					
-				} 
+				}
+				else if (((Planet) en).getScan() && en instanceof Planet) {
+					StaticObjects.MessBox(en.toString()+" has no more stock.", "Scanned "+en.toString(), "");
+				}
+				else if (en instanceof BlackHole) {
+					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
+				}
 				break found;
 			}
 		}
@@ -256,8 +258,4 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 		}
 	}
 
-	private Object Planet(Entity en) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
