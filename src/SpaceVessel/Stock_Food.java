@@ -9,7 +9,7 @@ import CustomUIELmt.StaticObjects;
  * @author Bach Vu, Linh Luu
  * @version 0.30
  */
-public class Stock_Food implements Stock{
+public class Stock_Food implements Stock, Cloneable {
 	private String Name;
 	private final String CATEGORY = "FOOD";
 	private int boostValue;
@@ -46,6 +46,10 @@ public class Stock_Food implements Stock{
 		return amount +"x " +Name + " (" + CATEGORY + "):<p> --> Effect: Crew Hunger +" +boostValue;
 	}
 	public String toString() {
-		return Name +" x"+ boostValue;
+		return Name +" x"+ amount;
+	}
+	
+	public Stock clone() throws CloneNotSupportedException {
+		return (Stock) super.clone();
 	}
 }

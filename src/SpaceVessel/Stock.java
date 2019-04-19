@@ -39,4 +39,9 @@ public interface Stock {
      * @param amount new amount of selected stock
      */
     public void setAmount(int amount);
+    /**
+     * Clone a stock to get 2 exact same instance of Stock
+     * @return Image of old Stock
+     */
+	//public Object clone();
 }
