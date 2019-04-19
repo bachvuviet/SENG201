@@ -54,6 +54,7 @@ public class Planet extends Entity implements CelestialBody {
 		for (Stock st: STOCK) {
 			hiddenStock = st;
 		}}
+
 		//System.out.println(STOCK);
 		//System.out.println(val);
 	}
