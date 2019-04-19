@@ -13,6 +13,8 @@ class Crew_Inventory {
 
 	private Spaceship testShip;
 	private Outpost tradePost;
+
+	ArrayList<Stock> STOCK = new ArrayList<Stock>();
 		
 	@BeforeEach
 	public void init() {
@@ -39,9 +41,8 @@ class Crew_Inventory {
 		
 		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 10, "/bread.png");
 		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 10, "/bread.png");
-		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, "/bread.png");
+		Stock medi3 = new Stock_Medicine("Syringe", "Disease", 10, "/bread.png");
 		
-		ArrayList<Stock> STOCK = new ArrayList<Stock>();
 		STOCK.add(food1);STOCK.add(food2);
 		STOCK.add(food3);STOCK.add(food4);
 		STOCK.add(food5);STOCK.add(food6);
@@ -124,7 +125,10 @@ class Crew_Inventory {
 	
 	@Test
 	public void Trade() {
-		
+		testShip.changeStockAmount(10, STOCK.get(5));
+		assertEquals(30, testShip.getInventory().get(5).getAmount());
+		testShip.changeStockAmount(-10, STOCK.get(4));
+		assertEquals(10, testShip.getInventory().get(4).getAmount());
 	}
 }
 

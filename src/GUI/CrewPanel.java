@@ -198,7 +198,7 @@ public class CrewPanel {
 		case "Use Supplement":
 			for (Stock st: stock) {
 				if (cboSupply.getSelectedItem().equals(st)) {
-					crew.useSupply(1, st);
+					crew.useSupply(10, st);
 		        } else {
 			        System.out.println("false");
 		        }
@@ -222,7 +222,7 @@ public class CrewPanel {
 		case "Use Supplement":
 			for (Stock st: stock) {
 				if (cboSupply.getSelectedItem().equals(st)) {
-					crew.useSupply(1, st);
+					crew.useSupply(10, st);
 		        } else {
 			        System.out.println("false");
 		        }

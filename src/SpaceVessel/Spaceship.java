@@ -227,4 +227,6 @@ public class Spaceship extends Outpost {
 	public ArrayList<Crew> getCrewList(){
 		return CREW;
 	}
+
+	
 }

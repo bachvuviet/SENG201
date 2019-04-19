@@ -128,6 +128,7 @@ public class Crew {
      */
     public void repair(Spaceship Ship) {
     	Hunger -= 20;
+    	Morale -= 10;
     	crewAction.add("Repairing Ship");
     	if (Rank == CrewRank.MECHANIC)
     		Ship.increaseHull(25);
@@ -138,6 +139,7 @@ public class Crew {
      * crew must have action to pilot ship at anytime, otherwise ship cannot move
      */
     public void pilotShip() {
+    	Morale -= 25;
     	crewAction.add("Driving Ship");
     }
     /**

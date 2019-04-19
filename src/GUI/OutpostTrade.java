@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 
-import SpaceVessel.Outpost;
-
 import java.awt.Color;
 import javax.swing.JTextField;
 
@@ -35,6 +33,7 @@ public class OutpostTrade {
 	/** Ship current stock*/
 	private ArrayList<Stock> StockList;
 	private ArrayList<JTextField> textFieldList = new ArrayList<JTextField>();
+	private Spaceship ship;
 
 	/**
 	 * Make Trade frame with stock load from ship
@@ -49,6 +48,8 @@ public class OutpostTrade {
 		frame.setBounds(200, 300, 501, 447);
 		frame.setUndecorated(true);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		this.ship = (Spaceship) ship;
 		
 		JLabel lblOutpost = new JLabel(outpost.toString());
 		lblOutpost.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -149,5 +150,6 @@ public class OutpostTrade {
 	void updateStockAmount(Stock st, int index) {
 		st.setAmount(st.getAmount()+1);
 		textFieldList.get(index).setText(Integer.toString(st.getAmount()));
+		ship.changeStockAmount(st.getAmount(), st);
 	}
 }

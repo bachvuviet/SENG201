@@ -53,7 +53,8 @@ public class Planet extends Entity implements CelestialBody {
 		Collections.shuffle(STOCK);
 		for (Stock st: STOCK) {
 			hiddenStock = st;
-		}}
+		}
+	}
 
 		//System.out.println(STOCK);
 		//System.out.println(val);
