@@ -6,6 +6,8 @@ import CustomUIELmt.StaticObjects;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Random;
+
 //import java.util.Timer;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -40,6 +42,8 @@ public class GameEnvironment {
 	public ArrayList<GalaxyPanel> Galaxy = new ArrayList<GalaxyPanel>();
 	/** Spaceship generated from MissionFrame*/
 	public Spaceship SpaceShip;
+    protected Random random = new Random();
+	
 
 	/**
 	 * Initialize Gaming environment
@@ -49,8 +53,9 @@ public class GameEnvironment {
 	 * @param x Width of the frame (always fullscreen)
 	 * @param y Height of the frame (always fullscreen)
 	 * @param ship Receive Spaceship object pass from Mission Frame
+	 * @throws CloneNotSupportedException 
 	 */
-	public GameEnvironment(int x, int y, Spaceship ship) {
+	public GameEnvironment(int x, int y, Spaceship ship) throws CloneNotSupportedException {
 		frame = new JFrame();
 		frame.setBounds(0, 0, x, y);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +66,8 @@ public class GameEnvironment {
 		
 		//Ship Default Inventory
 		SpaceShip = ship;
-		for(Stock st:generateStock()) {
+		ArrayList<Stock> modelSTOCK = generateStock();
+		for(Stock st:modelSTOCK) {
 			SpaceShip.addStock(st);
 		}
 		makeSpaceObjects();
@@ -120,6 +126,21 @@ public class GameEnvironment {
 		frame.getContentPane().add(controlPan);	
 		
 		for (Entity en:SpaceObjects) {
+			if (en instanceof Planet) {
+				int index = random.nextInt(8);
+				int randomInt = random.nextInt(30);
+				Stock st = modelSTOCK.get(index);
+				Stock cloneST = new Stock_Food("", 0, "/bread.png");
+				if (st instanceof Stock_Medicine) {
+					cloneST = ((Stock_Medicine) st).clone();
+					cloneST.setAmount(randomInt);
+				    //((Planet) en).setHiddenTreasure(cloneST);
+				} else if (st instanceof Stock_Food) {
+					cloneST = ((Stock_Food) st).clone();
+					cloneST.setAmount(randomInt);
+				}
+			    ((Planet) en).setHiddenTreasure(cloneST);
+			}
 			JLabel lblTemp = new JLabel(new ImageIcon(en.getImage()));
 			lblTemp.setBounds(en.getX(), en.getY(), en.getWidth(), en.getHeight());
 			frame.getContentPane().add(lblTemp);

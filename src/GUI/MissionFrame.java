@@ -253,9 +253,15 @@ public class MissionFrame {
 		//SpaceShip
 		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, tempCrew, CoreMod);				
 		System.out.println(tempCrew);
-		GameEnvironment game = new GameEnvironment(width, height, SpaceShip);
-		game.frame.setVisible(true);
-		game.frame.setLocationRelativeTo(null);
+		GameEnvironment game;
+		try {
+			game = new GameEnvironment(width, height, SpaceShip);
+			game.frame.setVisible(true);
+			game.frame.setLocationRelativeTo(null);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		frame.dispose();
 	}

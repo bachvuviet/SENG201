@@ -9,6 +9,7 @@ import SpaceVessel.Stock_Medicine;
 
 
 
+
 /**
  * This class contain only static methods to support gaming experience
  * @author Bach Vu
@@ -27,7 +28,7 @@ public class Planet extends Entity implements CelestialBody {
 	public int getRadius() {
 		return radius/2;
 	}
-	
+
 	public void setHiddenTreasure() {
 		for (int i=1; i <= 20; i++) {
 			int val = num.nextInt(i);
@@ -54,10 +55,14 @@ public class Planet extends Entity implements CelestialBody {
 		for (Stock st: STOCK) {
 			hiddenStock = st;
 		}
+		}
 	}
 
 		//System.out.println(STOCK);
 		//System.out.println(val);
+	public void setHiddenTreasure(Stock st) {
+	    hiddenStock = st;
+	    
 	}
 	
 	public boolean getScan() {
@@ -65,7 +70,6 @@ public class Planet extends Entity implements CelestialBody {
 	}
 	
 	public Stock getHiddenTreasure() {
-		setHiddenTreasure();
 		check = true;
 		return hiddenStock;
 	}

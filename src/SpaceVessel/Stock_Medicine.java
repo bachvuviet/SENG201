@@ -9,7 +9,7 @@ import CustomUIELmt.StaticObjects;
  * @author Bach Vu, Linh Luu
  * @version 0.30
  */
-public class Stock_Medicine implements Stock {
+public class Stock_Medicine implements Stock, Cloneable {
 	/** Name of medicine*/
     private String Name; 
     /** Desease heal*/
@@ -55,6 +55,10 @@ public class Stock_Medicine implements Stock {
 		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
 	}
 	public String toString() {
-		return Name + " x"+ boostValue;
+		return Name + " x"+ amount;
+	}
+	
+	public Stock clone() throws CloneNotSupportedException {
+		return (Stock) super.clone();
 	}
 }
