@@ -134,7 +134,6 @@ public class GameEnvironment {
 				if (st instanceof Stock_Medicine) {
 					cloneST = ((Stock_Medicine) st).clone();
 					cloneST.setAmount(randomInt);
-				    //((Planet) en).setHiddenTreasure(cloneST);
 				} else if (st instanceof Stock_Food) {
 					cloneST = ((Stock_Food) st).clone();
 					cloneST.setAmount(randomInt);

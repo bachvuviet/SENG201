@@ -150,6 +150,6 @@ public class OutpostTrade {
 	void updateStockAmount(Stock st, int index) {
 		st.setAmount(st.getAmount()+1);
 		textFieldList.get(index).setText(Integer.toString(st.getAmount()));
-		ship.changeStockAmount(st.getAmount(), st);
+		
 	}
 }
