@@ -271,7 +271,7 @@ public class MissionFrame {
     String[] Arr = {"","","","","",""};
     int avaIndex = 5;
     String[] AvatarArr = {"/Kirk.png","/DoctorStrange.png","/StarLord.png","/Spock.png","/Uhura.png",
-			"/Gamora.png","/Groot.png","/someone.jpeg","/thangaodo.jpg","/thangaovang.png"};
+			"/Gamora.png","/Groot.png","/someone.png","/thangaodo.png","/thangaovang.png"};
     /**
      * Called via click action on a crew type
      * Add crew of that type to ArrayList tempCrew
@@ -289,35 +289,35 @@ public class MissionFrame {
 		}
 		int index = 0;
 		switch (Rank) {
-		case SCIENTIST:
+		case CAPTAIN:
 			index = 0;
 			break;
-		case MECHANIC:
+		case DOCTOR:
 			index = 1;
 			break;
-		case CAPTAIN:
+		case HELMS_MAN:
 			index = 2;
 			break;
-		case DOCTOR:
+		case MECHANIC:
 			index = 3;
 			break;
-		case CHEF:
+		case SCIENTIST:
 			index = 4;
 			break;
-		case HELMS_MAN:
+		case CHEF:
 			index = 5;
 			break;
 		default:
 			break;
 		}
 		Array[index] += 1;
-		
 		Image IMG1 = StaticObjects.SelfResizeImage(Arr[index], this, 174, 207);
 		Crew newCrew = new Crew("Rename here", Rank, 100, 100, 100, new ImageIcon(IMG1));
 		tempCrew.add(newCrew);
 		updateCrewlabel();
 		
 		avaIndex += 1;
+		Arr[index] = AvatarArr[avaIndex];
 		Image IMG2 = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
 		btn.setIcon(new ImageIcon(IMG2));
 	}
