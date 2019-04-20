@@ -82,4 +82,16 @@ public class ShipModule implements Stock {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int getPrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String toStringPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

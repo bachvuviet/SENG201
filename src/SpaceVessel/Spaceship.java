@@ -25,6 +25,7 @@ public class Spaceship extends Outpost {
 	private int baseSpeed = 100;
 	private int baseFuel = 100;
 	private int HullStrength = 100;	
+	private int Money =100;
 	
 	//Indexed data	
 	private ArrayList<ShipModule> MODULES = new ArrayList<ShipModule>();
@@ -84,7 +85,7 @@ public class Spaceship extends Outpost {
 				break;
 		}
 	}
-	
+	/** Go straight*/
 	public void forward() {
 		velocity = 5;
 		UpdateLocation();
@@ -186,6 +187,13 @@ public class Spaceship extends Outpost {
 	public String getVesselName() {
 		return Name;
 	}
+	/**
+	 * Get Space money of player
+	 * @return Space money
+	 */
+	public int getMoney() {
+		return Money;
+	}
 	
 	//setter
 	/**
@@ -201,6 +209,20 @@ public class Spaceship extends Outpost {
 	 */
 	public void RenameShip(String name) {
 		Name = name;
+	}
+	/**
+	 * Add/Minus certain amount of money via sell/buy item
+	 * @param amount money to be added/minus
+	 */
+	public boolean changeMoney(int amount, Stock st) {
+		if (amount < 0 && Money >= -amount) {
+			Money += amount;
+			return true;
+		} else if (amount > 0 && st.getAmount() >= 5) {
+			Money += amount;
+			return true;
+		} else
+			return false;
 	}
 	
 	

@@ -230,7 +230,7 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 				if (en instanceof Outpost) {
 					frame.setFocusable(false);
 					frame.setEnabled(false);
-					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, (Outpost) SpaceShip);
+					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, SpaceShip);
 					trade.frame.setVisible(true);
 					trade.frame.setLocationRelativeTo(null);
 				}

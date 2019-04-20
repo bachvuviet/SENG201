@@ -14,11 +14,13 @@ public class Stock_Food implements Stock, Cloneable {
 	private final String CATEGORY = "FOOD";
 	private int boostValue;
 	private ImageIcon Image;
-	private int amount = 20;
+	private int amount = 10;
+	private int Price;
 	
-	public Stock_Food(String name, int boost, String path) {
+	public Stock_Food(String name, int boost, int price, String path) {
 		this.Name = name;
 		this.boostValue = boost;
+		this.Price = price;
 		this.Image = new ImageIcon(StaticObjects.SelfResizeImage(path, this, 50, 50));
 	}
 	
@@ -32,6 +34,9 @@ public class Stock_Food implements Stock, Cloneable {
 	public ImageIcon getImage() {
 		return Image;
 	}
+	public int getPrice() {
+		return Price;
+	}
 
 	//setter
 	public void setAmount(int amount) {
@@ -44,6 +49,9 @@ public class Stock_Food implements Stock, Cloneable {
 	//toStrings
 	public String getStockStatus() {
 		return amount +"x " +Name + " (" + CATEGORY + "):<p> --> Effect: Crew Hunger +" +boostValue;
+	}
+	public String toStringPrice() {
+		return Name + " x5: "+ Price + "$ each";
 	}
 	public String toString() {
 		return Name +" x"+ amount;

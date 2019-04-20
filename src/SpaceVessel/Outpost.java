@@ -53,7 +53,6 @@ public class Outpost extends Entity {
     public ArrayList<Stock> getInventory(){
     	return INVENTORY;
     }
-    
     /**
      * Produce formated string represent all stock status in the inventory
      * @return Formated string

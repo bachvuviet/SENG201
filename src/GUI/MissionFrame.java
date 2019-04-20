@@ -116,20 +116,19 @@ public class MissionFrame {
 		lblChoosingCrewMembers.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChoosingCrewMembers.setFont(new Font("Cambria", Font.BOLD, 18));
 		lblChoosingCrewMembers.setBounds(481, 115, 400, 68);
-		panelMid.add(lblChoosingCrewMembers);
+		panelMid.add(lblChoosingCrewMembers);		
 		
-		String[] AvatarArr = {"/Doctor Strange.png","/Gamora.png","/Groot.png","/Kirk.png","/Spock.png",
-				"/Star Lord.png","","","","","",""};
-		String[] TooltipArr = {"<html><h2><center>Doctor</center><h4>He/She heals your health</html>",
+		String[] TooltipArr = {"<html><h2><center>Captain</center><h4>He/She is ... </html>",
+								"<html><h2><center>Doctor</center><h4>He/She heals your health</html>",
+								"<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel</center></html>",
 								"<html><h2><center>Mechanic</center><h4>He/She fixes your ship</html>",
-								"<html><h2><center>Captain</center><h4>He/She is ... </html>",
 								"<html><h2><center>Scientist</center><h4>He/She researches stuff</html>",
-								"<html><h2><center>Chef</center><h4>He/She boosts your hunger</html>",
-								"<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel</center></html>"};
+								"<html><h2><center>Chef</center><h4>He/She boosts your hunger</html>",};
 		CrewRank RankArr[] = CrewRank.values();
 				
 		for (int i=0; i<6; i++) {
 			Image IMG = StaticObjects.SelfResizeImage(AvatarArr[i], this, 174, 207);
+			Arr[i] = AvatarArr[i];
 			JButton btnCrewMember = new JButton(new ImageIcon(IMG));
 			btnCrewMember.setText(Integer.toString(i));
 			btnCrewMember.setToolTipText(TooltipArr[i]);
@@ -138,9 +137,9 @@ public class MissionFrame {
 				public void mousePressed(MouseEvent e) {
 					int index = Integer.parseInt(btnCrewMember.getText());
 					if (SwingUtilities.isLeftMouseButton(e))
-						addCrew(RankArr[index], IMG);
+						addCrew(RankArr[index], btnCrewMember);
 					else if (SwingUtilities.isRightMouseButton(e))
-						removeCrew(RankArr[index]);
+						removeCrew(RankArr[index], btnCrewMember);
 				}
 
 				public void mouseReleased(MouseEvent e) {}
@@ -251,8 +250,7 @@ public class MissionFrame {
 		CoreMod.add(warp);
 		
 		//SpaceShip
-		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, tempCrew, CoreMod);				
-		System.out.println(tempCrew);
+		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, tempCrew, CoreMod);	
 		GameEnvironment game;
 		try {
 			game = new GameEnvironment(width, height, SpaceShip);
@@ -270,53 +268,65 @@ public class MissionFrame {
 	ArrayList<Crew> tempCrew = new ArrayList<Crew>();
 	/** Check amount of total crew in spaceship and amount of each type of crew*/
     int[] Array = {0, 0, 0, 0, 0, 0};
-    
+    String[] Arr = {"","","","","",""};
+    int avaIndex = 5;
+    String[] AvatarArr = {"/Kirk.png","/DoctorStrange.png","/StarLord.png","/Spock.png","/Uhura.png",
+			"/Gamora.png","/Groot.png","/someone.jpeg","/thangaodo.jpg","/thangaovang.png"};
     /**
      * Called via click action on a crew type
      * Add crew of that type to ArrayList tempCrew
      * @param Rank Specify Type of crew to add (button argument)
      * @param img Specify default avatar of crew (button argument)
      */
-	void addCrew(CrewRank Rank, Image img) {
+	void addCrew(CrewRank Rank, JButton btn) {
 		int total = 0;
 		for (int num:Array) {
 			total += num;
 		}
 		if (total >= 4) {
+			StaticObjects.MessBox("You can have maximum of 4 crew", "Enough Crew", "");
 			return;
 		}
+		int index = 0;
 		switch (Rank) {
 		case SCIENTIST:
-			Array[0] += 1;
+			index = 0;
 			break;
 		case MECHANIC:
-			Array[1] += 1;
+			index = 1;
 			break;
 		case CAPTAIN:
-			Array[2] += 1;
+			index = 2;
 			break;
 		case DOCTOR:
-			Array[3] += 1;
+			index = 3;
 			break;
 		case CHEF:
-			Array[4] += 1;
+			index = 4;
 			break;
 		case HELMS_MAN:
-			Array[5] += 1;
+			index = 5;
 			break;
 		default:
 			break;
 		}
-		Crew newCrew = new Crew("Rename here", Rank, 100, 100, 100, new ImageIcon(img));
+		Array[index] += 1;
+		
+		Image IMG1 = StaticObjects.SelfResizeImage(Arr[index], this, 174, 207);
+		Crew newCrew = new Crew("Rename here", Rank, 100, 100, 100, new ImageIcon(IMG1));
 		tempCrew.add(newCrew);
 		updateCrewlabel();
+		
+		avaIndex += 1;
+		Image IMG2 = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
+		btn.setIcon(new ImageIcon(IMG2));
 	}
 	
 	/**
 	 * Called via right-click button select crew to remove a specific type of crew out of Crew list
 	 * @param Rank Specify Type of crew to remove (button argument)
 	 */
-	void removeCrew(CrewRank Rank) {
+	void removeCrew(CrewRank Rank , JButton btn) {
 		switch (Rank) {
 		case SCIENTIST:
 			if (Array[0] > 0)
@@ -353,6 +363,9 @@ public class MissionFrame {
 			}
 		}
 		updateCrewlabel();
+		avaIndex -= 1;
+		Image IMG = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
+		btn.setIcon(new ImageIcon(IMG));
 	}
 	
 	/**

@@ -130,7 +130,7 @@ public class GameEnvironment {
 				int index = random.nextInt(8);
 				int randomInt = random.nextInt(30);
 				Stock st = modelSTOCK.get(index);
-				Stock cloneST = new Stock_Food("", 0, "/bread.png");
+				Stock cloneST = new Stock_Food("", 0, 0, "/bread.png");
 				if (st instanceof Stock_Medicine) {
 					cloneST = ((Stock_Medicine) st).clone();
 					cloneST.setAmount(randomInt);
@@ -159,16 +159,16 @@ public class GameEnvironment {
 	 * @return ArrayList<Stock> before adding the whole list to ship
 	 */
 	private ArrayList<Stock> generateStock(){
-		Stock food1 = new Stock_Food("Burger", 10, "/burger.png");
-		Stock food2 = new Stock_Food("Bread", 10, "/bread.png");
-		Stock food3 = new Stock_Food("Pizza", 10, "/pizza.png");
-		Stock food4 = new Stock_Food("Chicken", 10, "/Chicken.png");
-		Stock food5 = new Stock_Food("Steak", 10, "/steak.png");
-		Stock food6 = new Stock_Food("Sushi", 10, "/sushi.png");
+		Stock food1 = new Stock_Food("Burger", 5, 2, "/burger.png");
+		Stock food2 = new Stock_Food("Bread", 10, 4, "/bread.png");
+		Stock food3 = new Stock_Food("Pizza", 15, 6, "/pizza.png");
+		Stock food4 = new Stock_Food("Chicken", 20, 7, "/Chicken.png");
+		Stock food5 = new Stock_Food("Steak", 25, 8, "/steak.png");
+		Stock food6 = new Stock_Food("Sushi", 30, 9, "/sushi.png");
 		
-		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 10, "/healpotion.png");
-		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 10, "/painkiller.png");
-		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, "/syringe.png");
+		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 20, 10, "/healpotion.png");
+		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 20, 10, "/painkiller.png");
+		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, 10, "/syringe.png");
 		
 		ArrayList<Stock> STOCK = new ArrayList<Stock>();
 		STOCK.add(food1);STOCK.add(food2);
@@ -195,9 +195,9 @@ public class GameEnvironment {
 		SpaceObjects.add(hole2);
 		Planet earth = new Planet_Terrestrial(1000, 1000, 400, "Earth", "/Earth.png");
 		SpaceObjects.add(earth);
-		Planet oceanPlanet = new Planet_Ocean(600, 500, 250, "Ocean", "/Ocean Planet.png");
+		Planet oceanPlanet = new Planet_Ocean(600, 500, 250, "Ocean", "/OceanPlanet.png");
 		SpaceObjects.add(oceanPlanet);
-		Planet colorfulPlanet = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","/Colorful Planet1.png");
+		Planet colorfulPlanet = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","/ColorfulPlanet1.png");
 		SpaceObjects.add(colorfulPlanet);
 		Planet saturn = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
 		SpaceObjects.add(saturn);

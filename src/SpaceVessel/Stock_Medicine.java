@@ -19,12 +19,14 @@ public class Stock_Medicine implements Stock, Cloneable {
     /** image of medicine*/
     private ImageIcon Image;
     /** Amount current have in ship's inventory*/
-    private int amount = 30;
+    private int amount = 15;
+    private int Price;
     
-    public Stock_Medicine(String name, String healCategory, int boost, String path) { 
+    public Stock_Medicine(String name, String healCategory, int boost, int price, String path) { 
         this.Name = name;
         this.healCategory = healCategory;
         this.boostValue = boost;
+        this.Price = price;
         this.Image = new ImageIcon(StaticObjects.SelfResizeImage(path, this, 50, 50));
     }
     
@@ -41,6 +43,9 @@ public class Stock_Medicine implements Stock, Cloneable {
 	public ImageIcon getImage() {
 		return Image;
 	}
+	public int getPrice() {
+		return Price;
+	}
 	
 	//setter
 	public void setAmount(int amount) {
@@ -53,6 +58,9 @@ public class Stock_Medicine implements Stock, Cloneable {
     //toStrings
 	public String getStockStatus() {
 		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
+	}
+	public String toStringPrice() {
+		return Name + " x5: "+ Price + "$ each.";
 	}
 	public String toString() {
 		return Name + " x"+ amount;
