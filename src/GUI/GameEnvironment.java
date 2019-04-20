@@ -66,6 +66,7 @@ public class GameEnvironment {
 		
 		//Ship Default Inventory
 		SpaceShip = ship;
+		CheckCrew();
 		ArrayList<Stock> modelSTOCK = generateStock();
 		for(Stock st:modelSTOCK) {
 			SpaceShip.addStock(st);
@@ -84,9 +85,9 @@ public class GameEnvironment {
 		lblFuel.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblFuel.setFont(new Font("Cambria", Font.BOLD, 14));
 		
-		Fuel = new JProgressBar(0, y/2);
+		Fuel = new JProgressBar(0, SpaceShip.getFuel());
 		Fuel.setBounds(100, 10, 240, 20);
-		Fuel.setValue(y/2);
+		Fuel.setValue(Fuel.getMaximum());
 		Fuel.setStringPainted(true);
 		
 		JLabel lblHull = new JLabel("Ship Hull:");
@@ -201,5 +202,42 @@ public class GameEnvironment {
 		SpaceObjects.add(colorfulPlanet);
 		Planet saturn = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
 		SpaceObjects.add(saturn);
+	}
+	
+	void CheckCrew() {
+		ArrayList<Crew> crews = SpaceShip.getCrewList();
+		for (Crew crew:crews) {
+			switch (crew.getRank()) {
+			case SCIENTIST://Increase Hull
+				SpaceShip.addMaxHull(50);
+				break;
+			case MECHANIC://Repair Hull faster
+				break;
+			case CAPTAIN://Increase all morale
+				for (Crew cr:crews) {
+					cr.setMaxMorale(25);
+				}
+				break;
+			case DOCTOR://Increase all health
+				for (Crew cr:crews) {
+					cr.setMaxHealth(25);
+				}
+				break;
+			case CHEF://Increase all hunger
+				for (Crew cr:crews) {
+					cr.setMaxHunger(25);
+				}
+				break;
+			case HELMS_MAN://Increase fuel
+				SpaceShip.addFuel(200);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		for (Crew cr:crews) {
+			cr.MaxStat();
+		}
 	}
 }

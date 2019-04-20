@@ -34,9 +34,9 @@ public class CrewPanel {
 	JComboBox<String> cboAction1;
 	JComboBox<String> cboAction2;
 	JComboBox<Stock> cboSupply;
-	JProgressBar progHealth = new JProgressBar();
-	JProgressBar progHunger = new JProgressBar();
-	JProgressBar progMorale = new JProgressBar();
+	JProgressBar progHealth;
+	JProgressBar progHunger;
+	JProgressBar progMorale;
 
 	/**
 	 * Create a crew panel before added to crew tab in Pause frame (4 in total)
@@ -98,23 +98,26 @@ public class CrewPanel {
         lblActions.setFont(new Font("Dialog", Font.BOLD, 13));
         lblActions.setBounds(137, 131, 51, 50);
         contentPan.add(lblActions);
-        
-        progHunger.setBounds(188, 67, 160, 15);
-        progHunger.setValue(crew.getHunger());
-        progHunger.setForeground(Color.BLUE);
-        progHunger.setStringPainted(true);
-        contentPan.add(progHunger);
-        
+
+        progHealth = new JProgressBar(0, crew.getMaxHealth());
         progHealth.setBounds(188, 43, 160, 15);
         progHealth.setValue(crew.getHealth());
+        progHealth.setToolTipText(crew.getHealth()+"/"+progHealth.getMaximum());
         progHealth.setForeground(Color.RED);
-        progHealth.setStringPainted(true);
-        contentPan.add(progHealth);   
+        contentPan.add(progHealth); 
         
+        progHunger = new JProgressBar(0, crew.getMaxHunger());
+        progHunger.setBounds(188, 67, 160, 15);
+        progHunger.setToolTipText(crew.getHunger()+"/"+progHunger.getMaximum());
+        progHunger.setValue(crew.getHunger());
+        progHunger.setForeground(Color.BLUE);
+        contentPan.add(progHunger);
+        
+        progMorale = new JProgressBar(0, crew.getMaxMorale());
         progMorale.setBounds(188, 90, 160, 15);
         progMorale.setValue(crew.getMorale());
+        progMorale.setToolTipText(crew.getMorale()+"/"+progMorale.getMaximum());
         progMorale.setForeground(Color.YELLOW);
-        progMorale.setStringPainted(true);
         contentPan.add(progMorale);
 
         String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement"};
@@ -243,6 +246,9 @@ public class CrewPanel {
 		progHealth.setValue(crew.getHealth());
 	    progHunger.setValue(crew.getHunger());
 	    progMorale.setValue(crew.getMorale());
+	    progHealth.setToolTipText(crew.getHealth()+"/"+progHealth.getMaximum());
+	    progHunger.setToolTipText(crew.getHunger()+"/"+progHunger.getMaximum());
+	    progMorale.setToolTipText(crew.getMorale()+"/"+progMorale.getMaximum());
 	    txtName.setText(crew.getName());
 	}
 }

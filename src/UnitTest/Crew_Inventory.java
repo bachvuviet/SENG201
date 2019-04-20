@@ -19,16 +19,16 @@ class Crew_Inventory {
 	@BeforeEach
 	public void init() {
 		//Crew
-		Crew newCrew1 = new Crew("Kirk", CrewRank.CAPTAIN, 100, 100, 100, null);
-		Crew newCrew2 = new Crew("Spock", CrewRank.MECHANIC, 100, 100, 100, null);
-		Crew newCrew3 = new Crew("DR.Strange", CrewRank.DOCTOR, 100, 100, 100, null);
+		Crew newCrew1 = new Crew("Kirk", CrewRank.CAPTAIN, null);
+		Crew newCrew2 = new Crew("Spock", CrewRank.MECHANIC, null);
+		Crew newCrew3 = new Crew("DR.Strange", CrewRank.DOCTOR, null);
 		ArrayList<Crew> tempCrew = new ArrayList<Crew>();
 		tempCrew.add(newCrew1);
 		tempCrew.add(newCrew2);
 		tempCrew.add(newCrew3);
 		
 		//Ship
-		testShip = new Spaceship(200,200, "KMS Tirpitz", 0, tempCrew, null);
+		testShip = new Spaceship(200,200, "KMS Tirpitz", 0, 100, tempCrew, null);
 		tradePost = new Outpost(500, 500, 10, 10, "Eldar Corsair", "/bread.png");
 
 		//Stock

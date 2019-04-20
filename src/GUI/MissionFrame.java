@@ -118,12 +118,12 @@ public class MissionFrame {
 		lblChoosingCrewMembers.setBounds(481, 115, 400, 68);
 		panelMid.add(lblChoosingCrewMembers);		
 		
-		String[] TooltipArr = {"<html><h2><center>Captain</center><h4>He/She is ... </html>",
-								"<html><h2><center>Doctor</center><h4>He/She heals your health</html>",
-								"<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel</center></html>",
-								"<html><h2><center>Mechanic</center><h4>He/She fixes your ship</html>",
-								"<html><h2><center>Scientist</center><h4>He/She researches stuff</html>",
-								"<html><h2><center>Chef</center><h4>He/She boosts your hunger</html>",};
+		String[] TooltipArr = {"<html><h2><center>Captain</center><h4>Boost base morale of all crew by 25</html>",
+								"<html><h2><center>Doctor</center><h4>Boost base health of all crew by 25</html>",
+								"<html><h2><center>Helms</center><h4><center>He/She boosts your spaceship fuel by 200</center></html>",
+								"<html><h2><center>Mechanic</center><h4>He/She fixes your ship faster</html>",
+								"<html><h2><center>Scientist</center><h4>He/She increase Ship HP by 50</html>",
+								"<html><h2><center>Chef</center><h4>Boost base hunger of all crew by 25</html>",};
 		CrewRank RankArr[] = CrewRank.values();
 				
 		for (int i=0; i<6; i++) {
@@ -250,7 +250,7 @@ public class MissionFrame {
 		CoreMod.add(warp);
 		
 		//SpaceShip
-		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, tempCrew, CoreMod);	
+		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, height/2, tempCrew, CoreMod);	
 		GameEnvironment game;
 		try {
 			game = new GameEnvironment(width, height, SpaceShip);
@@ -312,7 +312,7 @@ public class MissionFrame {
 		}
 		Array[index] += 1;
 		Image IMG1 = StaticObjects.SelfResizeImage(Arr[index], this, 174, 207);
-		Crew newCrew = new Crew("Rename here", Rank, 100, 100, 100, new ImageIcon(IMG1));
+		Crew newCrew = new Crew("Rename here", Rank, new ImageIcon(IMG1));
 		tempCrew.add(newCrew);
 		updateCrewlabel();
 		
@@ -327,34 +327,30 @@ public class MissionFrame {
 	 * @param Rank Specify Type of crew to remove (button argument)
 	 */
 	void removeCrew(CrewRank Rank , JButton btn) {
+		int index = 0;
 		switch (Rank) {
-		case SCIENTIST:
-			if (Array[0] > 0)
-				Array[0] -= 1;
-			break;
-		case MECHANIC:
-			if (Array[1] > 0)
-				Array[1] -= 1;
-			break;
 		case CAPTAIN:
-			if (Array[2] > 0)
-				Array[2] -= 1;
+			index = 0;
 			break;
 		case DOCTOR:
-			if (Array[3] > 0)
-				Array[3] -= 1;
-			break;
-		case CHEF:
-			if (Array[4] > 0)
-				Array[4] -= 1;
+			index = 1;
 			break;
 		case HELMS_MAN:
-			if (Array[5] > 0)
-				Array[5] -= 1;
+			index = 2;
+			break;
+		case MECHANIC:
+			index = 3;
+			break;
+		case SCIENTIST:
+			index = 4;
+			break;
+		case CHEF:
+			index = 5;
 			break;
 		default:
 			break;
 		}
+		Array[index] -= 1;
 		
 		for (Crew cr:tempCrew) {
 			if (cr.getRank() == Rank) {
@@ -373,7 +369,7 @@ public class MissionFrame {
 	 * Called every time a button is left-clicked/right-clicked
 	 */
 	void updateCrewlabel() {
-		String[] Rank = {"Scientist", "Mechanic", "Captain", "Doctor", "Chef", "Helms"};
+		String[] Rank = {"Captain", "Doctor", "Helms", "Mechanic", "Scientist", "Chef"};
 		String mystr = "";
 		for (int i=0; i < 6; i++) {
 			if (Array[i] != 0) {

@@ -20,11 +20,14 @@ public class Crew {
     /** Rank of Crew (1 of 6). Different Rank (crew type) has different bonus*/
     private CrewRank Rank;
     /** If Health drop to 0, this crew will die and removed from ship's crew. You have less friend to help you carry orders.*/
+    private int MaxHealth;
     private int Health;
     /** Hunger is needed to perform your order. Feed them well after assign task to them.*/
     private int Hunger;
+    private int MaxHunger;
     /** Morale is needed to perform your order. Let crew sleep to relax, don't force them work too hard*/
     private int Morale;
+    private int MaxMorale;
     
     /** Maximum of 2 action per day/turn. Given order is added, so you can perform 2 actions at any time of a day.*/
     private ArrayList<String> crewAction = new ArrayList<String>();
@@ -42,13 +45,13 @@ public class Crew {
      * @param morale Depends on crew Rank, min 100
      * @param img Avatar, depends on crew Rank
      */
-    public Crew(String name, CrewRank rank, int health, int hunger, int morale, ImageIcon img) {
+    public Crew(String name, CrewRank rank, ImageIcon img) {
     	this.ID = 0;
     	this.Name = name;
     	this.Rank = rank;
-    	this.Health = health;
-    	this.Hunger = hunger;
-    	this.Morale = morale;
+    	this.MaxHealth = 100;
+    	this.MaxHunger = 100;
+    	this.MaxMorale = 100;
     	this.avatar = img;
     	Real = true;
     }
@@ -69,16 +72,37 @@ public class Crew {
     public int getHealth() {
     	return Health;
     }
+    /**
+     * Initial health
+     * @return Max health of crew
+     */
+	public int getMaxHealth() {
+		return MaxHealth;
+	}
     /** Get crew's morale
      * @return Morale point*/
     public int getMorale() {
     	return Morale;
     }
+    /**
+     * Initial morale
+     * @return Max morale of crew
+     */
+	public int getMaxMorale() {
+		return MaxMorale;
+	}
     /** Get crew's hunger
      * @return Hunger point*/
     public int getHunger() {
     	return Hunger;
     }
+    /**
+     * Initial hunger
+     * @return Max hunger of crew
+     */
+	public int getMaxHunger() {
+		return MaxHunger;
+	}
     /** Get crew's image, to display as label icon
      * @return Crew Avatar*/
     public ImageIcon getAvatar() {
@@ -92,7 +116,33 @@ public class Crew {
     public void setName(String name) {
     	Name = name;
     }
+    /**
+     * Increase health of crew by some amount
+     * @param amount HP increase
+     */
+    public void setMaxHealth(int amount) {
+    	MaxHealth += amount;
+    }
+    /**
+     * Increase hunger of crew by some amount
+     * @param amount hunger increase
+     */
+    public void setMaxHunger(int amount) {
+    	MaxHunger += amount;
+    }
+    /**
+     * Increase morale of crew by some amount
+     * @param amount morale increase
+     */
+    public void setMaxMorale(int amount) {
+    	MaxMorale += amount;
+    }
     
+    public void MaxStat() {
+    	Health = MaxHealth;
+    	Hunger = MaxHunger;
+    	Morale = MaxMorale;
+    }
     
 	//Crew Action
     /** 
@@ -104,7 +154,7 @@ public class Crew {
     	if (stock.getAmount() > 0) {
     		stock.setAmount(stock.getAmount()-amount);
     		if (stock instanceof Stock_Food) {
-    			Hunger += stock.use(amount);
+    			Hunger += stock.use(amount); 
         		crewAction.add("Eating");    			
     		}
     		else if (stock instanceof Stock_Medicine) {
@@ -119,7 +169,7 @@ public class Crew {
     public void sleep() {
     	Health += 25;
     	Morale += 25;
-    	Hunger -= 25;
+    	Hunger -= 20;
     	crewAction.add("Sleeping");
     }
     /**
@@ -128,7 +178,7 @@ public class Crew {
      */
     public void repair(Spaceship Ship) {
     	Hunger -= 20;
-    	Morale -= 10;
+    	Morale -= 15;
     	crewAction.add("Repairing Ship");
     	if (Rank == CrewRank.MECHANIC)
     		Ship.increaseHull(25);
