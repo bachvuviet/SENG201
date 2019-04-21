@@ -209,7 +209,7 @@ public class CrewPanel {
 				if (cboSupply.getSelectedItem().equals(st)) {
 					crew.useSupply(10, st);
 		        } else {
-			        System.out.println("false");
+			        //System.out.println("false");
 		        }
 			}
 			break;	

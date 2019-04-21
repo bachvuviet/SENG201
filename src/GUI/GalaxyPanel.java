@@ -237,7 +237,10 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 				else if (!((Planet) en).getScan() && en instanceof Planet) {
 					Stock st = ((Planet) en).getHiddenTreasure();
 					StaticObjects.MessBox("Found "+ st, "Scanned ", "");
-					SpaceShip.changeStockAmount(st.getAmount(), st);
+					if (st instanceof ShipModule)
+						SpaceShip.getModule((ShipModule) st).setActive(true);
+					else
+						SpaceShip.changeStockAmount(st.getAmount(), st);
 				}
 				else if (((Planet) en).getScan() && en instanceof Planet) {
 					StaticObjects.MessBox(en.toString()+" has no more stock.", "Scanned "+en.toString(), "");

@@ -79,11 +79,10 @@ public class Outpost extends Entity {
 	}
 	
 	public void changeStockAmount(int amount, Stock stock) {
-		// TODO Auto-generated method stub
 		for (Stock st: INVENTORY) {
 			if ((st.getName()).equals(stock.getName())) {
 				st.setAmount(amount + st.getAmount());
-			break;
+				break;
 			}
 		}
 	}

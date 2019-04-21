@@ -13,7 +13,7 @@ public class ShipModule implements Stock {
     private int boostValue;
     private boolean Active = true;
     
-    
+    public ShipModule() {}
     public ShipModule(String name, String boost, int boostVar) {
     	Name = name;
     	Boost = boost;//Boost Health, Energy, CrewHealth, CrewHunger, Complete
@@ -42,12 +42,15 @@ public class ShipModule implements Stock {
 	public boolean isActive() {
 		return Active;
 	}	
-	public String toString() {
+	public String modStatus() {
 		if (Active)
 			return Name + ": Active";
 		else
 			return Name + ": Broken";
     }
+	public String toString() {
+		return Name + ". Press ESC to check ship modules.";
+	}
 	public ImageIcon getImage() {
 		return null;
 	}
