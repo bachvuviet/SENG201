@@ -143,7 +143,7 @@ public class PauseFrame extends JFrame {
 		
 		int halfX = (int) 760/2;
 		int halfY = (int) 530/2;
-		System.out.println(halfX + " " + halfY);
+		//System.out.println(halfX + " " + halfY);
 		
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		

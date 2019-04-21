@@ -11,12 +11,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-
+import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
+
+import CustomUIELmt.StaticObjects;
 
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -29,6 +33,7 @@ import javax.swing.JTextField;
  */
 public class OutpostTrade {
 	public JFrame frame;
+	JLabel lblInventory;
 	
 	/** Ship current stock*/
 	private ArrayList<Stock> StockList;
@@ -41,15 +46,15 @@ public class OutpostTrade {
 	 * @param outpost Outpost interacted (press X)
 	 * @param ship Current ship
 	 */
-	public OutpostTrade(JFrame parent, Outpost outpost, Outpost ship) {
-		StockList = ship.getInventory();
+	public OutpostTrade(JFrame parent, Outpost outpost, Spaceship ship) {
 		frame = new JFrame();
-		frame.setAlwaysOnTop(true);
+		//frame.setAlwaysOnTop(true);
 		frame.setBounds(200, 300, 501, 447);
 		frame.setUndecorated(true);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		this.ship = (Spaceship) ship;
+		this.ship = ship;
+		StockList = ship.getInventory();
 		
 		JLabel lblOutpost = new JLabel(outpost.toString());
 		lblOutpost.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -59,10 +64,8 @@ public class OutpostTrade {
 		JPanel panelBottom = new JPanel();
 		frame.getContentPane().add(panelBottom, BorderLayout.SOUTH);
 		
-		JButton btnResume = new JButton("Resume");
-		btnResume.setPreferredSize(new Dimension(150, 30));
-		btnResume.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnResume.setPreferredSize(new Dimension(150, 30));
+		JButton btnResume = new JButton("Complete Trade");
+		btnResume.setPreferredSize(new Dimension(300, 30));
 		btnResume.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,7 +86,7 @@ public class OutpostTrade {
 		splitPane.setLeftComponent(panelLeft);
 		panelLeft.setLayout(null);
 		
-		JLabel lblInventory = new JLabel("You have");
+		lblInventory = new JLabel("You have "+ship.getMoney()+"$");
 		lblInventory.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblInventory.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInventory.setBounds(10, 11, 265, 30);
@@ -125,12 +128,21 @@ public class OutpostTrade {
 			panelLeft.add(txtFood);
 			
 			JButton btnFood = new JButton(st.getImage());
-			btnFood.setToolTipText(st.getName());
+			btnFood.setToolTipText(st.toStringPrice());
 			btnFood.setBounds(20 + (i-1-row)*60, 73+y*91, 50, 50);
-			btnFood.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					updateStockAmount(st, index);
+			btnFood.addMouseListener(new MouseListener() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if (SwingUtilities.isLeftMouseButton(e))
+						updateStockAmount(st, index, 1);
+					else if (SwingUtilities.isRightMouseButton(e))
+						updateStockAmount(st, index, -1);
 				}
+
+				public void mouseReleased(MouseEvent e) {}
+				public void mouseExited(MouseEvent e) {}
+				public void mouseEntered(MouseEvent e) {}
+				public void mouseClicked(MouseEvent e) {}
 			});
 			panelRight.add(btnFood);
 			
@@ -146,10 +158,22 @@ public class OutpostTrade {
 	 * Called when user buy any of the stock in the spacestation
 	 * @param st Stock user buy
 	 * @param index Index of stock, which can be used to find what textbox to be updated
+	 * @param mode 1 is buy, -1 is sell
 	 */
-	void updateStockAmount(Stock st, int index) {
-		st.setAmount(st.getAmount()+1);
-		textFieldList.get(index).setText(Integer.toString(st.getAmount()));
-		ship.changeStockAmount(st.getAmount(), st);
+	void updateStockAmount(Stock st, int index, int mode) {
+		int amountToTrade = 5; //buy or sell
+		if (ship.changeMoney(-st.getPrice() * (amountToTrade * mode), st)) {
+			st.setAmount(st.getAmount()+amountToTrade * mode);
+			lblInventory.setText("You have "+ship.getMoney()+"$"); 
+			textFieldList.get(index).setText(Integer.toString(st.getAmount()));
+		} else {
+			if (mode == 1)
+				StaticObjects.MessBox("You don't have enough money to buy " + st.getName() + " x"+ amountToTrade,
+					"Not enough money", "Error");
+			else if (mode == -1)
+				StaticObjects.MessBox("You don't have enough "+ amountToTrade+ "x "+ st.getName()+" to sell",
+						"Not enough item", "Error");
+		}
+		
 	}
 }

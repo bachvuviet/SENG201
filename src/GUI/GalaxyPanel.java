@@ -13,15 +13,9 @@ import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import Backend.BlackHole;
-import Backend.CelestialBody;
-import Backend.Entity;
-import Backend.Planet;
+import Backend.*;
 import CustomUIELmt.StaticObjects;
-import SpaceVessel.Outpost;
-import SpaceVessel.Spaceship;
-import SpaceVessel.Stock;
-
+import SpaceVessel.*;
 /**
  * This class make instances of JPanel, which Game Environment can initiate multiple galaxies.
  * Process User input and update controls in ControlPanel (bottom right) of Game environment
@@ -236,14 +230,14 @@ public class GalaxyPanel extends JPanel implements KeyListener{
 				if (en instanceof Outpost) {
 					frame.setFocusable(false);
 					frame.setEnabled(false);
-					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, (Outpost) SpaceShip);
+					OutpostTrade trade = new OutpostTrade(frame, (Outpost) en, SpaceShip);
 					trade.frame.setVisible(true);
 					trade.frame.setLocationRelativeTo(null);
 				}
 				else if (!((Planet) en).getScan() && en instanceof Planet) {
 					Stock st = ((Planet) en).getHiddenTreasure();
 					StaticObjects.MessBox("Found "+ st, "Scanned ", "");
-					
+					SpaceShip.changeStockAmount(st.getAmount(), st);
 				}
 				else if (((Planet) en).getScan() && en instanceof Planet) {
 					StaticObjects.MessBox(en.toString()+" has no more stock.", "Scanned "+en.toString(), "");

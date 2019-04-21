@@ -20,10 +20,16 @@ public interface Stock {
     /** get image to display at trade post
      * @return Image*/
     public ImageIcon getImage();
+    /** get price of item to buy
+     * @return Price of Stock*/
+    public int getPrice();
 
     /** Quick String output of Stock's status
      * @return Formated String*/
     public String getStockStatus();
+    /** String output, to display as tooltip in outpost
+     * @return i.e. Chicken x5: 7$ each*/
+    public String toStringPrice();
     /** String output, shorter version to be called implicitly in JControls
      * @return i.e. 30x Chicken*/
     public String toString();
