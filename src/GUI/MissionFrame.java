@@ -137,9 +137,9 @@ public class MissionFrame {
 				public void mousePressed(MouseEvent e) {
 					int index = Integer.parseInt(btnCrewMember.getText());
 					if (SwingUtilities.isLeftMouseButton(e))
-						addCrew(RankArr[index], btnCrewMember);
+						addCrew(RankArr[index], btnCrewMember, 1);
 					else if (SwingUtilities.isRightMouseButton(e))
-						removeCrew(RankArr[index], btnCrewMember);
+						addCrew(RankArr[index], btnCrewMember, -1);
 				}
 
 				public void mouseReleased(MouseEvent e) {}
@@ -278,91 +278,68 @@ public class MissionFrame {
      * @param Rank Specify Type of crew to add (button argument)
      * @param img Specify default avatar of crew (button argument)
      */
-	void addCrew(CrewRank Rank, JButton btn) {
-		int total = 0;
-		for (int num:Array) {
-			total += num;
-		}
-		if (total >= 4) {
-			StaticObjects.MessBox("You can have maximum of 4 crew", "Enough Crew", "");
-			return;
-		}
-		int index = 0;
-		switch (Rank) {
-		case CAPTAIN:
-			index = 0;
-			break;
-		case DOCTOR:
-			index = 1;
-			break;
-		case HELMS_MAN:
-			index = 2;
-			break;
-		case MECHANIC:
-			index = 3;
-			break;
-		case SCIENTIST:
-			index = 4;
-			break;
-		case CHEF:
-			index = 5;
-			break;
-		default:
-			break;
-		}
-		Array[index] += 1;
-		Image IMG1 = StaticObjects.SelfResizeImage(Arr[index], this, 174, 207);
-		Crew newCrew = new Crew("Rename here", Rank, new ImageIcon(IMG1));
-		tempCrew.add(newCrew);
-		updateCrewlabel();
-		
-		avaIndex += 1;
-		Arr[index] = AvatarArr[avaIndex];
-		Image IMG2 = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
-		btn.setIcon(new ImageIcon(IMG2));
-	}
-	
-	/**
-	 * Called via right-click button select crew to remove a specific type of crew out of Crew list
-	 * @param Rank Specify Type of crew to remove (button argument)
-	 */
-	void removeCrew(CrewRank Rank , JButton btn) {
-		int index = 0;
-		switch (Rank) {
-		case CAPTAIN:
-			index = 0;
-			break;
-		case DOCTOR:
-			index = 1;
-			break;
-		case HELMS_MAN:
-			index = 2;
-			break;
-		case MECHANIC:
-			index = 3;
-			break;
-		case SCIENTIST:
-			index = 4;
-			break;
-		case CHEF:
-			index = 5;
-			break;
-		default:
-			break;
-		}
-		Array[index] -= 1;
-		
-		for (Crew cr:tempCrew) {
-			if (cr.getRank() == Rank) {
-				tempCrew.remove(cr);
-				break;
+	void addCrew(CrewRank Rank, JButton btn, int mode) {
+		if (mode == 1) {
+			int total = 0;
+			for (int num:Array) {
+				total += num;
+			}
+			if (total >= 4) {
+				StaticObjects.MessBox("You can have maximum of 4 crew", "Enough Crew", "");
+				return;
 			}
 		}
-		updateCrewlabel();
-		avaIndex -= 1;
-		Image IMG = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
-		btn.setIcon(new ImageIcon(IMG));
-	}
+		
+		int index = 0;
+		switch (Rank) {
+		case CAPTAIN:
+			index = 0;
+			break;
+		case DOCTOR:
+			index = 1;
+			break;
+		case HELMS_MAN:
+			index = 2;
+			break;
+		case MECHANIC:
+			index = 3;
+			break;
+		case SCIENTIST:
+			index = 4;
+			break;
+		case CHEF:
+			index = 5;
+			break;
+		default:
+			break;
+		}
+		
+		if (mode == 1) {
+			Array[index] += 1;
+			Image IMG1 = StaticObjects.SelfResizeImage(Arr[index], this, 174, 207);
+			Crew newCrew = new Crew("Rename here", Rank, new ImageIcon(IMG1));
+			tempCrew.add(newCrew);
+			
+			avaIndex += 1;
+			Arr[index] = AvatarArr[avaIndex];
+			Image IMG2 = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
+			btn.setIcon(new ImageIcon(IMG2));
+		} else if (mode == -1) {
+			Array[index] -= 1;
+			
+			for (Crew cr:tempCrew) {
+				if (cr.getRank() == Rank) {
+					tempCrew.remove(cr);
+					break;
+				}
+			}
+			avaIndex -= 1;
+			Image IMG = StaticObjects.SelfResizeImage(AvatarArr[index], this, 174, 207);
+			btn.setIcon(new ImageIcon(IMG));
+		}
+
+		updateCrewlabel();		
+	}	
 	
 	/**
 	 * Update totalLabel, display current selected crew list

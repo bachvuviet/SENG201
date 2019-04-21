@@ -6,6 +6,7 @@ import CustomUIELmt.StaticObjects;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 //import java.util.Timer;
@@ -67,10 +68,17 @@ public class GameEnvironment {
 		//Ship Default Inventory
 		SpaceShip = ship;
 		CheckCrew();
-		ArrayList<Stock> modelSTOCK = generateStock();
+		ArrayList<Stock> modelSTOCK = generateStock();		
 		for(Stock st:modelSTOCK) {
 			SpaceShip.addStock(st);
 		}
+		//Hide parts of ship
+		ArrayList<ShipModule> missingModule = new ArrayList<ShipModule>();
+		for (ShipModule mod:SpaceShip.getModuleList()) {
+			if (!mod.isActive())
+			missingModule.add(mod);
+		}
+		//Entity list
 		makeSpaceObjects();
 		
 		
@@ -128,18 +136,23 @@ public class GameEnvironment {
 		
 		for (Entity en:SpaceObjects) {
 			if (en instanceof Planet) {
-				int index = random.nextInt(8);
-				int randomInt = random.nextInt(30);
-				Stock st = modelSTOCK.get(index);
-				Stock cloneST = new Stock_Food("", 0, 0, "/bread.png");
-				if (st instanceof Stock_Medicine) {
-					cloneST = ((Stock_Medicine) st).clone();
-					cloneST.setAmount(randomInt);
-				} else if (st instanceof Stock_Food) {
-					cloneST = ((Stock_Food) st).clone();
-					cloneST.setAmount(randomInt);
-				}
-			    ((Planet) en).setHiddenTreasure(cloneST);
+				if (missingModule.size() > 0) {
+					((Planet) en).setHiddenTreasure(missingModule.get(0));
+					missingModule.remove(0);
+				} else {
+					int index = random.nextInt(8);
+					int randomInt = random.nextInt(15);
+					Stock st = modelSTOCK.get(index);
+					Stock cloneST = new Stock_Food("", 0, 0, "/bread.png");
+					if (st instanceof Stock_Medicine) {
+						cloneST = ((Stock_Medicine) st).clone();
+						cloneST.setAmount(randomInt);
+					} else if (st instanceof Stock_Food) {
+						cloneST = ((Stock_Food) st).clone();
+						cloneST.setAmount(randomInt);
+					}
+				    ((Planet) en).setHiddenTreasure(cloneST);
+				}				
 			}
 			JLabel lblTemp = new JLabel(new ImageIcon(en.getImage()));
 			lblTemp.setBounds(en.getX(), en.getY(), en.getWidth(), en.getHeight());
@@ -186,14 +199,6 @@ public class GameEnvironment {
 	 */
 	private void makeSpaceObjects() {		
 		//Space objects
-		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/EldarSpaceStation.png");
-		SpaceObjects.add(post1);
-		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/SpaceMarineStation.png");
-		SpaceObjects.add(post2);
-		BlackHole hole1 = new BlackHole(20, 30, 150, 150, "MegaBlack", "/BlueHole.png");
-		SpaceObjects.add(hole1);
-		BlackHole hole2 = new BlackHole(1450, 700, 200, 200, "MediumBlue", "/smallBlueHole.png");
-		SpaceObjects.add(hole2);
 		Planet earth = new Planet_Terrestrial(1000, 1000, 400, "Earth", "/Earth.png");
 		SpaceObjects.add(earth);
 		Planet oceanPlanet = new Planet_Ocean(600, 500, 250, "Ocean", "/OceanPlanet.png");
@@ -202,6 +207,18 @@ public class GameEnvironment {
 		SpaceObjects.add(colorfulPlanet);
 		Planet saturn = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
 		SpaceObjects.add(saturn);
+		
+		Collections.shuffle(SpaceObjects);
+		
+
+		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/EldarSpaceStation.png");
+		SpaceObjects.add(0,	post1);
+		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/SpaceMarineStation.png");
+		SpaceObjects.add(1, post2);
+		BlackHole hole1 = new BlackHole(20, 30, 150, 150, "MegaBlack", "/BlueHole.png");
+		SpaceObjects.add(2, hole1);
+		BlackHole hole2 = new BlackHole(1450, 700, 200, 200, "MediumBlue", "/smallBlueHole.png");
+		SpaceObjects.add(3, hole2);
 	}
 	
 	void CheckCrew() {

@@ -166,6 +166,9 @@ public class Spaceship extends Outpost {
 		mystr = "<html><h1>Modules: " + active + "/" + MODULES.size() + mystr + "</html>";
 		return mystr;
 	}
+	public ArrayList<ShipModule> getModuleList() {
+		return MODULES;
+	}
 	
 	//Supply Ship Methods - getter
 	/**
