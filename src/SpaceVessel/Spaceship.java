@@ -267,5 +267,39 @@ public class Spaceship extends Outpost {
 		return CREW;
 	}
 
-	
+	public void CheckCrew() {
+		for (Crew crew:CREW) {
+			switch (crew.getRank()) {
+			case SCIENTIST://Increase Hull
+				addMaxHull(50);
+				break;
+			case MECHANIC://Repair Hull faster
+				break;
+			case CAPTAIN://Increase all morale
+				for (Crew cr:CREW) {
+					cr.setMaxMorale(25);
+				}
+				break;
+			case DOCTOR://Increase all health
+				for (Crew cr:CREW) {
+					cr.setMaxHealth(25);
+				}
+				break;
+			case CHEF://Increase all hunger
+				for (Crew cr:CREW) {
+					cr.setMaxHunger(25);
+				}
+				break;
+			case HELMS_MAN://Increase fuel
+				addFuel(200);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		for (Crew cr:CREW) {
+			cr.MaxStat();
+		}
+	}
 }

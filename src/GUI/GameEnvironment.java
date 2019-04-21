@@ -67,7 +67,7 @@ public class GameEnvironment {
 		
 		//Ship Default Inventory
 		SpaceShip = ship;
-		CheckCrew();
+		SpaceShip.CheckCrew();
 		ArrayList<Stock> modelSTOCK = generateStock();		
 		for(Stock st:modelSTOCK) {
 			SpaceShip.addStock(st);
@@ -221,40 +221,4 @@ public class GameEnvironment {
 		SpaceObjects.add(3, hole2);
 	}
 	
-	void CheckCrew() {
-		ArrayList<Crew> crews = SpaceShip.getCrewList();
-		for (Crew crew:crews) {
-			switch (crew.getRank()) {
-			case SCIENTIST://Increase Hull
-				SpaceShip.addMaxHull(50);
-				break;
-			case MECHANIC://Repair Hull faster
-				break;
-			case CAPTAIN://Increase all morale
-				for (Crew cr:crews) {
-					cr.setMaxMorale(25);
-				}
-				break;
-			case DOCTOR://Increase all health
-				for (Crew cr:crews) {
-					cr.setMaxHealth(25);
-				}
-				break;
-			case CHEF://Increase all hunger
-				for (Crew cr:crews) {
-					cr.setMaxHunger(25);
-				}
-				break;
-			case HELMS_MAN://Increase fuel
-				SpaceShip.addFuel(200);
-				break;
-			default:
-				break;
-			}
-		}
-		
-		for (Crew cr:crews) {
-			cr.MaxStat();
-		}
-	}
 }
