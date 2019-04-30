@@ -160,7 +160,7 @@ public class Spaceship extends Outpost {
 			if (module.isActive()) {
 				active += 1;
 			}
-			mystr += "<p>" + module.toString();
+			mystr += "<p>" + module.modStatus();
 		}
 		
 		mystr = "<html><h1>Modules: " + active + "/" + MODULES.size() + mystr + "</html>";
@@ -168,6 +168,19 @@ public class Spaceship extends Outpost {
 	}
 	public ArrayList<ShipModule> getModuleList() {
 		return MODULES;
+	}
+	public ShipModule getModule(ShipModule mod) {
+		ShipModule module = new ShipModule();
+		for (ShipModule st: MODULES) {
+			if ((st.getName()).equals(mod.getName())) {
+				module = st;
+				break;
+			}
+		}
+		return module;
+	}
+	public void CheckModule() {
+		
 	}
 	
 	//Supply Ship Methods - getter
