@@ -40,7 +40,7 @@ public class GameEnvironment {
 	/** All Space objects (from Backend package) is stored here*/
 	public ArrayList<Entity> SpaceObjects = new ArrayList<Entity>();
 	/** All Galaxy Panel is stored here*/
-	public ArrayList<GalaxyPanel> Galaxy = new ArrayList<GalaxyPanel>();
+	//public ArrayList<GalaxyPanel> Galaxy = new ArrayList<GalaxyPanel>();
 	/** Spaceship generated from MissionFrame*/
 	public Spaceship SpaceShip;
     protected Random random = new Random();
@@ -127,11 +127,11 @@ public class GameEnvironment {
 		controlPan.add(btnEndTurn);
 		
 		//Galaxy
-		GalaxyPanel galaxy = new GalaxyPanel(x, y, frame, this);		
-		galaxy.setBounds(0, 0, x ,y);
-		galaxy.setOpaque(false);
+		SpaceshipController controller = new SpaceshipController(x, y, frame, this);		
+		controller.setBounds(0, 0, x ,y);
+		controller.setOpaque(false);
 
-		frame.getContentPane().add(galaxy);
+		frame.getContentPane().add(controller);
 		frame.getContentPane().add(controlPan);	
 		
 		for (Entity en:SpaceObjects) {
@@ -159,13 +159,20 @@ public class GameEnvironment {
 			frame.getContentPane().add(lblTemp);
 		}
 		
-		//Background
+		GalaxyPanel galaxy = new GalaxyPanel(x, y);
+		galaxy.setBounds(0,0,x,y);
+		galaxy.setBackground(new Color(0, 255, 255));
+		galaxy.setLayout(null);
+
 		JLabel galaBack = new JLabel("");
 		galaBack.setBounds(0, 0, x, y);
-		galaBack.setVerticalAlignment(SwingConstants.BOTTOM);
+		galaBack.setVerticalAlignment(SwingConstants.BOTTOM);		
 		Image IMG = StaticObjects.SelfResizeImage("/giphy.gif", this, x, y);	
 		galaBack.setIcon(new ImageIcon(IMG));
-		frame.getContentPane().add(galaBack);
+		galaxy.add(galaBack);
+
+		//galaxy.UpgradeBackground(x, y, "/Mission.jpg");
+		frame.getContentPane().add(galaxy);
 	}
 	
 	/**
