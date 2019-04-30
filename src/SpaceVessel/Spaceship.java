@@ -25,7 +25,7 @@ public class Spaceship extends Outpost {
 	private int baseFuel;
 	private int baseHull = 100;
 	private int HullStrength;
-	private int Money =100;
+	private int Money = 100;
 	
 	//Indexed data	
 	private ArrayList<ShipModule> MODULES = new ArrayList<ShipModule>();

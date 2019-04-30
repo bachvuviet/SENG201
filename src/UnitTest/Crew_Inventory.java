@@ -15,14 +15,14 @@ class Crew_Inventory {
 	private Outpost tradePost;
 
 	ArrayList<Stock> STOCK = new ArrayList<Stock>();
-		
+	ArrayList<Crew> tempCrew = new ArrayList<Crew>();
 	@BeforeEach
 	public void init() {
 		//Crew
 		Crew newCrew1 = new Crew("Kirk", CrewRank.CAPTAIN, null);
 		Crew newCrew2 = new Crew("Spock", CrewRank.MECHANIC, null);
 		Crew newCrew3 = new Crew("DR.Strange", CrewRank.DOCTOR, null);
-		ArrayList<Crew> tempCrew = new ArrayList<Crew>();
+		
 		tempCrew.add(newCrew1);
 		tempCrew.add(newCrew2);
 		tempCrew.add(newCrew3);
@@ -94,23 +94,23 @@ class Crew_Inventory {
 		ArrayList<Stock> Stock = testShip.getInventory();
 		
 		cr.useSupply(5, Stock.get(0));//eat
-		assertEquals(150, cr.getHunger());
+		assertEquals(125, cr.getHunger());
 		assertEquals(100, cr.getHealth());
 		assertEquals(100, cr.getMorale());
 		
 		cr.useSupply(4, Stock.get(8));//heal
+		assertEquals(125, cr.getHunger());
 		assertEquals(140, cr.getHealth());
-		assertEquals(150, cr.getHunger());
 		assertEquals(100, cr.getMorale());
 		
 		cr.sleep();
-		assertEquals(125, cr.getHunger());
+		assertEquals(105, cr.getHunger());
 		assertEquals(125, cr.getMorale());
 		assertEquals(165, cr.getHealth());
 		
 		cr.repair(testShip);
-		assertEquals(105, cr.getHunger());
-		assertEquals(125, cr.getMorale());
+		assertEquals(85, cr.getHunger());
+		assertEquals(110, cr.getMorale());
 		assertEquals(165, cr.getHealth());
 		assertEquals(115, testShip.getHull());
 		
@@ -126,9 +126,19 @@ class Crew_Inventory {
 	@Test
 	public void Trade() {
 		testShip.changeStockAmount(10, STOCK.get(5));
-		assertEquals(30, testShip.getInventory().get(5).getAmount());
+		assertEquals(20, testShip.getInventory().get(5).getAmount());
 		testShip.changeStockAmount(-10, STOCK.get(4));
-		assertEquals(10, testShip.getInventory().get(4).getAmount());
+		assertEquals(0, testShip.getInventory().get(4).getAmount());
+		testShip.changeStockAmount(-5, STOCK.get(7));
+		assertEquals(10, testShip.getInventory().get(7).getAmount());
+	}
+	
+	@Test
+	public void SpecialCrews() {
+		Crew newCrew4 = new Crew("Blah", CrewRank.DOCTOR, null);
+		tempCrew.add(newCrew4);
+		testShip.CheckCrew();
+		assertEquals(100, testShip.getHull());
+		assertEquals(100, testShip.getFuel());
 	}
 }
-

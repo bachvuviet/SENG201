@@ -54,6 +54,7 @@ public class Crew {
     	this.MaxMorale = 100;
     	this.avatar = img;
     	Real = true;
+    	MaxStat();
     }
     
     //getter
@@ -146,7 +147,7 @@ public class Crew {
     
 	//Crew Action
     /** 
-     * Order crew to use stock (food, medicine, potion) from Ship Inventory to increase HP, Hunger and morale
+     * Order crew to use stock (food, medicine, portion) from Ship Inventory to increase HP, Hunger and morale
      * @param amount amount of stock to use
      * @param stock what stock to use
      */
