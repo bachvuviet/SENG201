@@ -39,11 +39,11 @@ public class LoadingFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setUndecorated(true);
-		
-		JLabel loadingScreen = new JLabel("");
+			
+		Image IMG = StaticObjects.SelfResizeImage("/Loading.jpg", this, x, y);	
+		JLabel loadingScreen = new JLabel(new ImageIcon(IMG));
 		loadingScreen.setBounds(0, 0, x, y);
-		loadingScreen.setVerticalAlignment(SwingConstants.BOTTOM);		
-		Image IMG = StaticObjects.SelfResizeImage("/Loading.gif", this, x, y);	
+		loadingScreen.setVerticalAlignment(SwingConstants.BOTTOM);
 		loadingScreen.setIcon(new ImageIcon(IMG));
 		frame.getContentPane().add(loadingScreen);
 	}

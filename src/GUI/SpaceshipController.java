@@ -241,8 +241,13 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				}
 				else if (en instanceof Planet) {
 					if (!((Planet) en).getScan()) {
+						frame.setFocusable(false);
+						frame.setEnabled(false);
 						Stock st = ((Planet) en).getHiddenTreasure();
-						StaticObjects.MessBox("Found "+ st, "Scanned ", "");
+						ScanPlanetFrame window = new ScanPlanetFrame("Found "+ st, ((Planet) en).getBackgroundPath(), frame);
+						window.frame.setLocationRelativeTo(null);
+						window.frame.setVisible(true);
+						
 						if (st instanceof ShipModule)
 							SpaceShip.getModule((ShipModule) st).setActive(true);
 						else

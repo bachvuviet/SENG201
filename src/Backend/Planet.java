@@ -14,12 +14,16 @@ public class Planet extends Entity implements CelestialBody {
 	protected int radius;
     protected Stock hiddenStock;
     protected boolean Scanned = false;
+    protected String backgroundPath;
     
 	public Planet() {}
 	public Planet (int x, int y, int r, String Name, ArrayList<String> imagePack) {
 		super(x, y, r, r, Name, "", imagePack);
 	}
 	
+	public String getBackgroundPath() {
+		return backgroundPath;
+	}
 	public int getRadius() {
 		return radius/2;
 	}
