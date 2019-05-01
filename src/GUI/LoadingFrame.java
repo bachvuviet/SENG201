@@ -31,6 +31,7 @@ public class LoadingFrame {
 	Galaxy currGalaxy;
 	Galaxy Gala1;
 	Galaxy Gala2;
+	int totalDay;
     
 	void Initialize(int x, int y) {
 		frame = new JFrame();
@@ -57,9 +58,11 @@ public class LoadingFrame {
 	//New game
 	public LoadingFrame(int width, int height, int days, Spaceship ship) {
 		Initialize(width, height);
+		totalDay = days;
 		SpaceShip = ship;
 		SpaceShip.CheckCrew();
-
+	}
+	public void NewMission(int x, int y) {
 		//Ship Default Inventory
 		ArrayList<Stock> modelSTOCK = generateStock();	
 		for(Stock st:modelSTOCK) {
@@ -67,7 +70,7 @@ public class LoadingFrame {
 		}
 		
 		//Ship Module
-		generateModules(days);		
+		generateModules();		
 		
 		//Generate Galaxy and Entity within them
 		makePlanets();
@@ -77,7 +80,7 @@ public class LoadingFrame {
 			e.printStackTrace();
 		}
 	    makeSpaceStations();
-	    CompleteLoading(width, height);
+	    CompleteLoading(x, y);
 	}
 	
 	void CompleteLoading(int x, int y) {		
@@ -97,7 +100,7 @@ public class LoadingFrame {
 	    timer.scheduleAtFixedRate(updateIncomingMessage, 2000, 10);//delay, period	
 	}
 	
-	private void generateModules(int days) {
+	private void generateModules() {
 		ShipModule thrust1 = new ShipModule("Engine-Left", "Speed", 50);
 		ShipModule thrust2 = new ShipModule("Engine-Right", "Speed", 50);
 		ShipModule thrust3 = new ShipModule("Engine-Center", "Speed", 100);
@@ -111,7 +114,7 @@ public class LoadingFrame {
 		ArrayList<ShipModule> CoreMod = new ArrayList<ShipModule>(Arrays.asList(thrust3, ammour, bridge));//Core
 		ArrayList<ShipModule> SupMod = new ArrayList<ShipModule>(Arrays.asList(thrust1, thrust2, engine1, engine2, fusioner));
 		Collections.shuffle(SupMod);
-		for (int i=0; i < (int) 2*days/3-1; i++) {
+		for (int i=0; i < (int) 2*totalDay/3-1; i++) {
 			SupMod.get(SupMod.size() -1 -i).setActive(false);
 		}
 		for (ShipModule mod:SupMod) {

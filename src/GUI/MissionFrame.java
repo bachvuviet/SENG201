@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -219,8 +221,21 @@ public class MissionFrame {
 		LoadingFrame game = new LoadingFrame(width, height, DaysOnMission, SpaceShip);
 		game.frame.setVisible(true);
 		game.frame.setLocationRelativeTo(null);
-		
+		game.frame.setFocusable(true);
 		frame.dispose();
+		
+		Timer timer = new Timer(true);
+		TimerTask updateIncomingMessage = new TimerTask() {
+			@Override
+			public void run() {						
+				game.NewMission(width, height);
+
+				timer.cancel();
+			}
+	    };
+	    
+	    timer.scheduleAtFixedRate(updateIncomingMessage, 20, 10);//delay, period
+		
 	}
 	
 	/** Crew list contain crew via button choose crew*/
