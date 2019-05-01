@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,6 +50,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	private JLabel Days;
 	/** Current turn to display via Jlabel Days*/
 	private int currDay = 1;
+	Galaxy currGalaxy;
 	
 	/**
 	 * 
@@ -56,14 +59,16 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * @param frame GameEnvironment frame
 	 * @param game GameEnvironment object to access fields
 	 */
-	public SpaceshipController(int width, int height, JFrame frame, GameEnvironment game) {
+	public SpaceshipController(int width, int height, JFrame frame, Galaxy currGalaxy, GameEnvironment game) {
 		this.frame = frame;
 		this.width = width;
 		this.height = height;
+		
 		this.Fuel = game.Fuel;
 		this.Hull = game.Hull;
 		this.Days = game.lblDay;
-		this.SpaceObjects = game.SpaceObjects;
+		this.currGalaxy = currGalaxy;
+		this.SpaceObjects = currGalaxy.getSpaceObjects();
 		
 		//Spaceship
 		x = width/2; y = height/2;
@@ -74,7 +79,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 		contentPane.setLayout(null);
 		
 		addKeyListener(this);
-		this.SpaceShip = game.SpaceShip;
+		this.SpaceShip = currGalaxy.getShip();
 		Fuel.setToolTipText(Fuel.getMaximum() + "/" + Fuel.getMaximum());
 		Hull.setToolTipText(SpaceShip.getHull() + "/" + SpaceShip.getHull());
 	}
@@ -234,19 +239,37 @@ public class SpaceshipController extends JPanel implements KeyListener{
 					trade.frame.setVisible(true);
 					trade.frame.setLocationRelativeTo(null);
 				}
-				else if (!((Planet) en).getScan() && en instanceof Planet) {
-					Stock st = ((Planet) en).getHiddenTreasure();
-					StaticObjects.MessBox("Found "+ st, "Scanned ", "");
-					if (st instanceof ShipModule)
-						SpaceShip.getModule((ShipModule) st).setActive(true);
-					else
-						SpaceShip.changeStockAmount(st.getAmount(), st);
-				}
-				else if (((Planet) en).getScan() && en instanceof Planet) {
-					StaticObjects.MessBox(en.toString()+" has no more stock.", "Scanned "+en.toString(), "");
+				else if (en instanceof Planet) {
+					if (!((Planet) en).getScan()) {
+						Stock st = ((Planet) en).getHiddenTreasure();
+						StaticObjects.MessBox("Found "+ st, "Scanned ", "");
+						if (st instanceof ShipModule)
+							SpaceShip.getModule((ShipModule) st).setActive(true);
+						else
+							SpaceShip.changeStockAmount(st.getAmount(), st);
+					} else {
+						StaticObjects.MessBox(en.toString()+" has no more stock.", "Scanned "+en.toString(), "");
+					}
+					
 				}
 				else if (en instanceof BlackHole) {
 					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
+					currGalaxy.deleteShip();
+					LoadingFrame game = new LoadingFrame(width, height, ((BlackHole) en).JumptoGalaxy(SpaceShip));
+					
+					Timer timer = new Timer(true);
+					TimerTask updateIncomingMessage = new TimerTask() {
+						@Override
+						public void run() {							
+							game.frame.setVisible(true);
+							game.frame.setLocationRelativeTo(null);	
+
+							timer.cancel();
+						}
+				    };
+				    
+				    timer.scheduleAtFixedRate(updateIncomingMessage, 20, 10);//delay, period
+					frame.dispose();
 				}
 				break found;
 			}

@@ -32,13 +32,12 @@ public class Spaceship extends Outpost {
 	private ArrayList<Crew> CREW = new ArrayList<Crew>();
 	
 	//Constructor
-	public Spaceship(double x, double y, String name, int day, int fuel, ArrayList<Crew> crew, ArrayList<ShipModule> mod) {
+	public Spaceship(double x, double y, String name, int day, int fuel, ArrayList<Crew> crew) {
 		super(x, y, name, "/spaceshipUp.png");
 		Width = 40; Height = 70;
 		baseFuel = fuel;
 		daysOnMission = day;
 		CREW = crew;
-		MODULES = mod;
 		HullStrength = baseHull;
 	}
 	
@@ -221,7 +220,9 @@ public class Spaceship extends Outpost {
 	public void addFuel(int amount) {
 		baseFuel += amount;
 	}
-	
+	public void setModule(ArrayList<ShipModule> mod) {
+		MODULES = mod;
+	}
 	public void addMaxHull(int amount) {
 		baseHull += amount;
 		HullStrength = baseHull;
