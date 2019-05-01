@@ -28,7 +28,7 @@ class Crew_Inventory {
 		tempCrew.add(newCrew3);
 		
 		//Ship
-		testShip = new Spaceship(200,200, "KMS Tirpitz", 0, 100, tempCrew, null);
+		testShip = new Spaceship(200,200, "KMS Tirpitz", 0, 100, tempCrew);
 		tradePost = new Outpost(500, 500, 10, 10, "Eldar Corsair", "/bread.png");
 
 		//Stock

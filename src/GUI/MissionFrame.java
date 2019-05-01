@@ -17,8 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -207,17 +207,6 @@ public class MissionFrame {
 		frame.getContentPane().add(Background);
 	}
 	
-	/**
-	 * Called via btnAccept&Start click action
-	 * @param width Get the default screen pixel width
-	 * @param height Get the default screen pixel width
-	 * @param Days Get total day on mission
-	 * @param name Get name of SpaceShip
-	 * 
-	 * Initiate Game environment
-	 * Initiate Modules and crew of Spaceship
-	 * Initiate new Spaceship
-	 */
 	void InitGame(int width, int height, int Days, String name) {
 		int DaysOnMission = Days;
 		if (name == "")
@@ -226,42 +215,27 @@ public class MissionFrame {
 			StaticObjects.MessBox("You haven't got enough crew, make more friends captain", "Not enough crew", "Info");
 			return;
 		}
-			
-		//Module
-		ShipModule thrust1 = new ShipModule("Engine-Left", "Speed", 50);
-		ShipModule thrust2 = new ShipModule("Engine-Right", "Speed", 50);
-		ShipModule thrust3 = new ShipModule("Engine-Center", "Speed", 100);
-		ShipModule engine1 = new ShipModule("Generator-Main", "Speed", 200);
-		ShipModule engine2 = new ShipModule("Generator-Support", "Speed", 100);
-		ShipModule ammour = new ShipModule("Amour Belt", "Health", 200);
-		ShipModule bridge = new ShipModule("Bridge", "CrewHealth", 50);
-		ShipModule fusioner = new ShipModule("Fusion3D-printer", "CrewHunger", 50);
-		ShipModule warp = new ShipModule("Warp-Engine", "Complete", 0);
-		warp.setActive(false);
-		ArrayList<ShipModule> CoreMod = new ArrayList<ShipModule>(Arrays.asList(thrust3, ammour, bridge));//Core
-		ArrayList<ShipModule> SupMod = new ArrayList<ShipModule>(Arrays.asList(thrust1, thrust2, engine1, engine2, fusioner));
-		Collections.shuffle(SupMod);
-		for (int i=0; i < (int) 2*DaysOnMission/3-1; i++) {
-			SupMod.get(SupMod.size() -1 -i).setActive(false);
-		}
-		for (ShipModule mod:SupMod) {
-			CoreMod.add(mod);
-		}
-		CoreMod.add(warp);
 		
 		//SpaceShip
-		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, height/2, tempCrew, CoreMod);	
-		GameEnvironment game;
-		try {
-			game = new GameEnvironment(width, height, SpaceShip);
-			game.frame.setVisible(true);
-			game.frame.setLocationRelativeTo(null);
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, height/2, tempCrew);	
+		LoadingFrame game = new LoadingFrame(width, height, DaysOnMission, SpaceShip);
+		game.frame.setVisible(true);
+		game.frame.setLocationRelativeTo(null);
+		game.frame.setFocusable(true);
 		frame.dispose();
+		
+		Timer timer = new Timer(true);
+		TimerTask updateIncomingMessage = new TimerTask() {
+			@Override
+			public void run() {						
+				game.NewMission(width, height);
+
+				timer.cancel();
+			}
+	    };
+	    
+	    timer.scheduleAtFixedRate(updateIncomingMessage, 20, 10);//delay, period
+		
 	}
 	
 	/** Crew list contain crew via button choose crew*/
@@ -272,12 +246,7 @@ public class MissionFrame {
     int avaIndex = 5;
     String[] AvatarArr = {"/Kirk.png","/DoctorStrange.png","/StarLord.png","/Spock.png","/Uhura.png",
 			"/Gamora.png","/Groot.png","/someone.png","/thangaodo.png","/thangaovang.png"};
-    /**
-     * Called via click action on a crew type
-     * Add crew of that type to ArrayList tempCrew
-     * @param Rank Specify Type of crew to add (button argument)
-     * @param img Specify default avatar of crew (button argument)
-     */
+
 	void addCrew(CrewRank Rank, JButton btn, int mode) {
 		if (mode == 1) {
 			int total = 0;
@@ -341,10 +310,6 @@ public class MissionFrame {
 		updateCrewlabel();		
 	}	
 	
-	/**
-	 * Update totalLabel, display current selected crew list
-	 * Called every time a button is left-clicked/right-clicked
-	 */
 	void updateCrewlabel() {
 		String[] Rank = {"Captain", "Doctor", "Helms", "Mechanic", "Scientist", "Chef"};
 		String mystr = "";
