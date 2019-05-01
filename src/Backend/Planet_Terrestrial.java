@@ -12,6 +12,6 @@ public class Planet_Terrestrial extends Planet implements CelestialBody {
 
 	public Planet_Terrestrial(int x, int y, int r, String Name) {
 		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Earth1.png","/Earth2.png","/Earth3.png","/RandomPlanet2.png")));
-		backgroundPath = "/Mission.jpg";
+		backgroundPath = "/EarthBack.jpg";
 	}
 }

@@ -12,6 +12,6 @@ public class Planet_Ocean extends Planet implements CelestialBody {
 
 	public Planet_Ocean(int x, int y, int r, String Name) {
 		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Ocean1.png","/Ocean2.png","/Ocean3.png")));
-		backgroundPath = "/Mission.jpg";
+		backgroundPath = "/OceanBack.jpg";
 	}
 }
