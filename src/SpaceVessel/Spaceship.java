@@ -33,8 +33,7 @@ public class Spaceship extends Outpost {
 	
 	//Constructor
 	public Spaceship(double x, double y, String name, int day, int fuel, ArrayList<Crew> crew) {
-		super(x, y, name, "/spaceshipUp.png");
-		Width = 40; Height = 70;
+		super((int) x, (int) y, 40, 70, name, "/spaceshipUp.png");
 		baseFuel = fuel;
 		daysOnMission = day;
 		CREW = crew;

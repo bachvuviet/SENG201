@@ -141,4 +141,4 @@ class Crew_Inventory {
 		assertEquals(100, testShip.getHull());
 		assertEquals(100, testShip.getFuel());
 	}
-}
+} 

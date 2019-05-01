@@ -1,6 +1,8 @@
 package Backend;
 
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import CustomUIELmt.StaticObjects;
 
@@ -16,24 +18,21 @@ public abstract class Entity {
 	protected Image visual;
 	protected String DefaultPath = "";
 	
-	//Size of Image
-	public Entity(double x, double y, String Name, String defaultPath) {
-		this.x = x;
-		this.y = y;
-		this.Name = Name;
-		this.DefaultPath = defaultPath;
-
-		visual = StaticObjects.SelfResizeImage(DefaultPath, this, 50, 70);
-	}
-	
+	public Entity() {}
 	//Resized
-	public Entity(int x, int y, int width, int height, String Name, String defaultPath) {
+	public Entity(int x, int y, int width, int height, String Name, String defaultPath, ArrayList<String> imagePack) {
 		this.x = x;	this.Width = width;
 		this.y = y; this.Height = height;
 		this.Name = Name;
 		this.DefaultPath = defaultPath;
-
-		visual = StaticObjects.SelfResizeImage(DefaultPath, this, (int) Width, (int) Height);
+		if (imagePack != null) {
+			DefaultPath = randomPath(imagePack);
+		}
+	}
+	
+	String randomPath(ArrayList<String> lol) {
+		Collections.shuffle(lol);
+		return lol.get(0);
 	}
 	
 	/**
@@ -50,6 +49,7 @@ public abstract class Entity {
 	 * @return Image of Label Image Icon
 	 */
 	public Image getImage() {
+		visual = StaticObjects.SelfResizeImage(DefaultPath, this, (int) Width, (int) Height);
 		return visual;
 	}
 

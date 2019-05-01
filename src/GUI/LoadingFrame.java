@@ -153,28 +153,28 @@ public class LoadingFrame {
 		Gala2 = new Galaxy("Nemesis Tessera", null, "/NemesisGalaxy.png");
 		
 		//Space objects
-		Planet terrestrial1 = new Planet_Terrestrial(1000, 1000, 400, "Earth", "/Earth.png");
-		Planet ocean1 = new Planet_Ocean(600, 500, 250, "Ocean", "/OceanPlanet.png");
-		Planet colorful1 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","/ColorfulPlanet1.png");
-		Planet gasgiant1 = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
+		Planet terrestrial1 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
+		Planet ocean1 = new Planet_Ocean(600, 500, 250, "Ocean");
+		Planet colorful1 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X");
+		Planet gasgiant1 = new Planet_GasGiant(200, 180, 350, "Saturn");
 		currGalaxy.addSpaceObjects(terrestrial1);
 		currGalaxy.addSpaceObjects(ocean1);
 		currGalaxy.addSpaceObjects(colorful1);
 		currGalaxy.addSpaceObjects(gasgiant1);
 		
-		Planet terrestrial2 = new Planet_Terrestrial(1000, 1000, 400, "Earth", "/Earth.png");
-		Planet ocean2 = new Planet_Ocean(600, 500, 250, "Ocean", "/OceanPlanet.png");
-		Planet colorful2 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","/ColorfulPlanet1.png");
-		Planet gasgiant2 = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
+		Planet terrestrial2 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
+		Planet ocean2 = new Planet_Ocean(600, 500, 250, "Ocean");
+		Planet colorful2 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X");
+		Planet gasgiant2 = new Planet_GasGiant(200, 180, 350, "Saturn");
 		Gala1.addSpaceObjects(terrestrial2);
 		Gala1.addSpaceObjects(ocean2);
 		Gala1.addSpaceObjects(colorful2);
 		Gala1.addSpaceObjects(gasgiant2);
 		
-		Planet terrestrial3 = new Planet_Terrestrial(1000, 1000, 400, "Earth", "/Earth.png");
-		Planet ocean3 = new Planet_Ocean(600, 500, 250, "Ocean", "/OceanPlanet.png");
-		Planet colorful3 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X","/ColorfulPlanet1.png");
-		Planet gasgiant3 = new Planet_GasGiant(200, 180, 350, "Saturn", "/saturn.png");
+		Planet terrestrial3 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
+		Planet ocean3 = new Planet_Ocean(600, 500, 250, "Ocean");
+		Planet colorful3 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X");
+		Planet gasgiant3 = new Planet_GasGiant(200, 180, 350, "Saturn");
 		Gala2.addSpaceObjects(terrestrial3);
 		Gala2.addSpaceObjects(ocean3);
 		Gala2.addSpaceObjects(colorful3);
@@ -185,14 +185,14 @@ public class LoadingFrame {
 		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/EldarSpaceStation.png");
 		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/SpaceMarineStation.png");
 		
-		BlackHole hole1a = new BlackHole(20, 30, 150, 150, "MegaBlack", "/BlueHole.png", Gala1);
-		BlackHole hole1b = new BlackHole(20, 30, 150, 150, "MegaBlack", "/BlueHole.png", currGalaxy);
+		BlackHole hole1a = new BlackHole(20, 30, 150, 150, "MegaBlack", Gala1);
+		BlackHole hole1b = new BlackHole(20, 30, 150, 150, "MegaBlack", currGalaxy);
 		
-		BlackHole hole2a = new BlackHole(1450, 700, 200, 200, "MediumBlue", "/smallBlueHole.png", Gala2);
-		BlackHole hole2b = new BlackHole(1450, 700, 200, 200, "MediumBlue", "/smallBlueHole.png", Gala1);
+		BlackHole hole2a = new BlackHole(1450, 700, 200, 200, "MediumBlue", Gala2);
+		BlackHole hole2b = new BlackHole(1450, 700, 200, 200, "MediumBlue", Gala1);
 		
-		BlackHole hole3a = new BlackHole(1450, 100, 200, 200, "MediumBlue", "/smallBlueHole.png", currGalaxy);
-		BlackHole hole3b = new BlackHole(1450, 100, 200, 200, "MediumBlue", "/smallBlueHole.png", Gala2);
+		BlackHole hole3a = new BlackHole(1450, 100, 200, 200, "MediumBlue", currGalaxy);
+		BlackHole hole3b = new BlackHole(1450, 100, 200, 200, "MediumBlue", Gala2);
 		
 		currGalaxy.addSpaceObjects(0, post1);
 		Gala1.addSpaceObjects(0, post2);

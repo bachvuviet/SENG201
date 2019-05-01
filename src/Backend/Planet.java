@@ -1,6 +1,8 @@
 package Backend;
 
 
+import java.util.ArrayList;
+
 import SpaceVessel.Stock;
 
 /**
@@ -12,9 +14,10 @@ public class Planet extends Entity implements CelestialBody {
 	protected int radius;
     protected Stock hiddenStock;
     protected boolean Scanned = false;
-	
-	public Planet (int x, int y, int r, String Name, String path) {
-		super(x, y, r, r, Name, path);
+    
+	public Planet() {}
+	public Planet (int x, int y, int r, String Name, ArrayList<String> imagePack) {
+		super(x, y, r, r, Name, "", imagePack);
 	}
 	
 	public int getRadius() {

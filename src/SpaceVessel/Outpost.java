@@ -16,16 +16,6 @@ public class Outpost extends Entity {
     protected int energy;
 	protected ArrayList<Stock> INVENTORY = new ArrayList<Stock>();
     
-	/**
-	 * Create Spaceship
-	 * @param x Horizontal pixel location
-	 * @param y Vertical pixel location
-	 * @param Name Ship name
-	 * @param path path to spaceship Icon
-	 */
-    public Outpost(double x, double y, String Name, String path) {
-		super(x, y, Name, path);
-	}
     /**
      * Create Trade outpost/Space station
 	 * @param x Horizontal pixel location
@@ -36,7 +26,7 @@ public class Outpost extends Entity {
 	 * @param path path to spaceship Icon
      */
     public Outpost(int x, int y, int w, int h, String Name, String path) {
-		super(x, y, w, h, Name, path);
+		super(x, y, w, h, Name, path, null);
 	}
     
     /**

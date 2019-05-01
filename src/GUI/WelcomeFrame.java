@@ -43,7 +43,7 @@ public class WelcomeFrame {
 		frame.getContentPane().setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 19));
 		frame.setBounds(100, 100, 635, 414);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setIconImage(StaticObjects.SelfResizeImage("/Earth.png", this, 40, 40));
+		frame.setIconImage(StaticObjects.SelfResizeImage("/Earth1.png", this, 40, 40));
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblWelcome = new JLabel("IMPERIAL BATTLEFLEET HEADQUARTER");

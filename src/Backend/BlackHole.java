@@ -1,5 +1,8 @@
 package Backend;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import SpaceVessel.Spaceship;
 
 /**
@@ -10,8 +13,8 @@ import SpaceVessel.Spaceship;
 public class BlackHole extends Entity implements CelestialBody {
 	public Galaxy DestinationGalaxy;
 	
-	public BlackHole(int x, int y, int w, int h, String Name, String path, Galaxy gala) {
-		super(x, y, w, h, Name, path);
+	public BlackHole(int x, int y, int w, int h, String Name, Galaxy gala) {
+		super(x, y, w, h, Name, "", new ArrayList<String>(Arrays.asList("/Hole1.png","/Hole2.png")));
 		DestinationGalaxy = gala;
 	}
 
