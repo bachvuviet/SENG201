@@ -1,7 +1,11 @@
 package SpaceVessel;
 
 import Backend.*;
+
+import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 /**
  * Outpost are space object thats created by human.Super class of spaceship, which has Inventory and methods related to Stock as in Spaceship
@@ -10,10 +14,6 @@ import java.util.ArrayList;
  */
 public class Outpost extends Entity {
 	protected int inventorySize = 100;
-	protected int baseSpeed; //temporary
-    protected int baseShield; // temporary
-    protected int shield;
-    protected int energy;
 	protected ArrayList<Stock> INVENTORY = new ArrayList<Stock>();
     
     /**
@@ -75,5 +75,93 @@ public class Outpost extends Entity {
 				break;
 			}
 		}
+	}
+	
+	//Object movement
+	double velocity;
+	int direction = 0;
+	public boolean turning = false;
+	
+	public void render(Graphics g) {
+		switch (direction) {
+		case 1: 
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipLeft.png")).getImage();
+			break;
+		case 2:
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipDown.png")).getImage();
+			break;
+		case 3:
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipRight.png")).getImage();
+			break;
+		default:
+			visual = new ImageIcon(this.getClass().getResource("/spaceshipUp.png")).getImage();
+			break;
+		}
+		g.drawImage(visual, (int) x, (int) y, null);
+	}
+	
+	//Controls Ship Methods
+	/**
+	 * Get new location of Spaceship on screen
+	 */
+	public void UpdateLocation() {
+		switch (direction) {
+			case 0:
+				y -= velocity;
+				break;
+			case 1: 
+				x -= velocity;
+				break;
+			case 2:
+				y += velocity;
+				break;
+			case 3:
+				x += velocity;
+				break;
+			default:
+				break;
+		}
+	}
+	/** Go straight*/
+	public void forward() {
+		velocity = 5;
+		UpdateLocation();
+	}
+	/** Turn left*/
+	public void toPort() {
+		if (!turning) {
+			if (direction < 3)
+				direction += 1;
+			else
+				direction = 0;
+			turning = true; 			
+		}
+	}
+	/** Turn right*/
+	public void toStarBoard() {
+		if (!turning) {
+			if (direction == 0)
+				direction = 3;
+			else
+				direction -= 1;
+			turning = true; 
+		}
+	}
+	/** Reverse*/
+	public void reverse() {
+		velocity = -2;
+		UpdateLocation();
+	}
+	/** Stop the Ship*/
+	public void stop() {
+		velocity = 0;
+		UpdateLocation();
+	}
+	/**
+	 * get current direction of Ship
+	 * @return WASD = 0123
+	 */
+	public int getDirect() {
+		return direction;
 	}
 }

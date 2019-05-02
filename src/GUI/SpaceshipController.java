@@ -49,7 +49,6 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	/** Current turn display in control Panel*/
 	private JLabel Days;
 	/** Current turn to display via Jlabel Days*/
-	private int currDay = 1;
 	Galaxy currGalaxy;
 	
 	/**
@@ -123,9 +122,10 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				check = true;
 			
 			if (check) {
-				SpaceShip.forward();
 				Fuel.setValue(Fuel.getValue() - 5);
 				Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
+				SpaceShip.forward();
+				SpaceShip.setFuel(Fuel.getValue());
 			}
 		}
 		else if (key == KeyEvent.VK_S && Fuel.getValue() > 0) {
@@ -141,9 +141,10 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				check = true;
 			
 			if (check) {
-				SpaceShip.reverse();
 				Fuel.setValue(Fuel.getValue() - 2);
 				Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
+				SpaceShip.reverse();
+				SpaceShip.setFuel(Fuel.getValue());
 			}				
 		}
 				
@@ -199,15 +200,15 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * Update Control panel, summary of turn and move to next day, reset fuel and SpaceEvent
 	 */
 	private void EndTurn() {
-		if (currDay < SpaceShip.daysOnMission) {
+		if (SpaceShip.getTurn() < Galaxy.maxTurn) {
 			//Update Control Panel
 			UIManager.put("ProgressBar.selectionForeground", Color.YELLOW);
 		    UIManager.put("ProgressBar.selectionBackground", Color.BLUE);
 			Fuel.setValue(Fuel.getMaximum());
 			Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
 			
-			currDay += 1;
-			Days.setText("Days on mission:"+currDay+"/"+SpaceShip.daysOnMission);
+			SpaceShip.nextTurn();
+			Days.setText("Days on mission:"+SpaceShip.getTurn()+"/"+Galaxy.maxTurn);
 			
 			
 			//
@@ -243,7 +244,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 					if (!((Planet) en).getScan()) {
 						frame.setFocusable(false);
 						frame.setEnabled(false);
-						Stock st = ((Planet) en).getHiddenTreasure();
+						Stock st = ((Planet) en).getTreasure();
 						ScanPlanetFrame window = new ScanPlanetFrame("Found "+ st, ((Planet) en).getBackgroundPath(), frame);
 						window.frame.setLocationRelativeTo(null);
 						window.frame.setVisible(true);

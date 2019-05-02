@@ -6,6 +6,11 @@ import java.util.Collections;
 import SpaceVessel.Spaceship;
 
 public class Galaxy {
+	public static int maxTurn;
+	public static int maxHull;
+	public static int maxFuel;
+	public static int Prestige;//Point
+	
 	private String Name;
 	private Spaceship SpaceShip;
 	private String imagePath;

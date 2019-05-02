@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
  * @version 0.30
  */
 public interface Stock {
-    //public static String CATERGORY="";
+    public static String CATERGORY="";
     
     /** get name of stock to display at Trade post
      * @return Stock Name*/

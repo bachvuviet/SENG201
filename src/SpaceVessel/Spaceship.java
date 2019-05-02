@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import Backend.Galaxy;
+
 enum Faction {
 	CHAOS_FLEET, IMPERIAL_NAVY, ELDAR_CORSAIR, SPACE_PIRATE;
 }
@@ -18,12 +20,11 @@ enum Faction {
 public class Spaceship extends Outpost {
 	//Attributes by User
 	/** current turn*/
-	public int daysOnMission;
+	private int daysOnMission = 1;
 	private final Faction shipFaction = Faction.IMPERIAL_NAVY;
 	
 	//Default
-	private int baseFuel;
-	private int baseHull = 100;
+	private int Fuel;
 	private int HullStrength;
 	private int Money = 100;
 	
@@ -32,100 +33,11 @@ public class Spaceship extends Outpost {
 	private ArrayList<Crew> CREW = new ArrayList<Crew>();
 	
 	//Constructor
-	public Spaceship(double x, double y, String name, int day, int fuel, ArrayList<Crew> crew) {
+	public Spaceship(double x, double y, String name, ArrayList<Crew> crew) {
 		super((int) x, (int) y, 40, 70, name, "/spaceshipUp.png");
-		baseFuel = fuel;
-		daysOnMission = day;
 		CREW = crew;
-		HullStrength = baseHull;
-	}
-	
-	//Visual Object
-	double velocity;
-	int direction = 0;
-	public boolean turning = false;
-	
-	public void render(Graphics g) {
-		switch (direction) {
-		case 1: 
-			visual = new ImageIcon(this.getClass().getResource("/spaceshipLeft.png")).getImage();
-			break;
-		case 2:
-			visual = new ImageIcon(this.getClass().getResource("/spaceshipDown.png")).getImage();
-			break;
-		case 3:
-			visual = new ImageIcon(this.getClass().getResource("/spaceshipRight.png")).getImage();
-			break;
-		default:
-			visual = new ImageIcon(this.getClass().getResource("/spaceshipUp.png")).getImage();
-			break;
-		}
-		g.drawImage(visual, (int) x, (int) y, null);
-	}
-	
-	//Controls Ship Methods
-	/**
-	 * Get new location of Spaceship on screen
-	 */
-	public void UpdateLocation() {
-		switch (direction) {
-			case 0:
-				y -= velocity;
-				break;
-			case 1: 
-				x -= velocity;
-				break;
-			case 2:
-				y += velocity;
-				break;
-			case 3:
-				x += velocity;
-				break;
-			default:
-				break;
-		}
-	}
-	/** Go straight*/
-	public void forward() {
-		velocity = 5;
-		UpdateLocation();
-	}
-	/** Turn left*/
-	public void toPort() {
-		if (!turning) {
-			if (direction < 3)
-				direction += 1;
-			else
-				direction = 0;
-			turning = true; 			
-		}
-	}
-	/** Turn right*/
-	public void toStarBoard() {
-		if (!turning) {
-			if (direction == 0)
-				direction = 3;
-			else
-				direction -= 1;
-			turning = true; 
-		}
-	}
-	/** Reverse*/
-	public void reverse() {
-		velocity = -2;
-		UpdateLocation();
-	}
-	/** Stop the Ship*/
-	public void stop() {
-		velocity = 0;
-		UpdateLocation();
-	}
-	/**
-	 * get current direction of Ship
-	 * @return WASD = 0123
-	 */
-	public int getDirect() {
-		return direction;
+		HullStrength = Galaxy.maxHull;
+		Fuel = Galaxy.maxFuel;
 	}
 	
 	//tostrings
@@ -137,7 +49,6 @@ public class Spaceship extends Outpost {
 		return "<html>"
 				+ "<h1>Ship Status:"
 				+ "<p>Hull Strength:" + HullStrength
-				+ "<p>Speed: " + baseSpeed
 				+ "<p>"
 				+ "<p>This vessel is registered for " + shipFaction
 				+ "<p> Day on Mission: " + daysOnMission
@@ -194,7 +105,7 @@ public class Spaceship extends Outpost {
 	 * @return current fuel left
 	 */
 	public int getFuel() {
-		return baseFuel;
+		return Fuel;
 	}
 	/**
 	 * Get Name of Ship
@@ -216,15 +127,8 @@ public class Spaceship extends Outpost {
 	 * Add max fuel
 	 * @param amount boost fuel by helmsman
 	 */
-	public void addFuel(int amount) {
-		baseFuel += amount;
-	}
 	public void setModule(ArrayList<ShipModule> mod) {
 		MODULES = mod;
-	}
-	public void addMaxHull(int amount) {
-		baseHull += amount;
-		HullStrength = baseHull;
 	}
 	/**
 	 * Set new Ship Hull after repair (+ve value) or after collision/events (-ve value)
@@ -284,7 +188,8 @@ public class Spaceship extends Outpost {
 		for (Crew crew:CREW) {
 			switch (crew.getRank()) {
 			case SCIENTIST://Increase Hull
-				addMaxHull(50);
+				Galaxy.maxHull += 50;
+				HullStrength = Galaxy.maxHull;
 				break;
 			case MECHANIC://Repair Hull faster
 				break;
@@ -304,7 +209,8 @@ public class Spaceship extends Outpost {
 				}
 				break;
 			case HELMS_MAN://Increase fuel
-				addFuel(200);
+				Galaxy.maxFuel += 200;
+				Fuel = Galaxy.maxFuel;
 				break;
 			default:
 				break;
@@ -314,5 +220,16 @@ public class Spaceship extends Outpost {
 		for (Crew cr:CREW) {
 			cr.MaxStat();
 		}
+	}
+
+	public int getTurn() {
+		return daysOnMission;
+	}
+	public void nextTurn() {
+		daysOnMission += 1;
+	}
+
+	public void setFuel(int value) {
+		Fuel = value;
 	}
 }

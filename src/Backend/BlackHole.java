@@ -11,21 +11,21 @@ import SpaceVessel.Spaceship;
  * @version 0.30
  */
 public class BlackHole extends Entity implements CelestialBody {
-	public Galaxy DestinationGalaxy;
+	public Galaxy Destination;
 	
 	public BlackHole(int x, int y, int w, int h, String Name, Galaxy gala) {
 		super(x, y, w, h, Name, "", new ArrayList<String>(Arrays.asList("/Hole1.png","/Hole2.png")));
-		DestinationGalaxy = gala;
+		Destination = gala;
 	}
 
 	public Galaxy JumptoGalaxy(Spaceship ship) {
-		DestinationGalaxy.updateShip(ship);
-		return DestinationGalaxy;
+		Destination.updateShip(ship);
+		return Destination;
 	}
 	
 	@Override
 	public String toString() {
-		return "Ready to jump to "+DestinationGalaxy.getGalaxyName()+"!";
+		return "Ready to jump to "+Destination.getGalaxyName()+"!";
 	}
 
 }

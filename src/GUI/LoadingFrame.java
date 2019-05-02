@@ -31,7 +31,6 @@ public class LoadingFrame {
 	Galaxy currGalaxy;
 	Galaxy Gala1;
 	Galaxy Gala2;
-	int totalDay;
     
 	void Initialize(int x, int y) {
 		frame = new JFrame();
@@ -56,9 +55,8 @@ public class LoadingFrame {
 	}
 	
 	//New game
-	public LoadingFrame(int width, int height, int days, Spaceship ship) {
+	public LoadingFrame(int width, int height, Spaceship ship) {
 		Initialize(width, height);
-		totalDay = days;
 		SpaceShip = ship;
 		SpaceShip.CheckCrew();
 	}
@@ -114,7 +112,7 @@ public class LoadingFrame {
 		ArrayList<ShipModule> CoreMod = new ArrayList<ShipModule>(Arrays.asList(thrust3, ammour, bridge));//Core
 		ArrayList<ShipModule> SupMod = new ArrayList<ShipModule>(Arrays.asList(thrust1, thrust2, engine1, engine2, fusioner));
 		Collections.shuffle(SupMod);
-		for (int i=0; i < (int) 2*totalDay/3-1; i++) {
+		for (int i=0; i < (int) 2* Galaxy.maxTurn/3-1; i++) {
 			SupMod.get(SupMod.size() -1 -i).setActive(false);
 		}
 		for (ShipModule mod:SupMod) {
@@ -231,7 +229,7 @@ public class LoadingFrame {
 		for (Entity en:SpaceObjects) {
 			if (en instanceof Planet) {
 				if (missingModule.size() > 0) {
-					((Planet) en).setHiddenTreasure(missingModule.get(0));
+					((Planet) en).setTreasure(missingModule.get(0));
 					missingModule.remove(0);
 				} else {
 					int index = random.nextInt(8);
@@ -245,7 +243,7 @@ public class LoadingFrame {
 						cloneST = ((Stock_Food) st).clone();
 						cloneST.setAmount(randomInt);
 					}
-				    ((Planet) en).setHiddenTreasure(cloneST);
+				    ((Planet) en).setTreasure(cloneST);
 				}				
 			}
 		}

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import Backend.Galaxy;
 import SpaceVessel.*;
 import CustomUIELmt.StaticObjects;
 
@@ -217,8 +218,13 @@ public class MissionFrame {
 		}
 		
 		//SpaceShip
-		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, DaysOnMission, height/2, tempCrew);	
-		LoadingFrame game = new LoadingFrame(width, height, DaysOnMission, SpaceShip);
+		Galaxy.maxFuel = height/2;
+		Galaxy.maxHull = 100;
+		Galaxy.maxTurn = DaysOnMission;
+		Galaxy.Prestige = 0;
+		
+		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, tempCrew);	
+		LoadingFrame game = new LoadingFrame(width, height, SpaceShip);
 		game.frame.setVisible(true);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setFocusable(true);

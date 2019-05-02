@@ -68,9 +68,10 @@ public class GameEnvironment {
 		lblFuel.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblFuel.setFont(new Font("Cambria", Font.BOLD, 14));
 		
-		Fuel = new JProgressBar(0, SpaceShip.getFuel());
+		Fuel = new JProgressBar(0, Galaxy.maxFuel);
 		Fuel.setBounds(100, 10, 240, 20);
-		Fuel.setValue(Fuel.getMaximum());
+		Fuel.setValue(SpaceShip.getFuel());
+		Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
 		Fuel.setStringPainted(true);
 		
 		JLabel lblHull = new JLabel("Ship Hull:");
@@ -78,14 +79,14 @@ public class GameEnvironment {
 		lblHull.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblHull.setFont(new Font("Cambria", Font.BOLD, 14));
 		
-		Hull = new JProgressBar(0, SpaceShip.getHull());
+		Hull = new JProgressBar(0, Galaxy.maxHull);
 		Hull.setBounds(100, 40, 240, 20);
 		Hull.setValue(SpaceShip.getHull());
 		Hull.setStringPainted(true);
-		Hull.setToolTipText("");
+		Hull.setToolTipText(Hull.getValue()+"/"+Hull.getMaximum());
 		Hull.setForeground(Color.RED);
 		
-		lblDay.setText("Day on mission: 1/"+SpaceShip.daysOnMission);
+		lblDay.setText("Day on mission: "+SpaceShip.getTurn()+"/"+Galaxy.maxTurn);
 		lblDay.setBounds(10, 70, 330, 20);
 		lblDay.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblDay.setFont(new Font("Cambria", Font.BOLD, 14));

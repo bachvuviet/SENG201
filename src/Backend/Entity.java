@@ -30,18 +30,9 @@ public abstract class Entity {
 		}
 	}
 	
-	String randomPath(ArrayList<String> lol) {
+	private String randomPath(ArrayList<String> lol) {
 		Collections.shuffle(lol);
 		return lol.get(0);
-	}
-	
-	/**
-	 * Use to set new location, after spaceship or outpost has moved
-	 * @param velX Horizontal speed
-	 * @param velY Vertical speed
-	 */
-	public void UpdateLocation(double velX, double velY) {
-		
 	}
 	
 	/**

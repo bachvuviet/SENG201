@@ -11,7 +11,6 @@ import CustomUIELmt.StaticObjects;
  */
 public class Stock_Food implements Stock, Cloneable {
 	private String Name;
-	private final String CATEGORY = "FOOD";
 	private int boostValue;
 	private ImageIcon Image;
 	private int amount = 10;
@@ -48,7 +47,7 @@ public class Stock_Food implements Stock, Cloneable {
 	
 	//toStrings
 	public String getStockStatus() {
-		return amount +"x " +Name + " (" + CATEGORY + "):<p> --> Effect: Crew Hunger +" +boostValue;
+		return amount +"x " +Name + " (Food):<p> --> Effect: Crew Hunger +" +boostValue;
 	}
 	public String toStringPrice() {
 		return Name + " x5: "+ Price + "$ each";

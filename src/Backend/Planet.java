@@ -11,8 +11,7 @@ import SpaceVessel.Stock;
  * @version 1.0
  */
 public class Planet extends Entity implements CelestialBody {
-	protected int radius;
-    protected Stock hiddenStock;
+	protected Stock hiddenStock;
     protected boolean Scanned = false;
     protected String backgroundPath;
     
@@ -24,19 +23,15 @@ public class Planet extends Entity implements CelestialBody {
 	public String getBackgroundPath() {
 		return backgroundPath;
 	}
-	public int getRadius() {
-		return radius/2;
-	}
 	
 	public boolean getScan() {
 		return Scanned;
 	}
-	public void setHiddenTreasure(Stock st) {
+	public void setTreasure(Stock st) {
 	    hiddenStock = st;
-	    
 	}
 	
-	public Stock getHiddenTreasure() {
+	public Stock getTreasure() {
 		Scanned = true;
 		return hiddenStock;
 	}
