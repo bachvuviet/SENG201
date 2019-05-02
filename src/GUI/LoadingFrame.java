@@ -162,19 +162,19 @@ public class LoadingFrame {
 		currGalaxy.addSpaceObjects(colorful1);
 		currGalaxy.addSpaceObjects(gasgiant1);
 		
-		Planet terrestrial2 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
-		Planet ocean2 = new Planet_Ocean(600, 500, 250, "Ocean");
-		Planet colorful2 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X");
-		Planet gasgiant2 = new Planet_GasGiant(200, 180, 350, "Saturn");
+		Planet terrestrial2 = new Planet_Terrestrial(800, 0, 200, "Earth");
+		Planet ocean2 = new Planet_Ocean(950, 700, 250, "Ocean");
+		Planet colorful2 = new Planet_ColorfulDrawf(1600, 600, 300, "ODBE-35X");
+		Planet gasgiant2 = new Planet_GasGiant(300, 400, 250, "Saturn");
 		Gala1.addSpaceObjects(terrestrial2);
 		Gala1.addSpaceObjects(ocean2);
 		Gala1.addSpaceObjects(colorful2);
 		Gala1.addSpaceObjects(gasgiant2);
 		
-		Planet terrestrial3 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
-		Planet ocean3 = new Planet_Ocean(600, 500, 250, "Ocean");
-		Planet colorful3 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X");
-		Planet gasgiant3 = new Planet_GasGiant(200, 180, 350, "Saturn");
+		Planet terrestrial3 = new Planet_Terrestrial(100, 50, 300, "Earth");
+		Planet ocean3 = new Planet_Ocean(500, 800, 400, "Ocean");
+		Planet colorful3 = new Planet_ColorfulDrawf(1650, 300, 300, "ODBE-35X");
+		Planet gasgiant3 = new Planet_GasGiant(1200, 380, 500, "Saturn");
 		Gala2.addSpaceObjects(terrestrial3);
 		Gala2.addSpaceObjects(ocean3);
 		Gala2.addSpaceObjects(colorful3);
