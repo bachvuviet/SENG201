@@ -11,6 +11,7 @@ import SpaceVessel.Spaceship;
  * @version 0.30
  */
 public class BlackHole extends Entity implements CelestialBody {
+	private static final long serialVersionUID = 1L;
 	public Galaxy Destination;
 	
 	public BlackHole(int x, int y, int w, int h, String Name, Galaxy gala) {
