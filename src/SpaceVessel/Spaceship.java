@@ -14,11 +14,25 @@ enum Faction {
  * @version 0.30
  */
 public class Spaceship extends Outpost {
+	private static final long serialVersionUID = 1L;
 	public static int maxCrewHealth = 100;
 	public static int maxCrewHunger = 100;
-	public static int maxCrewMorale = 100;	
-	/** current turn*/
+	public static int maxCrewMorale = 100;
 	public static int daysOnMission = 1;
+	private int[] ShipStatic = {0, 0, 0, 0};
+	
+	public void Save() {
+		ShipStatic[0] = maxCrewHealth;
+		ShipStatic[1] = maxCrewHunger;
+		ShipStatic[2] = maxCrewMorale;
+		ShipStatic[3] = daysOnMission;
+	}
+	public void Load() {
+		maxCrewHealth = ShipStatic[0];
+		maxCrewHunger = ShipStatic[1];
+		maxCrewMorale = ShipStatic[2];
+		daysOnMission = ShipStatic[3];
+	}
 	
 	//Attributes by User
 	private final Faction shipFaction = Faction.IMPERIAL_NAVY;
@@ -33,8 +47,8 @@ public class Spaceship extends Outpost {
 	private ArrayList<Crew> CREW = new ArrayList<Crew>();
 	
 	//Constructor
-	public Spaceship(double x, double y, String name, ArrayList<Crew> crew) {
-		super((int) x, (int) y, 40, 70, name, "/spaceshipUp.png");
+	public Spaceship(int x, int y, String name, ArrayList<Crew> crew) {
+		super(x, y, 40, 70, name, "/spaceshipUp.png");
 		CREW = crew;
 		HullStrength = Galaxy.maxHull;
 		Fuel = Galaxy.maxFuel;

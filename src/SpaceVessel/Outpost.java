@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
  * @version 0.30
  */
 public class Outpost extends Entity {
+	private static final long serialVersionUID = 1L;
 	protected int inventorySize = 100;
 	protected ArrayList<Stock> INVENTORY = new ArrayList<Stock>();
     

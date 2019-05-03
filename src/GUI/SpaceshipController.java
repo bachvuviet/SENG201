@@ -261,7 +261,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				else if (en instanceof BlackHole) {
 					StaticObjects.MessBox(en.toString(), "Move Galaxy", "Warning");
 					currGalaxy.deleteShip();
-					LoadingFrame game = new LoadingFrame(width, height, ((BlackHole) en).JumptoGalaxy(SpaceShip));
+					LoadingFrame game = new LoadingFrame(((BlackHole) en).JumptoGalaxy(SpaceShip), false);
 					
 					Timer timer = new Timer(true);
 					TimerTask updateIncomingMessage = new TimerTask() {

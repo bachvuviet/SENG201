@@ -9,7 +9,8 @@ import java.util.Arrays;
  * @version 0.30
  */
 public class Planet_GasGiant extends Planet implements CelestialBody {
-	
+	private static final long serialVersionUID = 1L;
+
 	public Planet_GasGiant(int x, int y, int r, String Name) {		
 		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Celestial/Gas1.png","/Celestial/Gas2.png","/Celestial/Gas3.png")));
 		backgroundPath = "/Background/GasBack.jpg";

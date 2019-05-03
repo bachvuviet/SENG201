@@ -10,9 +10,10 @@ import CustomUIELmt.StaticObjects;
  * @version 0.30
  */
 public class Stock_Food implements Stock, Cloneable {
+	private static final long serialVersionUID = 1L;
 	private String Name;
 	private int boostValue;
-	private ImageIcon Image;
+	private String imagePath;
 	private int amount = 10;
 	private int Price;
 	
@@ -20,7 +21,7 @@ public class Stock_Food implements Stock, Cloneable {
 		this.Name = name;
 		this.boostValue = boost;
 		this.Price = price;
-		this.Image = new ImageIcon(StaticObjects.SelfResizeImage(path, this, 50, 50));
+		this.imagePath = path;
 	}
 	
 	//getter
@@ -31,6 +32,7 @@ public class Stock_Food implements Stock, Cloneable {
 		return amount;
 	}
 	public ImageIcon getImage() {
+		ImageIcon Image = new ImageIcon(StaticObjects.SelfResizeImage(imagePath, this, 50, 50));
 		return Image;
 	}
 	public int getPrice() {

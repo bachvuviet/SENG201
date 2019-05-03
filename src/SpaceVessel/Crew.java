@@ -2,6 +2,7 @@ package SpaceVessel;
 
 import javax.swing.ImageIcon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,8 @@ import java.util.ArrayList;
  * @author Bach Vu, Linh Luu
  * @version 0.30
  */
-public class Crew {
+public class Crew implements Serializable {
+	private static final long serialVersionUID = 1L;
 	/** ID of Crew on ship (0-3) to support get Crew from ship's Crew list*/
     public int ID;
     /** Check if the crew was instantiated from MissionFrame. If false, cannot perform action.*/

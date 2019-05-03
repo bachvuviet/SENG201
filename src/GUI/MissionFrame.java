@@ -22,8 +22,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.FlowLayout;
@@ -52,10 +50,6 @@ public class MissionFrame {
 	 * Initialize new Spaceship
 	 */
 	public MissionFrame() {		
-		GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
-		int width = gd[0].getDisplayMode().getWidth();
-		int height = gd[0].getDisplayMode().getHeight();
-		
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(0, 0, 1366, 768);
@@ -187,7 +181,7 @@ public class MissionFrame {
 			public void actionPerformed(ActionEvent e) {
 				Days = slideJourneyDay.getValue();
 				if (Days >= 3  && Days <= 10) {
-				    InitGame(width, height, Days, txtShipName.getText());					
+				    InitGame(Days, txtShipName.getText());					
 				}
 			}
 		});
@@ -208,7 +202,7 @@ public class MissionFrame {
 		frame.getContentPane().add(Background);
 	}
 	
-	void InitGame(int width, int height, int Days, String name) {
+	void InitGame(int Days, String name) {
 		int DaysOnMission = Days;
 		if (name == "")
 			name = "KMS Gneisenau";
@@ -218,13 +212,12 @@ public class MissionFrame {
 		}
 		
 		//SpaceShip
-		Galaxy.maxFuel = height/2;
 		Galaxy.maxHull = 100;
 		Galaxy.maxTurn = DaysOnMission;
 		Galaxy.Prestige = 0;
 		
-		Spaceship SpaceShip = new Spaceship(width/2, height/2, name, tempCrew);	
-		LoadingFrame game = new LoadingFrame(width, height, SpaceShip);
+		Spaceship SpaceShip = new Spaceship(300, 300, name, tempCrew);	
+		LoadingFrame game = new LoadingFrame(SpaceShip);
 		game.frame.setVisible(true);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setFocusable(true);
@@ -234,7 +227,7 @@ public class MissionFrame {
 		TimerTask updateIncomingMessage = new TimerTask() {
 			@Override
 			public void run() {						
-				game.NewMission(width, height);
+				game.NewMission();
 
 				timer.cancel();
 			}

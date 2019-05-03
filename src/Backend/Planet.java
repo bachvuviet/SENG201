@@ -11,6 +11,7 @@ import SpaceVessel.Stock;
  * @version 1.0
  */
 public class Planet extends Entity implements CelestialBody {
+	private static final long serialVersionUID = 1L;
 	protected Stock hiddenStock;
     protected boolean Scanned = false;
     protected String backgroundPath;

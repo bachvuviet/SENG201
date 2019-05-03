@@ -10,6 +10,7 @@ import CustomUIELmt.StaticObjects;
  * @version 0.30
  */
 public class Stock_Medicine implements Stock, Cloneable {
+	private static final long serialVersionUID = 1L;
 	/** Name of medicine*/
     private String Name; 
     /** Desease heal*/
@@ -17,7 +18,7 @@ public class Stock_Medicine implements Stock, Cloneable {
     /** amount of Health recover*/
     private int boostValue;
     /** image of medicine*/
-    private ImageIcon Image;
+    private String imagePath;
     /** Amount current have in ship's inventory*/
     private int amount = 15;
     private int Price;
@@ -27,7 +28,7 @@ public class Stock_Medicine implements Stock, Cloneable {
         this.healCategory = healCategory;
         this.boostValue = boost;
         this.Price = price;
-        this.Image = new ImageIcon(StaticObjects.SelfResizeImage(path, this, 50, 50));
+        this.imagePath = path;
     }
     
     //getter
@@ -41,6 +42,7 @@ public class Stock_Medicine implements Stock, Cloneable {
 		return amount;
 	}
 	public ImageIcon getImage() {
+		ImageIcon Image = new ImageIcon(StaticObjects.SelfResizeImage(imagePath, this, 50, 50));
 		return Image;
 	}
 	public int getPrice() {

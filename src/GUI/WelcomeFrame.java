@@ -15,8 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+
+import Backend.Galaxy;
+
 import java.awt.Color;
 
 /**
@@ -74,6 +79,28 @@ public class WelcomeFrame {
 		btnLoadMission.setAlignmentX(.5f);
 		btnLoadMission.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnLoadMission.setBounds(180, 241, 270, 57);
+		btnLoadMission.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				Galaxy gala;
+				try {
+					FileInputStream fileInputStream = new FileInputStream("B:/taomet.txt");
+				    ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+				    gala = (Galaxy) objectInputStream.readObject();
+				    objectInputStream.close(); 							
+				} catch(Exception ex) {
+					ex.printStackTrace();
+					return;
+				}
+				
+				//newGame.frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 				
+				LoadingFrame loadGame = new LoadingFrame(gala, true);
+				loadGame.frame.setUndecorated(true);//no control box
+				loadGame.frame.setVisible(true);
+				loadGame.frame.setLocationRelativeTo(null);
+
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnLoadMission);
 		
 		JButton btnCredits = new TranslucentButton("Credits");

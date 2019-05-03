@@ -1,5 +1,7 @@
 package SpaceVessel;
 
+import java.io.Serializable;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -8,7 +10,7 @@ import javax.swing.ImageIcon;
  * @author Bach Vu, Linh Luu
  * @version 0.30
  */
-public interface Stock {
+public interface Stock extends Serializable {
     public static String CATERGORY="";
     
     /** get name of stock to display at Trade post

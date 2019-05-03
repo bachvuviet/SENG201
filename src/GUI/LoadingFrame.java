@@ -9,6 +9,8 @@ import SpaceVessel.Stock;
 import SpaceVessel.Stock_Food;
 import SpaceVessel.Stock_Medicine;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,36 +33,49 @@ public class LoadingFrame {
 	Galaxy currGalaxy;
 	Galaxy Gala1;
 	Galaxy Gala2;
+	
+	int width, height;
     
-	void Initialize(int x, int y) {
+	void Initialize() {
+		GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+		width = gd[0].getDisplayMode().getWidth();
+		height = gd[0].getDisplayMode().getHeight();
+		
 		frame = new JFrame();
-		frame.setBounds(0, 0, x, y);
+		frame.setBounds(0, 0, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setUndecorated(true);
 			
-		Image IMG = StaticObjects.SelfResizeImage("/Background/Loading.jpg", this, x, y);	
+		Image IMG = StaticObjects.SelfResizeImage("/Background/Loading.jpg", this, width, height);	
 		JLabel loadingScreen = new JLabel(new ImageIcon(IMG));
-		loadingScreen.setBounds(0, 0, x, y);
+		loadingScreen.setBounds(0, 0, width, height);
 		loadingScreen.setVerticalAlignment(SwingConstants.BOTTOM);
 		loadingScreen.setIcon(new ImageIcon(IMG));
 		frame.getContentPane().add(loadingScreen);
 	}
 	
 	//Change galaxy
-	public LoadingFrame(int width, int height, Galaxy gala) {
-		Initialize(width, height);
+	public LoadingFrame(Galaxy gala, boolean LoadGame) {
+		Initialize();
+		if (LoadGame) {
+			gala.Load();
+			gala.getShip().Load();
+		}
 		currGalaxy = gala;
-		CompleteLoading(width, height);
+		CompleteLoading();
 	}
 	
 	//New game
-	public LoadingFrame(int width, int height, Spaceship ship) {
-		Initialize(width, height);
+	public LoadingFrame(Spaceship ship) {		
+		Initialize();
+		Galaxy.maxFuel = height/2;
+		ship.setFuel(Galaxy.maxFuel);
 		SpaceShip = ship;
 		SpaceShip.CheckCrew();
 	}
-	public void NewMission(int x, int y) {
+	
+	public void NewMission() {
 		//Ship Default Inventory
 		ArrayList<Stock> modelSTOCK = generateStock();	
 		for(Stock st:modelSTOCK) {
@@ -78,11 +93,11 @@ public class LoadingFrame {
 			e.printStackTrace();
 		}
 	    makeSpaceStations();
-	    CompleteLoading(x, y);
+	    CompleteLoading();
 	}
 	
-	void CompleteLoading(int x, int y) {		
-		GameEnvironment game = new GameEnvironment(x, y, currGalaxy);		
+	void CompleteLoading() {		
+		GameEnvironment game = new GameEnvironment(width, height, currGalaxy);		
 		Timer timer = new Timer(true);
 		TimerTask updateIncomingMessage = new TimerTask() {
 			@Override

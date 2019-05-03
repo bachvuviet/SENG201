@@ -9,6 +9,7 @@ import java.util.Arrays;
  * @version 0.30
  */
 public class Planet_Ocean extends Planet implements CelestialBody {
+	private static final long serialVersionUID = 1L;
 
 	public Planet_Ocean(int x, int y, int r, String Name) {
 		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Celestial/Ocean1.png","/Celestial/Ocean2.png","/Celestial/Ocean3.png")));

@@ -1,6 +1,7 @@
 package Backend;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,11 +12,13 @@ import CustomUIELmt.StaticObjects;
  * @author Bach Vu, Linh Luu
  * @version 0.30
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	protected String Name;	
 
 	protected double x, y, Width, Height;
-	protected Image visual;
+	protected transient Image visual;
 	protected String DefaultPath = "";
 	
 	public Entity() {}

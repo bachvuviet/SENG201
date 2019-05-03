@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
  * @version 0.30
  */
 public class ShipModule implements Stock {
+	private static final long serialVersionUID = 1L;
 	private String Name;
     private String Boost;
     private int boostValue;

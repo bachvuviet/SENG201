@@ -1,7 +1,6 @@
 package GUI;
 
 import SpaceVessel.*;
-import Backend.*;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -78,22 +77,13 @@ public class PauseFrame extends JFrame {
 		btnSave.setPreferredSize(new Dimension(150, 30));
 		btnSave.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ArrayList<Galaxy> gala = new ArrayList<Galaxy>();
-				gala.add(currGala);
-				for (Entity en:currGala.getSpaceObjects()) {
-					if (en instanceof BlackHole) {
-						gala.add(((BlackHole) en).Destination);
-					}
-				}
-				
+			public void actionPerformed(ActionEvent e) {				
 				try {
-					System.out.println("here");
+					MyShip.Save();
+					currGala.Save();
 					//String path = "B:\\Saved\\lol.ser";//this.getClass().getResource("/Saved/lol.ser").toString();
-			        FileOutputStream fileOut = new FileOutputStream(this.getClass().getResource("/Saved/lol.ser").toString());
-			        System.out.println("here1");
+			        FileOutputStream fileOut = new FileOutputStream("B:/taomet.txt");
 			        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			        System.out.println("here2");
 			        out.writeObject(currGala);
 			        out.close();
 			        fileOut.close();
