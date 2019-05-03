@@ -14,7 +14,7 @@ public class BlackHole extends Entity implements CelestialBody {
 	public Galaxy Destination;
 	
 	public BlackHole(int x, int y, int w, int h, String Name, Galaxy gala) {
-		super(x, y, w, h, Name, "", new ArrayList<String>(Arrays.asList("/Hole1.png","/Hole2.png")));
+		super(x, y, w, h, Name, "", new ArrayList<String>(Arrays.asList("/Celestial/Hole1.png","/Celestial/Hole2.png")));
 		Destination = gala;
 	}
 

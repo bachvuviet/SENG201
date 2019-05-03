@@ -86,7 +86,7 @@ public class GameEnvironment {
 		Hull.setToolTipText(Hull.getValue()+"/"+Hull.getMaximum());
 		Hull.setForeground(Color.RED);
 		
-		lblDay.setText("Day on mission: "+SpaceShip.getTurn()+"/"+Galaxy.maxTurn);
+		lblDay.setText("Day on mission: "+Spaceship.daysOnMission+"/"+Galaxy.maxTurn);
 		lblDay.setBounds(10, 70, 330, 20);
 		lblDay.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblDay.setFont(new Font("Cambria", Font.BOLD, 14));

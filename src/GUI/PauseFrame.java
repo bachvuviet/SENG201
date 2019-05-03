@@ -1,6 +1,8 @@
 package GUI;
 
 import SpaceVessel.*;
+import Backend.*;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -8,13 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+import Backend.Galaxy;
 import CustomUIELmt.StaticObjects;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -46,7 +49,7 @@ public class PauseFrame extends JFrame {
 	 * @param parent Galaxy to be paused (disable control in game environment)
 	 * @param MyShip ship Current ship
 	 */
-	public PauseFrame(JFrame parent, Spaceship MyShip) {
+	public PauseFrame(JFrame parent, Spaceship MyShip, Galaxy currGala) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 770, 620);
 		//frame.setAlwaysOnTop(true);
@@ -74,6 +77,33 @@ public class PauseFrame extends JFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.setPreferredSize(new Dimension(150, 30));
 		btnSave.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Galaxy> gala = new ArrayList<Galaxy>();
+				gala.add(currGala);
+				for (Entity en:currGala.getSpaceObjects()) {
+					if (en instanceof BlackHole) {
+						gala.add(((BlackHole) en).Destination);
+					}
+				}
+				
+				try {
+					System.out.println("here");
+					//String path = "B:\\Saved\\lol.ser";//this.getClass().getResource("/Saved/lol.ser").toString();
+			        FileOutputStream fileOut = new FileOutputStream(this.getClass().getResource("/Saved/lol.ser").toString());
+			        System.out.println("here1");
+			        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			        System.out.println("here2");
+			        out.writeObject(currGala);
+			        out.close();
+			        fileOut.close();
+			        StaticObjects.MessBox("Game saved", "Save success", "Info");
+			      } catch (IOException ex) {
+			    	  ex.printStackTrace();
+			    	  StaticObjects.MessBox(ex.getMessage(),"Save Error", "Error");
+			      }
+			}
+		});
 		panelBottom.add(btnSave);
 		
 		JButton btnResume = new JButton("Resume");
@@ -112,7 +142,7 @@ public class PauseFrame extends JFrame {
 		lblShipvisiual.setOpaque(true);
 		lblShipvisiual.setBackground(new Color(0, 0, 128));
 		lblShipvisiual.setBounds(230, 11, 257, 482);
-		Image IMG = StaticObjects.SelfResizeImage("/spaceshipOrg.png", this, lblShipvisiual.getWidth(), lblShipvisiual.getHeight());	
+		Image IMG = StaticObjects.SelfResizeImage("/Ship/spaceshipOrg.png", this, lblShipvisiual.getWidth(), lblShipvisiual.getHeight());	
 		lblShipvisiual.setIcon(new ImageIcon(IMG));
 		panelStatus.add(lblShipvisiual);		
 		

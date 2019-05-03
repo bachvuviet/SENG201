@@ -99,21 +99,21 @@ public class CrewPanel {
         lblActions.setBounds(137, 131, 51, 50);
         contentPan.add(lblActions);
 
-        progHealth = new JProgressBar(0, crew.getMaxHealth());
+        progHealth = new JProgressBar(0, Spaceship.maxCrewHealth);
         progHealth.setBounds(188, 43, 160, 15);
         progHealth.setValue(crew.getHealth());
         progHealth.setToolTipText(crew.getHealth()+"/"+progHealth.getMaximum());
         progHealth.setForeground(Color.RED);
         contentPan.add(progHealth); 
         
-        progHunger = new JProgressBar(0, crew.getMaxHunger());
+        progHunger = new JProgressBar(0, Spaceship.maxCrewHunger);
         progHunger.setBounds(188, 67, 160, 15);
         progHunger.setToolTipText(crew.getHunger()+"/"+progHunger.getMaximum());
         progHunger.setValue(crew.getHunger());
         progHunger.setForeground(Color.BLUE);
         contentPan.add(progHunger);
         
-        progMorale = new JProgressBar(0, crew.getMaxMorale());
+        progMorale = new JProgressBar(0, Spaceship.maxCrewMorale);
         progMorale.setBounds(188, 90, 160, 15);
         progMorale.setValue(crew.getMorale());
         progMorale.setToolTipText(crew.getMorale()+"/"+progMorale.getMaximum());

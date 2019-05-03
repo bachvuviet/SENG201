@@ -1,10 +1,6 @@
 package SpaceVessel;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-
 import Backend.Galaxy;
 
 enum Faction {
@@ -18,9 +14,13 @@ enum Faction {
  * @version 0.30
  */
 public class Spaceship extends Outpost {
-	//Attributes by User
+	public static int maxCrewHealth = 100;
+	public static int maxCrewHunger = 100;
+	public static int maxCrewMorale = 100;	
 	/** current turn*/
-	private int daysOnMission = 1;
+	public static int daysOnMission = 1;
+	
+	//Attributes by User
 	private final Faction shipFaction = Faction.IMPERIAL_NAVY;
 	
 	//Default
@@ -194,19 +194,13 @@ public class Spaceship extends Outpost {
 			case MECHANIC://Repair Hull faster
 				break;
 			case CAPTAIN://Increase all morale
-				for (Crew cr:CREW) {
-					cr.setMaxMorale(25);
-				}
+				maxCrewMorale += 25;
 				break;
 			case DOCTOR://Increase all health
-				for (Crew cr:CREW) {
-					cr.setMaxHealth(25);
-				}
+				maxCrewHealth += 25;
 				break;
 			case CHEF://Increase all hunger
-				for (Crew cr:CREW) {
-					cr.setMaxHunger(25);
-				}
+				maxCrewHunger += 25;
 				break;
 			case HELMS_MAN://Increase fuel
 				Galaxy.maxFuel += 200;
@@ -220,13 +214,6 @@ public class Spaceship extends Outpost {
 		for (Crew cr:CREW) {
 			cr.MaxStat();
 		}
-	}
-
-	public int getTurn() {
-		return daysOnMission;
-	}
-	public void nextTurn() {
-		daysOnMission += 1;
 	}
 
 	public void setFuel(int value) {

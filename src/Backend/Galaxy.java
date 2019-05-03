@@ -5,14 +5,15 @@ import java.util.Collections;
 
 import SpaceVessel.Spaceship;
 
-public class Galaxy {
+public class Galaxy implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 	public static int maxTurn;
 	public static int maxHull;
 	public static int maxFuel;
 	public static int Prestige;//Point
 	
 	private String Name;
-	private Spaceship SpaceShip;
+	private transient Spaceship SpaceShip;
 	private String imagePath;
 	private ArrayList<Entity> SpaceObjects = new ArrayList<Entity>();
 	

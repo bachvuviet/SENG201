@@ -128,7 +128,7 @@ public class MissionFrame {
 		CrewRank RankArr[] = CrewRank.values();
 				
 		for (int i=0; i<6; i++) {
-			Image IMG = StaticObjects.SelfResizeImage(AvatarArr[i], this, 174, 207);
+			Image IMG = StaticObjects.SelfResizeImage("/Crew"+AvatarArr[i], this, 174, 207);
 			Arr[i] = AvatarArr[i];
 			JButton btnCrewMember = new JButton(new ImageIcon(IMG));
 			btnCrewMember.setText(Integer.toString(i));
@@ -202,7 +202,7 @@ public class MissionFrame {
 		//Always put background at the END
 		JLabel Background = new JLabel("");
 		Background.setBounds(0, 0, 1366, 768);
-		Image IMG = StaticObjects.SelfResizeImage("/Mission.jpg", this, 1366, 768);
+		Image IMG = StaticObjects.SelfResizeImage("/Background/Mission.jpg", this, 1366, 768);
 		Background.setVerticalAlignment(SwingConstants.BOTTOM);
 		Background.setIcon(new ImageIcon(IMG));
 		frame.getContentPane().add(Background);
@@ -291,13 +291,13 @@ public class MissionFrame {
 		
 		if (mode == 1) {
 			Array[index] += 1;
-			Image IMG1 = StaticObjects.SelfResizeImage(Arr[index], this, 174, 207);
+			Image IMG1 = StaticObjects.SelfResizeImage("/Crew"+Arr[index], this, 174, 207);
 			Crew newCrew = new Crew("Rename here", Rank, new ImageIcon(IMG1));
 			tempCrew.add(newCrew);
 			
 			avaIndex += 1;
 			Arr[index] = AvatarArr[avaIndex];
-			Image IMG2 = StaticObjects.SelfResizeImage(AvatarArr[avaIndex], this, 174, 207);
+			Image IMG2 = StaticObjects.SelfResizeImage("/Crew"+AvatarArr[avaIndex], this, 174, 207);
 			btn.setIcon(new ImageIcon(IMG2));
 		} else if (mode == -1) {
 			Array[index] -= 1;
@@ -309,7 +309,7 @@ public class MissionFrame {
 				}
 			}
 			avaIndex -= 1;
-			Image IMG = StaticObjects.SelfResizeImage(AvatarArr[index], this, 174, 207);
+			Image IMG = StaticObjects.SelfResizeImage("/Crew"+AvatarArr[index], this, 174, 207);
 			btn.setIcon(new ImageIcon(IMG));
 		}
 

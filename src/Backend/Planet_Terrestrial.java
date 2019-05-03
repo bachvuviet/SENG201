@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Planet_Terrestrial extends Planet implements CelestialBody {
 
 	public Planet_Terrestrial(int x, int y, int r, String Name) {
-		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Earth1.png","/Earth2.png","/Earth3.png","/RandomPlanet2.png")));
-		backgroundPath = "/EarthBack.jpg";
+		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Celestial/Earth1.png","/Celestial/Earth2.png","/Celestial/Earth3.png","/Celestial/RandomPlanet2.png")));
+		backgroundPath = "/Background/EarthBack.jpg";
 	}
 }

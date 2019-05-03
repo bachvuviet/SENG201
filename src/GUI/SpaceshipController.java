@@ -162,7 +162,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 			//Pause
 			frame.setFocusable(false);
 			frame.setEnabled(false);
-			PauseFrame pause = new PauseFrame(frame, SpaceShip);
+			PauseFrame pause = new PauseFrame(frame, SpaceShip, currGalaxy);
 			pause.frame.setUndecorated(true);
 			pause.frame.setVisible(true);
 			pause.frame.setLocationRelativeTo(null);
@@ -200,15 +200,15 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * Update Control panel, summary of turn and move to next day, reset fuel and SpaceEvent
 	 */
 	private void EndTurn() {
-		if (SpaceShip.getTurn() < Galaxy.maxTurn) {
+		if (Spaceship.daysOnMission < Galaxy.maxTurn) {
 			//Update Control Panel
 			UIManager.put("ProgressBar.selectionForeground", Color.YELLOW);
 		    UIManager.put("ProgressBar.selectionBackground", Color.BLUE);
 			Fuel.setValue(Fuel.getMaximum());
 			Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
 			
-			SpaceShip.nextTurn();
-			Days.setText("Days on mission:"+SpaceShip.getTurn()+"/"+Galaxy.maxTurn);
+			Spaceship.daysOnMission += 1;
+			Days.setText("Days on mission:"+Spaceship.daysOnMission+"/"+Galaxy.maxTurn);
 			
 			
 			//

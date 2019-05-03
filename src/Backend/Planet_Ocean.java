@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Planet_Ocean extends Planet implements CelestialBody {
 
 	public Planet_Ocean(int x, int y, int r, String Name) {
-		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Ocean1.png","/Ocean2.png","/Ocean3.png")));
-		backgroundPath = "/OceanBack.jpg";
+		super(x, y, r, Name, new ArrayList<String>(Arrays.asList("/Celestial/Ocean1.png","/Celestial/Ocean2.png","/Celestial/Ocean3.png")));
+		backgroundPath = "/Background/OceanBack.jpg";
 	}
 }

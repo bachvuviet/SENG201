@@ -39,7 +39,7 @@ public class LoadingFrame {
 		frame.getContentPane().setLayout(null);
 		frame.setUndecorated(true);
 			
-		Image IMG = StaticObjects.SelfResizeImage("/Loading.jpg", this, x, y);	
+		Image IMG = StaticObjects.SelfResizeImage("/Background/Loading.jpg", this, x, y);	
 		JLabel loadingScreen = new JLabel(new ImageIcon(IMG));
 		loadingScreen.setBounds(0, 0, x, y);
 		loadingScreen.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -123,16 +123,16 @@ public class LoadingFrame {
 	}
 	
 	private ArrayList<Stock> generateStock() {
-		Stock food1 = new Stock_Food("Burger", 5, 2, "/burger.png");
-		Stock food2 = new Stock_Food("Bread", 10, 4, "/bread.png");
-		Stock food3 = new Stock_Food("Pizza", 15, 6, "/pizza.png");
-		Stock food4 = new Stock_Food("Chicken", 20, 7, "/Chicken.png");
-		Stock food5 = new Stock_Food("Steak", 25, 8, "/steak.png");
-		Stock food6 = new Stock_Food("Sushi", 30, 9, "/sushi.png");
+		Stock food1 = new Stock_Food("Burger", 5, 2, "/Stock/burger.png");
+		Stock food2 = new Stock_Food("Bread", 10, 4, "/Stock/bread.png");
+		Stock food3 = new Stock_Food("Pizza", 15, 6, "/Stock/pizza.png");
+		Stock food4 = new Stock_Food("Chicken", 20, 7, "/Stock/Chicken.png");
+		Stock food5 = new Stock_Food("Steak", 25, 8, "/Stock/steak.png");
+		Stock food6 = new Stock_Food("Sushi", 30, 9, "/Stock/sushi.png");
 		
-		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 20, 10, "/healpotion.png");
-		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 20, 10, "/painkiller.png");
-		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, 10, "/syringe.png");
+		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 20, 10, "/Stock/healpotion.png");
+		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 20, 10, "/Stock/painkiller.png");
+		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, 10, "/Stock/syringe.png");
 		
 		ArrayList<Stock> STOCK = new ArrayList<Stock>();
 		STOCK.add(food1);STOCK.add(food2);
@@ -146,9 +146,9 @@ public class LoadingFrame {
 	
 	private void makePlanets() {		
 		//Galaxy
-		currGalaxy = new Galaxy("Cadian Galaxy", SpaceShip, "/CadianGalaxy.gif");
-		Gala1 = new Galaxy("Orion Galaxy" , null, "/OrionGalaxy.jpg");
-		Gala2 = new Galaxy("Nemesis Tessera", null, "/NemesisGalaxy.png");
+		currGalaxy = new Galaxy("Cadian Galaxy", SpaceShip, "/Background/CadianGalaxy.gif");
+		Gala1 = new Galaxy("Orion Galaxy" , null, "/Background/OrionGalaxy.jpg");
+		Gala2 = new Galaxy("Nemesis Tessera", null, "/Background/NemesisGalaxy.png");
 		
 		//Space objects
 		Planet terrestrial1 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
@@ -180,8 +180,8 @@ public class LoadingFrame {
 	}
 	
 	private void makeSpaceStations() {
-		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/EldarSpaceStation.png");
-		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/SpaceMarineStation.png");
+		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/Ship/EldarSpaceStation.png");
+		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/Ship/SpaceMarineStation.png");
 		
 		BlackHole hole1a = new BlackHole(20, 30, 150, 150, "MegaBlack", Gala1);
 		BlackHole hole1b = new BlackHole(20, 30, 150, 150, "MegaBlack", currGalaxy);
@@ -235,7 +235,7 @@ public class LoadingFrame {
 					int index = random.nextInt(8);
 					int randomInt = random.nextInt(15);
 					Stock st = modelSTOCK.get(index);
-					Stock cloneST = new Stock_Food("", 0, 0, "/bread.png");
+					Stock cloneST = new Stock_Food("", 0, 0, "/Stock/bread.png");
 					if (st instanceof Stock_Medicine) {
 						cloneST = ((Stock_Medicine) st).clone();
 						cloneST.setAmount(randomInt);
