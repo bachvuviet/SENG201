@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
  */
 public class Outpost extends Entity {
 	private static final long serialVersionUID = 1L;
+	protected int Fuel;
 	protected int inventorySize = 100;
 	protected ArrayList<Stock> INVENTORY = new ArrayList<Stock>();
     
@@ -126,6 +127,7 @@ public class Outpost extends Entity {
 	/** Go straight*/
 	public void forward() {
 		velocity = 5;
+		Fuel -= 5;
 		UpdateLocation();
 	}
 	/** Turn left*/
@@ -151,6 +153,7 @@ public class Outpost extends Entity {
 	/** Reverse*/
 	public void reverse() {
 		velocity = -2;
+		Fuel -= 2;
 		UpdateLocation();
 	}
 	/** Stop the Ship*/
@@ -164,5 +167,17 @@ public class Outpost extends Entity {
 	 */
 	public int getDirect() {
 		return direction;
+	}
+	
+	/**
+	 * Get Fuel left at any instance
+	 * @return current fuel left
+	 */
+	public int getFuel() {
+		return Fuel;
+	}
+	
+	public void setFuel(int maxFuel) {
+		Fuel = maxFuel;		
 	}
 }

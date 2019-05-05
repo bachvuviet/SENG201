@@ -69,10 +69,7 @@ public class LoadingFrame {
 	//New game
 	public LoadingFrame(Spaceship ship) {		
 		Initialize();
-		Galaxy.maxFuel = height/2;
-		ship.setFuel(Galaxy.maxFuel);
 		SpaceShip = ship;
-		SpaceShip.CheckCrew();
 	}
 	
 	public void NewMission() {
@@ -239,7 +236,7 @@ public class LoadingFrame {
 		for (Entity en:Gala2.getSpaceObjects()) {
 			SpaceObjects.add(en);
 		}
-		
+		Collections.shuffle(SpaceObjects);
 		
 		for (Entity en:SpaceObjects) {
 			if (en instanceof Planet) {
@@ -247,8 +244,8 @@ public class LoadingFrame {
 					((Planet) en).setTreasure(missingModule.get(0));
 					missingModule.remove(0);
 				} else {
-					int index = random.nextInt(8);
-					int randomInt = random.nextInt(15);
+					int index = random.nextInt(9);
+					int randomInt = random.nextInt(11);
 					Stock st = modelSTOCK.get(index);
 					Stock cloneST = new Stock_Food("", 0, 0, "/Stock/bread.png");
 					if (st instanceof Stock_Medicine) {

@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 public class Crew implements Serializable {
 	private static final long serialVersionUID = 1L;
-	/** ID of Crew on ship (0-3) to support get Crew from ship's Crew list*/
-    public int ID;
     /** Check if the crew was instantiated from MissionFrame. If false, cannot perform action.*/
     public boolean Real;
     
@@ -27,6 +25,7 @@ public class Crew implements Serializable {
     private int Hunger;
     /** Morale is needed to perform your order. Let crew sleep to relax, don't force them work too hard*/
     private int Morale;
+    private boolean Sick = false;
     
     /** Maximum of 2 action per day/turn. Given order is added, so you can perform 2 actions at any time of a day.*/
     private ArrayList<String> crewAction = new ArrayList<String>();
@@ -45,7 +44,6 @@ public class Crew implements Serializable {
      * @param img Avatar, depends on crew Rank
      */
     public Crew(String name, CrewRank rank, ImageIcon img) {
-    	this.ID = 0;
     	this.Name = name;
     	this.Rank = rank;
     	this.avatar = img;
@@ -85,12 +83,20 @@ public class Crew implements Serializable {
     	return avatar;
     }
     
+    public boolean isSick() {
+    	return Sick;
+    }
+    
     //setter
     /** Set crew's name in crew penel txtbox
      * @param name New name for crew
      * */
     public void setName(String name) {
     	Name = name;
+    }
+    
+    public void Sick(boolean sick) {
+    	Sick = sick;
     }
     
     public void MaxStat() {
@@ -100,52 +106,84 @@ public class Crew implements Serializable {
     }
     
 	//Crew Action
+    private boolean checkCrewStat(int hunger, int morale, String act) {
+    	//String errMess = "Cannot perform action "+act+".";
+    	boolean err = false;
+    	if (Hunger < hunger) {
+    		//errMess += "\nCrew is too hungry to do this. (Sleep or use supplement)";
+    		err = true;
+    	}
+    	if (Morale < morale) {
+    		//errMess += "\nCrew is too tired to do this. (Sleep or use supplement)";
+    		err = true;
+    	}
+    	return err;
+    }
+    
     /** 
      * Order crew to use stock (food, medicine, portion) from Ship Inventory to increase HP, Hunger and morale
      * @param amount amount of stock to use
      * @param stock what stock to use
      */
-    public void useSupply(int amount, Stock stock) {
-    	if (stock.getAmount() > 0) {
-    		stock.setAmount(stock.getAmount()-amount);
-    		if (stock instanceof Stock_Food) {
-    			Hunger += stock.use(amount); 
-        		crewAction.add("Eating");    			
-    		}
-    		else if (stock instanceof Stock_Medicine) {
-    			Health += stock.use(amount);
-        		crewAction.add("Healing");    	
-    		}
-    	}    	
+    public boolean useSupply(int amount, Stock stock) {
+    	int boost = stock.use(amount);
+    	if (boost <= 0) {
+    		return false;
+    	}
+
+		if (stock instanceof Stock_Food) {
+			Hunger += boost;
+		}
+		else if (stock instanceof Stock_Medicine) {
+			if (((Stock_Medicine) stock).getHealCategory() == "Health")
+				Health += boost;
+			else if (((Stock_Medicine) stock).getHealCategory() == "Morale")
+				Morale += boost;
+			else {
+				Health += boost;
+				Morale += boost;
+				Sick = false;
+			}
+		}
+		crewAction.add("Use Supplement (x2)");  
+		return true;
     }
     /**
      * Let Crew sleep to increase Health and Morale, but hungry when wake up
      */
     public void sleep() {
-    	Health += 25;
+    	Health += 5;
     	Morale += 25;
     	Hunger -= 20;
-    	crewAction.add("Sleeping");
+    	crewAction.add("Sleep");
     }
     /**
      * Order crew to repair ship
      * @param Ship Ship of the crew
      */
-    public void repair(Spaceship Ship) {
-    	Hunger -= 20;
-    	Morale -= 15;
-    	crewAction.add("Repairing Ship");
-    	if (Rank == CrewRank.MECHANIC)
-    		Ship.increaseHull(25);
-    	else
-    		Ship.increaseHull(15);
+    public boolean repair(Spaceship Ship) {
+    	if (!checkCrewStat(20, 15, "Repair Ship")) {
+        	Hunger -= 20;
+        	Morale -= 15;
+        	crewAction.add("Repair");
+        	if (Rank == CrewRank.MECHANIC)
+        		Ship.increaseHull(25);
+        	else
+        		Ship.increaseHull(15);
+        	return true;
+    	} else
+    		return false;
     }
     /**
      * crew must have action to pilot ship at anytime, otherwise ship cannot move
      */
-    public void pilotShip() {
-    	Morale -= 25;
-    	crewAction.add("Driving Ship");
+    public boolean pilotShip() {
+    	if (!checkCrewStat(0, 25, "Pilot Ship")) {
+	    	Morale -= 25;
+	    	crewAction.add("Pilot");
+	    	return true;
+    	} else
+    		return false;
     }
     /**
      * Get Assigned order of each crew
@@ -154,6 +192,9 @@ public class Crew implements Serializable {
     public ArrayList<String> getCrewActivity(){
     	return crewAction;
     }
+	public void clearActivity() {
+		crewAction.clear();
+	}
     /**
      * Quick output to check Crew status when testing
      */

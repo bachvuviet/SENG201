@@ -10,17 +10,17 @@ import CustomUIELmt.StaticObjects;
  * @version 0.30
  */
 public class Stock_Medicine implements Stock, Cloneable {
-	private static final long serialVersionUID = 1L;
-	/** Name of medicine*/
-    private String Name; 
+	private static final long serialVersionUID = 1L; 
     /** Desease heal*/
-    private String healCategory;
+    public String healCategory;
+	/** Name of medicine*/
+    private String Name;
     /** amount of Health recover*/
     private int boostValue;
     /** image of medicine*/
     private String imagePath;
     /** Amount current have in ship's inventory*/
-    private int amount = 15;
+    private int amount = 5;
     private int Price;
     
     public Stock_Medicine(String name, String healCategory, int boost, int price, String path) { 
@@ -54,7 +54,11 @@ public class Stock_Medicine implements Stock, Cloneable {
 		this.amount = amount;
 	}
     public int use(int amount) {
-        return boostValue*amount;
+    	if (amount <= this.amount) {
+    		this.amount -= amount;
+    		return boostValue*amount;    		
+    	} else
+    		return 0;    	
     }
     
     //toStrings
