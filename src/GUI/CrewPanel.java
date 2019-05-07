@@ -13,12 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import CustomUIELmt.StaticObjects;
 import SpaceVessel.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /** 
@@ -52,12 +52,16 @@ public class CrewPanel {
 		contentPan.setBounds(x, y, w, h);
 		contentPan.setLayout(null);
 		contentPan.setVisible(true);
+		if (crew.isSick())
+			contentPan.setBackground(new Color(255,102,102));
+		else
+			contentPan.setBackground(new Color(240, 240, 240));
         
 	    JLabel lblAvatar = new JLabel(crew.getAvatar());
 	    Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
 	    lblAvatar.setBorder(border);
-        lblAvatar.setBackground(Color.GRAY);
-        lblAvatar.setForeground(Color.RED);
+        lblAvatar.setBackground(Color.WHITE);
+        lblAvatar.setOpaque(true);
         lblAvatar.setHorizontalAlignment(SwingConstants.CENTER);
         lblAvatar.setBounds(12, 12, 111, 169);
         contentPan.add(lblAvatar);
@@ -120,70 +124,91 @@ public class CrewPanel {
         progMorale.setForeground(Color.YELLOW);
         contentPan.add(progMorale);
 
-        String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement"};
         cboAction1 = new JComboBox<String>(ActionSet);
         cboAction1.setBounds(188, 131, 160, 19);
         cboAction1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				String choice = "";
-				if (cboAction1.getItemCount() > 0)
-        			choice = cboAction1.getSelectedItem().toString();
-				
-				cboAction2.removeAllItems();
-				for (String str:ActionSet) {
-					if (!choice.equals(str))
-						cboAction2.addItem(str);
-				}
-				cboAction2.setEnabled(true);
-
-				if (choice.equals(ActionSet[4])) {
-					cboSupply.setVisible(true);
-				} else {
-					cboSupply.setVisible(false);
-				}
+				UpdateCbo(cboAction1, cboAction2, ship);
+				check = true;
 			}
 		});
         contentPan.add(cboAction1);
         
         cboAction2 = new JComboBox<String>(ActionSet);
-        cboAction2.setEnabled(false);
         cboAction2.setBounds(188, 162, 160, 19);
         cboAction2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		String choice = "";
-        		if (cboAction2.getItemCount() > 0)
-        			choice = cboAction2.getSelectedItem().toString();
-				if (choice.equals(ActionSet[4])) {
-					cboSupply.setVisible(true);
-				} else {
-					cboSupply.setVisible(false);
-				}
-				cboAction1.setEnabled(false);
+        		UpdateCbo(cboAction2, cboAction1, ship);
+				check = true;
 			}
 		});
         contentPan.add(cboAction2);
         
-        ArrayList<Stock> stock = ship.getInventory();
-        cboSupply = new JComboBox<Stock>(stock.toArray(new Stock[stock.size()]));
+        cboSupply = new JComboBox<Stock>();
         cboSupply.setBounds(12, 200, 111, 20);        
         cboSupply.setVisible(false);
         contentPan.add(cboSupply);
         
         JButton btnGiveOrder = new JButton("Give Order");
         btnGiveOrder.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {        		
-        		GiveOrder(crew, ship);
-        		if (cboAction2.getSelectedIndex() != 0) {
-        			cboAction2.setEnabled(false);
-        		}
+        	public void actionPerformed(ActionEvent e) {
+        		GiveOrder(cboAction1, crew, ship);
+        		GiveOrder(cboAction2, crew, ship);
         	}
         });
         
         btnGiveOrder.setBounds(138, 197, 210, 25);
         contentPan.add(btnGiveOrder);
+
+        if (crew.getCrewActivity().size() >= 1) {
+        	cboAction1.setEnabled(false);
+        	cboAction1.setSelectedItem(crew.getCrewActivity().get(0));
+        }
+        if (crew.getCrewActivity().size() == 2) {
+        	cboAction2.setEnabled(false);
+        	cboAction2.setSelectedItem(crew.getCrewActivity().get(1));
+        }
         
         contentPan.revalidate();
         contentPan.repaint();
+	}
+
+	boolean check = true;
+    String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement (x2)"};
+	void UpdateCbo(JComboBox<String> cboSelect, JComboBox<String> cboUpdate, Spaceship ship) {
+		String choice = "";
+		String choice2 = "";
+		if (cboSelect.getItemCount() > 0 && check) {
+			check = false;
+			choice = cboSelect.getSelectedItem().toString();
+			choice2 = cboUpdate.getSelectedItem().toString();
+		} else if (cboSelect.getItemCount() > 0) {
+			check = true;
+			return;
+		}
+		else {
+			return;
+		}
+		
+		cboUpdate.removeAllItems();
+		for (String str:ActionSet) {
+			if (!choice.equals(str))
+				cboUpdate.addItem(str);
+		}
+		cboUpdate.setSelectedItem(choice2);
+		
+		if ((choice.equals(ActionSet[4]) && cboSelect.isEnabled())||(choice2.equals(ActionSet[4]) && cboUpdate.isEnabled())) {
+			if (!cboSupply.isVisible()) {
+				cboSupply.setVisible(true);
+				cboSupply.removeAllItems();
+				for (Stock st: ship.getInventory()) {
+					cboSupply.addItem(st);
+				}				
+			}
+		} else {
+			if (cboSupply.isVisible())
+				cboSupply.setVisible(false);
+		}
 	}
 	
 	/**
@@ -191,64 +216,55 @@ public class CrewPanel {
 	 * @param crew The crew whom the panel show status
 	 * @param ship current ship
 	 */
-	void GiveOrder(Crew crew, Spaceship ship) {
-		ArrayList<Stock> stock = ship.getInventory();
-		//Action1
-		switch (cboAction1.getSelectedItem().toString()) {
-		case "Sleep":
-			crew.sleep();
-			break;
-		case "Repair":
-			crew.repair(ship);
-			break;
-		case "Pilot":
-			crew.pilotShip();
-			break;
-		case "Use Supplement": 
-			for (Stock st: stock) {
-				if (cboSupply.getSelectedItem().equals(st)) {
-					crew.useSupply(10, st);
-		        } else {
-			        //System.out.println("false");
-		        }
-			}
-			break;	
-		default:
-			break;
-		}
+	void GiveOrder(JComboBox<String> cboAction, Crew crew, Spaceship ship) {
+		if (!cboAction.isEnabled())
+			return;
 		
-		//Action2
-		switch (cboAction2.getSelectedItem().toString()) {
+		boolean check = true;
+		switch (cboAction.getSelectedItem().toString()) {
 		case "Sleep":
 			crew.sleep();
 			break;
 		case "Repair":
-			crew.repair(ship);
+			if(!crew.repair(ship)) {
+	    		StaticObjects.MessBox("Crew is too hungry/tired to do this. Sleep or use supplement.", "Cannot perform order", "Error");
+	    		check = false;
+			}
 			break;
 		case "Pilot":
-			crew.pilotShip();
+			if(!crew.pilotShip()) {
+	    		StaticObjects.MessBox("Crew is too hungry/tired to do this. Sleep or use supplement.", "Cannot perform order", "Error");
+	    		check = false;
+			}
 			break;
-		case "Use Supplement":
-			for (Stock st: stock) {
+		case "Use Supplement (x2)": 
+			for (Stock st:ship.getInventory()) {
 				if (cboSupply.getSelectedItem().equals(st)) {
-					crew.useSupply(10, st);
-		        } else {
-			        System.out.println("false");
-		        }
+					if(!crew.useSupply(2, st)) {
+						StaticObjects.MessBox("Have less than 2x "+st.getName(), "Not enough Stock", "Error");
+						check = false;
+					} else
+						cboSupply.setVisible(false);
+				}
 			}
 			break;	
 		default:
-			break;
+			return;
 		}
 
 	    crew.setName(txtName.getText());
-	    
-		progHealth.setValue(crew.getHealth());
-	    progHunger.setValue(crew.getHunger());
-	    progMorale.setValue(crew.getMorale());
-	    progHealth.setToolTipText(crew.getHealth()+"/"+progHealth.getMaximum());
-	    progHunger.setToolTipText(crew.getHunger()+"/"+progHunger.getMaximum());
-	    progMorale.setToolTipText(crew.getMorale()+"/"+progMorale.getMaximum());
 	    txtName.setText(crew.getName());
+	    if (check) {	    	
+	    	cboAction.setEnabled(false);
+			if (!crew.isSick())
+				contentPan.setBackground(new Color(240, 240, 240));
+			
+			progHealth.setValue(crew.getHealth());
+		    progHunger.setValue(crew.getHunger());
+		    progMorale.setValue(crew.getMorale());
+		    progHealth.setToolTipText(crew.getHealth()+"/"+progHealth.getMaximum());
+		    progHunger.setToolTipText(crew.getHunger()+"/"+progHunger.getMaximum());
+		    progMorale.setToolTipText(crew.getMorale()+"/"+progMorale.getMaximum());
+	    }
 	}
 }

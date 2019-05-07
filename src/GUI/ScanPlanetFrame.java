@@ -30,18 +30,10 @@ public class ScanPlanetFrame {
 		
 		JPanel panelMid = new JPanel();
 		panelMid.setBounds(0, 0, width, height);
-		panelMid.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.5f));
+		panelMid.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.3f));
 		panelMid.setOpaque(true);
 		panelMid.setLayout(null);
 		frame.getContentPane().add(panelMid);
-		
-		//Always put background at the END
-		Image IMG = StaticObjects.SelfResizeImage(path, this, width, height);
-		JLabel Background = new JLabel(new ImageIcon(IMG));
-		Background.setBounds(0, 0, width, height);
-		Background.setVerticalAlignment(SwingConstants.BOTTOM);
-		Background.setIcon(new ImageIcon(IMG));
-		frame.getContentPane().add(Background);
 		
 		JButton btnOK = new JButton("Accept");
 		btnOK.setBounds(277, 462, 183, 27);
@@ -55,10 +47,22 @@ public class ScanPlanetFrame {
 		btnOK.setFont(new Font("Times New Roman", Font.BOLD, 20));			
 		panelMid.add(btnOK);		
 		
-		JLabel lblMessage = new JLabel("Message");
+		JLabel lblMessage = new JLabel(Message);
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessage.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblMessage.setBounds(28, 40, 651, 45);
+		lblMessage.setForeground(Color.YELLOW);
 		panelMid.add(lblMessage);
+		
+		frame.getRootPane().setDefaultButton(btnOK);
+		btnOK.requestFocus();
+		
+		//Always put background at the END
+		Image IMG = StaticObjects.SelfResizeImage(path, this, width, height);
+		JLabel Background = new JLabel(new ImageIcon(IMG));
+		Background.setBounds(0, 0, width, height);
+		Background.setVerticalAlignment(SwingConstants.BOTTOM);
+		Background.setIcon(new ImageIcon(IMG));
+		frame.getContentPane().add(Background);
 	}
 }

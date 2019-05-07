@@ -35,20 +35,15 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	private ArrayList<Entity> SpaceObjects; 
 	/** Same Spaceship generated from MissionFrame*/
 	private Spaceship SpaceShip;
-	
-	//private Timer mainTimer;
+
 	private int height;
 	private int width;
 	private double x, y;
 	private int direction = 0;
 	
-	/** Fuel level of ship*/
 	private JProgressBar Fuel;
-	/** Ship's hull strength*/
 	private JProgressBar Hull;
-	/** Current turn display in control Panel*/
 	private JLabel Days;
-	/** Current turn to display via Jlabel Days*/
 	Galaxy currGalaxy;
 	
 	/**
@@ -105,9 +100,57 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * X to Scan, trade, change universe
 	 * Enter: move to next turn
 	 */
+	boolean enoughPilot = false;
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		//Ship control
+		
+		if (key == KeyEvent.VK_ESCAPE) {
+			//Pause
+			frame.setFocusable(false);
+			frame.setEnabled(false);
+			PauseFrame pause = new PauseFrame(frame, SpaceShip, currGalaxy);
+			pause.frame.setUndecorated(true);
+			pause.frame.setVisible(true);
+			pause.frame.setLocationRelativeTo(null);
+			
+		} else if (key == KeyEvent.VK_ENTER) {
+			//Next day
+			EndTurn();
+		} else if (key == KeyEvent.VK_X) {
+			//Scan, Jump galaxy, trade
+			Interact();
+		} else if (key == KeyEvent.VK_W||key == KeyEvent.VK_D||key == KeyEvent.VK_A||key == KeyEvent.VK_S) {
+			if (SpaceShip.enoughPilot()||enoughPilot) {
+				//Ship Control
+				enoughPilot = true;
+				ShipMove(key);
+			} else 
+				StaticObjects.MessBox("Assign 2 crews to pilot the Spaceship", "Not enough pilot", "Error");
+		} else {
+			//Unknown key typed
+		}
+	}
+	
+	/**
+	 * Pause the ship when key is released
+	 */
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+		SpaceShip.turning = false;
+		enoughPilot = false;
+		
+		if (key == KeyEvent.VK_W)
+			SpaceShip.stop();
+		else if (key == KeyEvent.VK_S)
+			SpaceShip.stop();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}	
+	
+	private void ShipMove(int key) {
 		boolean check;
 		if (key == KeyEvent.VK_W && Fuel.getValue() > 0) {
 			if (y < 0 & direction == 0)
@@ -122,13 +165,11 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				check = true;
 			
 			if (check) {
-				Fuel.setValue(Fuel.getValue() - 5);
-				Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
 				SpaceShip.forward();
-				SpaceShip.setFuel(Fuel.getValue());
+				Fuel.setValue(SpaceShip.getFuel() - 5);
+				Fuel.setToolTipText(SpaceShip.getFuel() + "/" + Fuel.getMaximum());
 			}
-		}
-		else if (key == KeyEvent.VK_S && Fuel.getValue() > 0) {
+		} else if (key == KeyEvent.VK_S && Fuel.getValue() > 0) {
 			if (y < 0 && direction == 2)
 				check = false;
 			else if (x < 0 && direction == 3)
@@ -141,13 +182,12 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				check = true;
 			
 			if (check) {
-				Fuel.setValue(Fuel.getValue() - 2);
-				Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
 				SpaceShip.reverse();
-				SpaceShip.setFuel(Fuel.getValue());
-			}				
+				Fuel.setValue(SpaceShip.getFuel() - 2);
+				Fuel.setToolTipText(SpaceShip.getFuel() + "/" + Fuel.getMaximum());
+			}
 		}
-				
+		
 		if (key == KeyEvent.VK_A)
 			SpaceShip.toPort();
 		else if (key == KeyEvent.VK_D)
@@ -156,44 +196,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 			SpaceShip.stop();
 		
 		repaint();
-		
-		//Pause menu - ESC
-		if (key == KeyEvent.VK_ESCAPE) {
-			//Pause
-			frame.setFocusable(false);
-			frame.setEnabled(false);
-			PauseFrame pause = new PauseFrame(frame, SpaceShip, currGalaxy);
-			pause.frame.setUndecorated(true);
-			pause.frame.setVisible(true);
-			pause.frame.setLocationRelativeTo(null);
-			
-		}
-		else if (key == KeyEvent.VK_ENTER) {
-			EndTurn();
-		}
-		
-		if (key == KeyEvent.VK_X) {
-			Interact();
-		}
 	}
-	
-	/**
-	 * Pause the ship when key is released
-	 */
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-		SpaceShip.turning = false;
-		
-		if (key == KeyEvent.VK_W)
-			SpaceShip.stop();
-		else if (key == KeyEvent.VK_S)
-			SpaceShip.stop();
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}	
 	
 	/**
 	 * Press Enter
@@ -201,19 +204,19 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 */
 	private void EndTurn() {
 		if (Spaceship.daysOnMission < Galaxy.maxTurn) {
+			SpaceShip.EndTurn();
+
 			//Update Control Panel
 			UIManager.put("ProgressBar.selectionForeground", Color.YELLOW);
 		    UIManager.put("ProgressBar.selectionBackground", Color.BLUE);
-			Fuel.setValue(Fuel.getMaximum());
+		    
+		    Hull.setValue(SpaceShip.getHull());
+		    Hull.setToolTipText(Hull.getValue()+"/"+Hull.getMaximum());
+			Fuel.setValue(Galaxy.maxFuel);
 			Fuel.setToolTipText(Fuel.getValue()+"/"+Fuel.getMaximum());
-			
-			Spaceship.daysOnMission += 1;
 			Days.setText("Days on mission:"+Spaceship.daysOnMission+"/"+Galaxy.maxTurn);
 			
-			
-			//
-			
-			StaticObjects.MessBox("Loading Next day", "End Turn", "");
+			//StaticObjects.MessBox("New turn begin", "End Turn Complete", "");
 		} else {
 			StaticObjects.MessBox("MissionFail", "Time Elapsed", "");
 		}
@@ -230,8 +233,6 @@ public class SpaceshipController extends JPanel implements KeyListener{
 			int scanRad = en.getScanRadius();
 			boolean X = Math.abs(en.getcenterX() - x) <= scanRad;
 			boolean Y = Math.abs(en.getcenterY() - y) <= scanRad;
-			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterX()+":"+x+":"+scanRad);
-			//System.out.println(X +" "+ Y + " "+en+" "+en.getcenterY()+":"+y+":"+scanRad);
 			if (X && Y) {
 				if (en instanceof Outpost) {
 					frame.setFocusable(false);

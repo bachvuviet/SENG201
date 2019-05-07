@@ -212,6 +212,7 @@ public class MissionFrame {
 		}
 		
 		//SpaceShip
+		Galaxy.maxFuel = 800;
 		Galaxy.maxHull = 100;
 		Galaxy.maxTurn = DaysOnMission;
 		Galaxy.Prestige = 0;

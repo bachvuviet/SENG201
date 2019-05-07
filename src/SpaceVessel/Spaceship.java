@@ -1,7 +1,10 @@
 package SpaceVessel;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import Backend.Galaxy;
+import CustomUIELmt.StaticObjects;
 
 enum Faction {
 	CHAOS_FLEET, IMPERIAL_NAVY, ELDAR_CORSAIR, SPACE_PIRATE;
@@ -38,7 +41,6 @@ public class Spaceship extends Outpost {
 	private final Faction shipFaction = Faction.IMPERIAL_NAVY;
 	
 	//Default
-	private int Fuel;
 	private int HullStrength;
 	private int Money = 100;
 	
@@ -50,6 +52,9 @@ public class Spaceship extends Outpost {
 	public Spaceship(int x, int y, String name, ArrayList<Crew> crew) {
 		super(x, y, 40, 70, name, "/spaceshipUp.png");
 		CREW = crew;
+		
+		if (crew != null)
+			CheckCrew();
 		HullStrength = Galaxy.maxHull;
 		Fuel = Galaxy.maxFuel;
 	}
@@ -115,13 +120,6 @@ public class Spaceship extends Outpost {
 		return HullStrength;
 	}
 	/**
-	 * Get Fuel left at any instance
-	 * @return current fuel left
-	 */
-	public int getFuel() {
-		return Fuel;
-	}
-	/**
 	 * Get Name of Ship
 	 * @return Ship Name
 	 */
@@ -176,21 +174,6 @@ public class Spaceship extends Outpost {
 	
 	//Crew Related
 	/**
-	 * Get crew from crew list
-	 * @param ID ID or index of crew
-	 * @return Crew member at selected index
-	 */
-	public Crew getCrew(int ID) {
-		Crew myCrew = new Crew();
-		for (Crew cr:CREW) {
-			if (cr.ID == ID) {
-				myCrew = cr;
-				break;
-			}
-		}
-		return myCrew;
-	}
-	/**
 	 * Get entire list of crew in ship
 	 * @return Entire Crew list
 	 */
@@ -199,6 +182,12 @@ public class Spaceship extends Outpost {
 	}
 
 	public void CheckCrew() {
+		Galaxy.maxHull = 100;
+		Galaxy.maxFuel = 800;
+		maxCrewHealth = 100;
+		maxCrewHunger = 100;
+		maxCrewMorale = 100;
+		
 		for (Crew crew:CREW) {
 			switch (crew.getRank()) {
 			case SCIENTIST://Increase Hull
@@ -229,8 +218,80 @@ public class Spaceship extends Outpost {
 			cr.MaxStat();
 		}
 	}
-
-	public void setFuel(int value) {
-		Fuel = value;
+	
+	Random random = new Random();
+	public void EndTurn() {
+		daysOnMission += 1;
+		setFuel(Galaxy.maxFuel);
+		for (Crew cr:CREW) {
+			cr.clearActivity();
+		}
+		
+		String[] eventArr = {"Alien Pirates", "Space Plague", "Space Debris/Asteroid belt", "No problem"};
+		String Message = "";
+		int index = random .nextInt(4);
+		switch (index) {
+		case 0:
+			Message = AlienPirates();
+			break;
+		case 1:
+			Message = SpacePlague();
+			break;
+		case 2:
+			Message = AsteroidBelt();
+			break;
+		default://No event
+			Message = "Nothing to worry about!";
+			break;
+		}
+		StaticObjects.MessBox(Message+"\nNew Turn biegins", eventArr[index], "Warning");
+	}
+	
+	String AlienPirates() {
+		String mess = "Alien pirates boarded our ship and stole all of your ";
+		int index = random .nextInt(9);
+		Stock st = INVENTORY.get(index);
+		st.setAmount(0);
+		
+		mess += st.getName();
+		return mess;
+	}
+	
+	String SpacePlague() {
+		String mess = "A strange plague has not been quarantine. Following crew(s) are currently sick:\n\n";
+		int numSick = random .nextInt(2);
+		for (int i=0; i<=numSick; i++) {
+			int index = random .nextInt(4);
+			Crew cr = CREW.get(index);
+			if (!cr.isSick()) {
+				cr.Sick(true);
+			}
+		}
+		
+		for (Crew cr:CREW) {
+			if (cr.isSick())
+				mess += cr.getName() + " ("+cr.getRank()+"): -15HP, -20Morale per turn\n";
+		}
+		mess += "Sick crew(s) are colored Red in Crew Manaagement.\n";
+		
+		return mess;
+	}
+	
+	String AsteroidBelt() {
+		int amount = (int) HullStrength/2;
+		HullStrength -= amount;
+		return "Blame the pilot dude for Sleeping and driving at same time. Ship's hull damaged by "+amount+" points";
+	}
+	
+	public boolean enoughPilot() {
+		int pilotNum = 0;
+		
+		for (Crew cr:CREW) {
+			if(cr.getCrewActivity().contains("Pilot")) {
+				pilotNum += 1;
+			}
+		}
+		
+		return pilotNum >= 2;
 	}
 }

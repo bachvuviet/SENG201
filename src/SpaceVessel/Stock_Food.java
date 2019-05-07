@@ -14,7 +14,7 @@ public class Stock_Food implements Stock, Cloneable {
 	private String Name;
 	private int boostValue;
 	private String imagePath;
-	private int amount = 10;
+	private int amount = 5;
 	private int Price;
 	
 	public Stock_Food(String name, int boost, int price, String path) {
@@ -44,8 +44,12 @@ public class Stock_Food implements Stock, Cloneable {
 		this.amount = amount;
 	}	
 	public int use(int amount) {
-        return amount*boostValue;
-	}	
+    	if (amount <= this.amount) {
+    		this.amount -= amount;
+    		return boostValue*amount;    		
+    	} else
+    		return 0;    	
+    }	
 	
 	//toStrings
 	public String getStockStatus() {
