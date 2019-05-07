@@ -92,7 +92,6 @@ public class SpaceshipController extends JPanel implements KeyListener{
 		direction = SpaceShip.getDirect();
 	}
 	
-	int speed = 4;
 	/**
 	 * Keypress event
 	 * WSAD for ship's movement

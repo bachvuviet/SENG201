@@ -15,6 +15,11 @@ public class CmdGame {
 	int day;
 	int action1;
 	int action2;
+	
+	public CmdGame() {
+		checkShip();
+	}
+	
 	public void checkShip() {
         //Crew
 		Galaxy.maxFuel = 0;
@@ -183,9 +188,9 @@ public class CmdGame {
     
     public static void main(String[] args) {
     	CmdGame st = new CmdGame();
-    	Crew crew = new Crew();
+    	Crew crew = ship.getCrewList().get(0);//new Crew();
     	
-    	st.checkShip();
+    	//st.checkShip();
 		st.scanDays();
 		st.shipParts();
 		st.crew();

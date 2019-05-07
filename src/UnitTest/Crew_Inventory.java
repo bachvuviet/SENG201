@@ -131,7 +131,7 @@ class Crew_Inventory {
 		cr.sleep();
 		assertEquals(105, cr.getHunger());
 		assertEquals(150, cr.getMorale());
-		assertEquals(150, cr.getHealth());
+		assertEquals(130, cr.getHealth());
 	}
 	
 	@Test
@@ -184,13 +184,13 @@ class Crew_Inventory {
 		Crew cr = testShip.getCrewList().get(0);
 		cr.pilotShip();
 		assertEquals(1, cr.getCrewActivity().size());
-		assertEquals("Driving Ship", cr.getCrewActivity().get(0));
+		assertEquals("Pilot", cr.getCrewActivity().get(0));
 	}
 	
 	@Test
 	public void Trade() {
 		testShip.changeStockAmount(10, STOCK.get(5));
-		assertEquals(20, testShip.getInventory().get(5).getAmount());
+		assertEquals(15, testShip.getInventory().get(5).getAmount());
 		testShip.changeStockAmount(-10, STOCK.get(4));
 		assertEquals(0, testShip.getInventory().get(4).getAmount());
 		testShip.changeStockAmount(-5, STOCK.get(7));
