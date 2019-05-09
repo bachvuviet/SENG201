@@ -88,7 +88,7 @@ public class Crew implements Serializable {
     }
     
     //setter
-    /** Set crew's name in crew penel txtbox
+    /** Set crew's name in crew panel txtbox
      * @param name New name for crew
      * */
     public void setName(String name) {

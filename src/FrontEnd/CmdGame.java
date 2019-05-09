@@ -15,6 +15,8 @@ public class CmdGame {
 	int day;
 	int action1;
 	int action2;
+	int supply;
+	//int action2;
 	
 	public CmdGame() {
 		checkShip();
@@ -121,79 +123,114 @@ public class CmdGame {
 		
 	}
     
-    public void crew() {
-    	System.out.println("Crews Selected: ");
-        for (Crew c: crew) {
-        	System.out.println("Crew: " + c.getRank() + "("+c.getName()+")" + " +1");
-        }
-    }
     
     public void printStr(int count) {
     	String str = "";
-    	    str += "\n";
+    	    //str += "\n";
     		str += "Day " + count + "\n";
     		str += "Choose 2 actions via Sleep, choose 1" + "\n";
     		str += "1.Sleep \t 2.Repair \t 3.Pilot \t 4.Use supplements" + "\n";
-    	System.out.println(str);
+    		System.out.println(str);
+    	
+    	
     }
+    
+    public void scanFoodList() {
+    	String str = "";
+    	str += "List of supplements \n";
+    	str += "Food:     {0.Burger, 1.Bread, 2.Pizza, 3.Chicken, 4.Steak, 5.Sushi} \n";
+    	str += "Medicine: {6.Healing Potion, 7. Pain Killer, 8.Syringe}";
+    	System.out.println(str);
+    	@SuppressWarnings("resource")
+		Scanner scan2 = new Scanner(System.in);
+    	System.out.print("Enter supplement: ");
+    	supply = scan2.nextInt();
+    }
+    
     
     public void scanActions(Crew action, Spaceship ship) {
     	
     	@SuppressWarnings("resource")
 		Scanner scan1 = new Scanner(System.in);
-    	//@SuppressWarnings("resource")
-		//Scanner scan2 = new Scanner(System.in);
-    	for (int count=1; count <= day; count ++) {
-    		printStr(count);
-    		System.out.print("Enter your num for action1: ");
-    		action1 = scan1.nextInt();
-    		crewActions(action, ship);
-    		//System.out.print("And ");
-    		//action2 = scan2.nextInt();
+    	@SuppressWarnings("resource")
+		Scanner scan3 = new Scanner(System.in);
+    	for (Crew cr: crew) {
+    		for (int count=1; count <= day; count ++) {
+        		System.out.println("Crew " + cr.getRank() + " +1:");
+        		printStr(count);
+        		System.out.print("Action1: ");
+        		action1 = scan1.nextInt();
+        		System.out.print("\nAction2: ");
+        		action2 = scan3.nextInt();
+        		if (action1 == 4 || action2 == 4) {
+        			scanFoodList();
+        		}
+        		
+        		
+        	    crewActions(action, ship);
+        	    
+        	}
     	}
     	
+    	
     }
+
     
     public void crewActions(Crew action, Spaceship ship) {
+    	//Action1
     	ship.CheckCrew();
-    	for (int i=1; i <= 4; i++) {
-    		
-    		switch(action1) {
-    		case 1:
-    			action.sleep();
-    			//System.out.println(str + action.getHealth());
-    			//System.out.println(str + action.getHunger());
-    			break;
-    		case 2:
-    			action.repair(ship);
-    			break;
-    		case 3:
-    			action.pilotShip();
-    			break;
-    		case 4:
-    			for (Stock st: STOCK) {
-    				action.useSupply(10, st);
-    			}
-    			break;
-    		default:
-    			break;
-    	}
-    		
-    }
     	
-    	System.out.println("health: " + action.getHealth());
-    	System.out.println("hunger: " + action.getHunger());
-    	System.out.println("morale: " + action.getMorale());
+		switch(action1) {
+		case 1:
+			action.sleep();
+			break;
+		case 2:
+			action.repair(ship);
+			break;
+		case 3:
+			action.pilotShip();
+			break;
+		case 4:
+			for (Crew cr: crew) {
+				cr.useSupply(5, ship.getInventory().get(supply));//eat
+			}
+			break;
+		default:
+			break;
+	    }
+		
+		//Action2
+		switch(action2) {
+		case 1:
+			action.sleep();
+			break;
+		case 2:
+			action.repair(ship);
+			break;
+		case 3:
+			action.pilotShip();
+			break;
+		case 4:
+			for (Crew cr: crew) {
+				cr.useSupply(5, ship.getInventory().get(supply));//eat
+			}
+			break;
+		default:
+			break;
+	    }
+
+		System.out.println("health: " + action.getHealth());
+		System.out.println("hunger: " + action.getHunger());
+		System.out.println("morale: " + action.getMorale());
+		System.out.println(action.getCrewActivity());
     }
     
     public static void main(String[] args) {
     	CmdGame st = new CmdGame();
     	Crew crew = ship.getCrewList().get(0);//new Crew();
-    	
-    	//st.checkShip();
+    	st.checkShip();
 		st.scanDays();
 		st.shipParts();
-		st.crew();
 		st.scanActions(crew, ship);
 	}
     

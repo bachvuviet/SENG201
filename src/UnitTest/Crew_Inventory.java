@@ -191,9 +191,9 @@ class Crew_Inventory {
 	public void Trade() {
 		testShip.changeStockAmount(10, STOCK.get(5));
 		assertEquals(15, testShip.getInventory().get(5).getAmount());
-		testShip.changeStockAmount(-10, STOCK.get(4));
+		testShip.changeStockAmount(-5, STOCK.get(4));
 		assertEquals(0, testShip.getInventory().get(4).getAmount());
-		testShip.changeStockAmount(-5, STOCK.get(7));
+		testShip.changeStockAmount(5, STOCK.get(7));
 		assertEquals(10, testShip.getInventory().get(7).getAmount());
 	}
 } 
