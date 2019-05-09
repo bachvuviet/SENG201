@@ -294,6 +294,8 @@ public class MissionFrame {
 			Image IMG2 = StaticObjects.SelfResizeImage("/Crew"+AvatarArr[avaIndex], this, 174, 207);
 			btn.setIcon(new ImageIcon(IMG2));
 		} else if (mode == -1) {
+			if (Array[index]==0)
+				return;
 			Array[index] -= 1;
 			
 			for (Crew cr:tempCrew) {
