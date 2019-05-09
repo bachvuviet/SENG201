@@ -163,7 +163,7 @@ public class LoadingFrame {
 		Gala2 = new Galaxy("Nemesis Tessera", null, "/Background/NemesisGalaxy.png");
 		
 		//Space objects
-		Planet terrestrial1 = new Planet_Terrestrial(1000, 1000, 400, "Earth");
+		Planet terrestrial1 = new Planet_Terrestrial(1000, 1000, 500, "Earth");
 		Planet ocean1 = new Planet_Ocean(600, 500, 250, "Ocean");
 		Planet colorful1 = new Planet_ColorfulDrawf(1800, 300, 300, "ODBE-35X");
 		Planet gasgiant1 = new Planet_GasGiant(200, 180, 350, "Saturn");
@@ -203,18 +203,22 @@ public class LoadingFrame {
 		
 		BlackHole hole3a = new BlackHole(1450, 100, 200, 200, "MediumBlue", currGalaxy);
 		BlackHole hole3b = new BlackHole(1450, 100, 200, 200, "MediumBlue", Gala2);
-		
+
 		currGalaxy.addSpaceObjects(0, post1);
-		Gala1.addSpaceObjects(0, post2);
+		Gala2.addSpaceObjects(0, post2);	
 		
-		currGalaxy.addSpaceObjects(1, hole1a);
-		Gala1.addSpaceObjects(1, hole1b);
+		if (Galaxy.maxTurn/3 >= 2) {
+			currGalaxy.addSpaceObjects(1, hole1a);
+			Gala1.addSpaceObjects(1, hole1b);
+		}
 		
-		Gala1.addSpaceObjects(1, hole2a);
-		Gala2.addSpaceObjects(1, hole2b);
-		
-		Gala2.addSpaceObjects(1, hole3a);
-		currGalaxy.addSpaceObjects(1, hole3b);
+		if ((Galaxy.maxTurn/3 >= 3)) {
+			Gala1.addSpaceObjects(1, hole2a);
+			Gala2.addSpaceObjects(1, hole2b);
+			
+			Gala2.addSpaceObjects(1, hole3a);
+			currGalaxy.addSpaceObjects(1, hole3b);
+		}	
 	}
 
 	private void hideStock(ArrayList<Stock> modelSTOCK) throws CloneNotSupportedException {
