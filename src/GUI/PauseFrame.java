@@ -8,12 +8,14 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Backend.Galaxy;
 import CustomUIELmt.StaticObjects;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -77,21 +79,35 @@ public class PauseFrame extends JFrame {
 		btnSave.setPreferredSize(new Dimension(150, 30));
 		btnSave.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
-				try {
-					MyShip.Save();
-					currGala.Save();
-					//String path = "B:\\Saved\\lol.ser";//this.getClass().getResource("/Saved/lol.ser").toString();
-			        FileOutputStream fileOut = new FileOutputStream("B:/taomet.txt");
-			        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			        out.writeObject(currGala);
-			        out.close();
-			        fileOut.close();
-			        StaticObjects.MessBox("Game saved", "Save success", "Info");
-			      } catch (IOException ex) {
-			    	  ex.printStackTrace();
-			    	  StaticObjects.MessBox(ex.getMessage(),"Save Error", "Error");
-			      }
+			public void actionPerformed(ActionEvent e) {						
+				MyShip.Save();
+				currGala.Save();
+
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setAcceptAllFileFilterUsed(false);;
+				fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SpaceExplorer Saves (.starman)", "starman"));
+				
+				if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+					try {
+						FileOutputStream fileOut;
+						if (!fileChooser.getSelectedFile().getPath().endsWith(".starman"))
+							fileOut = new FileOutputStream(fileChooser.getSelectedFile()+".starman");
+						else
+							fileOut = new FileOutputStream(fileChooser.getSelectedFile());
+						
+				        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				        out.writeObject(currGala);
+				        out.close();
+				        fileOut.close();
+				        StaticObjects.MessBox("Game saved", "Save success", "Info");
+				    } catch (IOException ex) {
+				    	ex.printStackTrace();
+				    	StaticObjects.MessBox(ex.getMessage(),"Save Error", "Error");
+				    	return;
+				    }
+				} else {
+					
+				}
 			}
 		});
 		panelBottom.add(btnSave);

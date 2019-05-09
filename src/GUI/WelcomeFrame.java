@@ -14,11 +14,14 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Backend.Galaxy;
 
@@ -82,23 +85,32 @@ public class WelcomeFrame {
 		btnLoadMission.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				Galaxy gala;
-				try {
-					FileInputStream fileInputStream = new FileInputStream("B:/taomet.txt");
-				    ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-				    gala = (Galaxy) objectInputStream.readObject();
-				    objectInputStream.close(); 							
-				} catch(Exception ex) {
-					ex.printStackTrace();
-					return;
-				}
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setAcceptAllFileFilterUsed(false);;
+				fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("SpaceExplorer Saves (.starman)", "starman"));
 				
-				//newGame.frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 				
-				LoadingFrame loadGame = new LoadingFrame(gala, true);
-				loadGame.frame.setUndecorated(true);//no control box
-				loadGame.frame.setVisible(true);
-				loadGame.frame.setLocationRelativeTo(null);
-
-				frame.dispose();
+				if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+					try {
+						FileInputStream fileInputStream = new FileInputStream(fileChooser.getSelectedFile());
+					    ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+					    gala = (Galaxy) objectInputStream.readObject();
+					    objectInputStream.close(); 	
+					    
+					    //newGame.frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 				
+						LoadingFrame loadGame = new LoadingFrame(gala, true);
+						loadGame.frame.setUndecorated(true);//no control box
+						loadGame.frame.setVisible(true);
+						loadGame.frame.setLocationRelativeTo(null);
+	
+						frame.dispose();
+					} catch(Exception ex) {
+						StaticObjects.MessBox(ex.getMessage(),"Can't load selected save", "Open Error");
+						ex.printStackTrace();
+						return;
+					}
+				} else {
+					
+				}
 			}
 		});
 		frame.getContentPane().add(btnLoadMission);
