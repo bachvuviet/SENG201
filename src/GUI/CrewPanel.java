@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -52,10 +53,14 @@ public class CrewPanel {
 		contentPan.setBounds(x, y, w, h);
 		contentPan.setLayout(null);
 		contentPan.setVisible(true);
-		if (crew.isSick())
+		if (crew.isSick()) {
 			contentPan.setBackground(new Color(255,102,102));
-		else
+			contentPan.setToolTipText("This Crew is sick.");
+		}
+		else {
 			contentPan.setBackground(new Color(240, 240, 240));
+			contentPan.setToolTipText("");
+		}
         
 	    JLabel lblAvatar = new JLabel(crew.getAvatar());
 	    Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
@@ -168,6 +173,13 @@ public class CrewPanel {
         	cboAction2.setEnabled(false);
         	cboAction2.setSelectedItem(crew.getCrewActivity().get(1));
         }
+		
+		if (!crew.Real) {
+			contentPan.setToolTipText("This Crew is dead.");
+			for (Component comp:contentPan.getComponents()) {
+				comp.setEnabled(false);
+			}
+		}
         
         contentPan.revalidate();
         contentPan.repaint();

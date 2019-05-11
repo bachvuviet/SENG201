@@ -216,6 +216,7 @@ public class MissionFrame {
 		Galaxy.maxHull = 100;
 		Galaxy.maxTurn = DaysOnMission;
 		Galaxy.Prestige = 0;
+		Galaxy.currTutorial = 0;
 		
 		Spaceship SpaceShip = new Spaceship(300, 300, name, tempCrew);	
 		LoadingFrame game = new LoadingFrame(SpaceShip);

@@ -220,13 +220,7 @@ public class Spaceship extends Outpost {
 	}
 	
 	Random random = new Random();
-	public void EndTurn() {
-		daysOnMission += 1;
-		setFuel(Galaxy.maxFuel);
-		for (Crew cr:CREW) {
-			cr.clearActivity();
-		}
-		
+	public void EndTurn() {				
 		String[] eventArr = {"Alien Pirates", "Space Plague", "Space Debris/Asteroid belt", "No problem"};
 		String Message = "";
 		int index = random .nextInt(4);
@@ -245,6 +239,19 @@ public class Spaceship extends Outpost {
 			break;
 		}
 		StaticObjects.MessBox(Message+"\nNew Turn biegins", eventArr[index], "Warning");
+
+		daysOnMission += 1;
+		setFuel(Galaxy.maxFuel);
+		for (Crew cr:CREW) {
+			if (!cr.Real)
+				continue;
+			
+			cr.clearActivity();
+			if (cr.isSick())
+				cr.minusHealth(50);
+			if (cr.getHealth() == 0)
+				cr.dead();
+		}
 	}
 	
 	String AlienPirates() {

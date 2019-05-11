@@ -209,4 +209,12 @@ public class Crew implements Serializable {
     	}
     	return mystr;
     }
+    
+	public void minusHealth(int amount) {
+		Health -= amount;
+	}
+	
+	public void dead() {
+		Real = false;		
+	}
 }

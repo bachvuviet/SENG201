@@ -44,7 +44,8 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	private JProgressBar Fuel;
 	private JProgressBar Hull;
 	private JLabel Days;
-	Galaxy currGalaxy;
+	private JLabel Tutorial;
+	private Galaxy currGalaxy;
 	
 	/**
 	 * 
@@ -61,6 +62,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 		this.Fuel = game.Fuel;
 		this.Hull = game.Hull;
 		this.Days = game.lblDay;
+		this.Tutorial = game.lblTutorial;
 		this.currGalaxy = currGalaxy;
 		this.SpaceObjects = currGalaxy.getSpaceObjects();
 		
@@ -76,6 +78,16 @@ public class SpaceshipController extends JPanel implements KeyListener{
 		this.SpaceShip = currGalaxy.getShip();
 		Fuel.setToolTipText(Fuel.getMaximum() + "/" + Fuel.getMaximum());
 		Hull.setToolTipText(SpaceShip.getHull() + "/" + SpaceShip.getHull());
+		
+		/*
+		btnEndTurn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//EndTurn();
+				contentPane.setOpaque(true);
+				contentPane.setFocusable(true);
+				contentPane.requestFocus();
+			}
+		});*/
 	}
 	
 	//KeyListener Action
@@ -125,6 +137,15 @@ public class SpaceshipController extends JPanel implements KeyListener{
 				ShipMove(key);
 			} else 
 				StaticObjects.MessBox("Assign 2 crews to pilot the Spaceship", "Not enough pilot", "Error");
+		} else if (key == KeyEvent.VK_SPACE){
+			if (Tutorial.isVisible())
+				Tutorial.setVisible(false);
+			else
+				Tutorial.setVisible(true);
+		} else if (key == KeyEvent.VK_LEFT){			
+			LoadTutorial(-1, 0);
+		} else if (key == KeyEvent.VK_RIGHT) {
+			LoadTutorial(1, Galaxy.Tutorial.size()-1);
 		} else {
 			//Unknown key typed
 		}
@@ -148,6 +169,16 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		
 	}	
+	
+	private void LoadTutorial(int index, int boundary) {
+		if (Galaxy.currTutorial == boundary)
+			return;
+		
+		Tutorial.setText("");
+		Galaxy.currTutorial += 1;
+		Tutorial tut = Galaxy.Tutorial.get(Galaxy.currTutorial);
+		StaticObjects.IncomingMessage(tut.getTitle(), tut.getMessage(), tut.getPS()+"<p>Hit Space to hide, ArrowLeft/Right to change tutorial.", Tutorial);
+	}
 	
 	private void ShipMove(int key) {
 		boolean check;

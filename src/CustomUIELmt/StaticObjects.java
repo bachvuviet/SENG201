@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  * @version 1.0
  */
 public class StaticObjects {
+	public static boolean runningMess = false;
 	
 	/**
 	 * Quick way to use pop up messbox, only show details, no decision process
@@ -75,6 +76,8 @@ public class StaticObjects {
     	}
     }
     
+
+	static Timer timer;
     /**
      * Running message, for game tutorial and incoming message of storyline
      * @param heading Header of message
@@ -84,8 +87,13 @@ public class StaticObjects {
      */
 	public static void IncomingMessage(String heading, String message, String PS, JLabel messLabel) {
 		//String OutputMessage = String.format("<html><h1> %s:</h1><p>	Greeting Captain,<p>%s<p>%s</html>", heading, message, PS);
+		if (runningMess) {
+			timer.cancel();
+			runningMess = false;			
+		}
 		
-		Timer timer = new Timer(true);
+		runningMess = true;
+		timer = new Timer(true);
 		TimerTask updateIncomingMessage = new TimerTask() {
 			boolean CompleteMessage = false;
 			
@@ -115,6 +123,7 @@ public class StaticObjects {
 	        		CompleteMessage = true;
 	        	
 	        	if(CompleteMessage) {
+	        		runningMess= false;
 	    			timer.cancel();
 	    		}
 	        }

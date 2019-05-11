@@ -9,9 +9,11 @@ import SpaceVessel.Stock;
 import SpaceVessel.Stock_Food;
 import SpaceVessel.Stock_Medicine;
 
+import java.awt.Desktop;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -90,9 +92,21 @@ public class LoadingFrame {
 			e.printStackTrace();
 		}
 	    makeSpaceStations();
+	    try {
+			PlayIntroVideo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	    CompleteLoading();
 	}
 	
+	private void PlayIntroVideo() throws Exception {
+		Desktop dt = Desktop.getDesktop();
+    	File movie = new File(LoadingFrame.class.getProtectionDomain().getCodeSource().getLocation().getPath()+"/GameIntro.mp4");
+		dt.open(movie);
+		Thread.sleep(3000);
+	}
+
 	void CompleteLoading() {		
 		GameEnvironment game = new GameEnvironment(width, height, currGalaxy);		
 		Timer timer = new Timer(true);

@@ -8,6 +8,7 @@ import java.awt.Image;
 
 //import java.util.Timer;
 import javax.swing.JLabel;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +33,9 @@ public class GameEnvironment {
 	public JFrame frame;
 	public JProgressBar Fuel;
 	public JProgressBar Hull;
+	public JButton btnEndTurn;
 	public JLabel lblDay = new JLabel("");
+	public JLabel lblTutorial;
 	
 	/** Spaceship generated from MissionFrame*/
 
@@ -91,7 +94,7 @@ public class GameEnvironment {
 		lblDay.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblDay.setFont(new Font("Cambria", Font.BOLD, 14));
 				
-		JButton btnEndTurn = new JButton("Next Day (Enter)");
+		btnEndTurn = new JButton("Next Day (Enter)");
 		btnEndTurn.setBounds(10, 110, 330, 30);
 		btnEndTurn.setEnabled(false);
 		
@@ -102,11 +105,22 @@ public class GameEnvironment {
 		controlPan.add(lblDay);
 		controlPan.add(btnEndTurn);
 		
+		//Tutorial
+		lblTutorial = new JLabel("");
+		lblTutorial.setBounds(0, y-250, 500, 230);
+		lblTutorial.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		lblTutorial.setVerticalAlignment(SwingConstants.TOP);
+		lblTutorial.setFont(new Font("Cambria", Font.BOLD, 14));
+		lblTutorial.setOpaque(true);
+		Tutorial tut = Galaxy.Tutorial.get(Galaxy.currTutorial);
+		StaticObjects.IncomingMessage(tut.getTitle(), tut.getMessage(), tut.getPS()+"<br>Hit Space to hide, ArrowLeft/Right to change tutorial.", lblTutorial);
+		
 		//Galaxy
 		SpaceshipController controller = new SpaceshipController(x, y, frame, currGala, this);		
 		controller.setBounds(0, 0, x ,y);
 		controller.setOpaque(false);
 
+		frame.getContentPane().add(lblTutorial);
 		frame.getContentPane().add(controller);
 		frame.getContentPane().add(controlPan);
 
