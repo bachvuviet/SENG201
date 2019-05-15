@@ -20,15 +20,16 @@ public class Stock_Medicine implements Stock, Cloneable {
     /** image of medicine*/
     private String imagePath;
     /** Amount current have in ship's inventory*/
-    private int amount = 5;
+    private int amount;
     private int Price;
     
-    public Stock_Medicine(String name, String healCategory, int boost, int price, String path) { 
+    public Stock_Medicine(String name, String healCategory, int boost, int price, int amount, String path) { 
         this.Name = name;
         this.healCategory = healCategory;
         this.boostValue = boost;
         this.Price = price;
         this.imagePath = path;
+        this.amount = amount;
     }
     
     //getter

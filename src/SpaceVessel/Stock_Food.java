@@ -14,13 +14,14 @@ public class Stock_Food implements Stock, Cloneable {
 	private String Name;
 	private int boostValue;
 	private String imagePath;
-	private int amount = 5;
+	private int amount;
 	private int Price;
 	
-	public Stock_Food(String name, int boost, int price, String path) {
+	public Stock_Food(String name, int boost, int price, int amount, String path) {
 		this.Name = name;
 		this.boostValue = boost;
 		this.Price = price;
+		this.amount = amount;
 		this.imagePath = path;
 	}
 	
