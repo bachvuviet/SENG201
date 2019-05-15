@@ -175,7 +175,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 			return;
 		
 		Tutorial.setText("");
-		Galaxy.currTutorial += 1;
+		Galaxy.currTutorial += index;
 		Tutorial tut = Galaxy.Tutorial.get(Galaxy.currTutorial);
 		StaticObjects.IncomingMessage(tut.getTitle(), tut.getMessage(), tut.getPS()+"<p>Hit Space to hide, ArrowLeft/Right to change tutorial.", Tutorial);
 	}
