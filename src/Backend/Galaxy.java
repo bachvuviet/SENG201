@@ -12,6 +12,7 @@ public class Galaxy implements Serializable {
 	public static int maxTurn;
 	public static int maxHull;
 	public static int maxFuel;
+	public static int totalCrew;
 	public static int Prestige;//Point
 	public static int currTutorial;
 	
@@ -30,19 +31,21 @@ public class Galaxy implements Serializable {
 			new Tutorial("Leutenent Linh, tip12", "Each crew has 2 tasks to perform per day. Utilise them.<br>Enter the black hole to move to the next galaxy once you have scanned all planets.<br>Space events occur randomly. Keep close eyes to ship stat and crew.<br>If a crew dies, you have less person to perform the action.", "Repair your ship and get back to the fleet.")
 			));
 	
-	private int[] ShipStatic = {0, 0, 0, 0};
+	private int[] ShipStatic = {0, 0, 0, 0, 0};
 	
 	public void Save() {
 		ShipStatic[0] = maxTurn;
 		ShipStatic[1] = maxHull;
 		ShipStatic[2] = maxFuel;
-		ShipStatic[3] = Prestige;
+		ShipStatic[3] = totalCrew;
+		ShipStatic[4] = Prestige;
 	}
 	public void Load() {
 		maxTurn = ShipStatic[0];
 		maxHull = ShipStatic[1];
 		maxFuel = ShipStatic[2];
-		Prestige = ShipStatic[3];
+		totalCrew = ShipStatic[3];
+		Prestige = ShipStatic[4];
 	}
 	
 	private String Name;

@@ -107,21 +107,21 @@ public class OutpostTrade {
 		lblMedicine.setBounds(10, 235, 76, 14);
 		panelRight.add(lblMedicine);
 		
-		int y = 0; int row = 0;
+		int col = 0; int row = 0;
 		for(int i=1; i <= StockList.size(); i++) {
 			int index=i-1;
 			Stock st = StockList.get(index);
 			JLabel lblFood = new JLabel(st.getImage());
 			lblFood.setBorder(new LineBorder(new Color(0, 0, 0)));
 			lblFood.setDoubleBuffered(true);
-			lblFood.setBounds(33 + (i-1-row)*86, 73+y*91, 50, 50);
+			lblFood.setBounds(33 + (i-1-col)*86, 73+row*91, 50, 50);
 			lblFood.setToolTipText(st.getName());
 			panelLeft.add(lblFood);
 			
 			JTextField txtFood = new JTextField();
 			txtFood.setEnabled(false);
 			txtFood.setHorizontalAlignment(SwingConstants.CENTER);
-			txtFood.setBounds(33 + (i-1-row)*86, 121+y*91, 50, 20);
+			txtFood.setBounds(33 + (i-1-col)*86, 121+row*91, 50, 20);
 			txtFood.setColumns(10);
 			txtFood.setText(Integer.toString(st.getAmount()));
 			textFieldList.add(txtFood);
@@ -129,7 +129,7 @@ public class OutpostTrade {
 			
 			JButton btnFood = new JButton(st.getImage());
 			btnFood.setToolTipText(st.toStringPrice());
-			btnFood.setBounds(20 + (i-1-row)*60, 73+y*91, 50, 50);
+			btnFood.setBounds(20 + (i-1-col)*60, 73+row*91, 50, 50);
 			btnFood.addMouseListener(new MouseListener() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -147,8 +147,8 @@ public class OutpostTrade {
 			panelRight.add(btnFood);
 			
 			if (i%3 == 0) {
-				row += 3;
-				y += 1;
+				col += 3;
+				row += 1;
 			}
 		}
 	}

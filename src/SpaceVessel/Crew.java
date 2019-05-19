@@ -132,14 +132,17 @@ public class Crew implements Serializable {
     	}
 
 		if (stock instanceof Stock_Food) {
-			Hunger += boost;
+			if (Hunger + boost <= Spaceship.maxCrewHunger)
+				Hunger += boost;
 		}
 		else if (stock instanceof Stock_Medicine) {
 			if (((Stock_Medicine) stock).getHealCategory() == "Health")
-				Health += boost;
+				if (Health + boost <= Spaceship.maxCrewHealth)
+					Health += boost;
 			else if (((Stock_Medicine) stock).getHealCategory() == "Morale")
-				Morale += boost;
-			else {
+				if (Morale + boost <= Spaceship.maxCrewMorale)
+					Morale += boost;
+			else if (Morale + boost <= Spaceship.maxCrewMorale && Health + boost <= Spaceship.maxCrewHealth) {
 				Health += boost;
 				Morale += boost;
 				Sick = false;

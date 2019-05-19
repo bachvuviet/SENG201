@@ -261,7 +261,7 @@ public class CrewPanel {
 			}
 			break;	
 		default:
-			return;
+			break;
 		}
 
 	    crew.setName(txtName.getText());

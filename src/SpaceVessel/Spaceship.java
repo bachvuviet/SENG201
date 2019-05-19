@@ -301,4 +301,7 @@ public class Spaceship extends Outpost {
 		
 		return pilotNum >= 2;
 	}
+	public void setName(String name) {
+		Name = name;
+	}
 }

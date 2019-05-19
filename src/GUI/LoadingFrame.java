@@ -265,7 +265,7 @@ public class LoadingFrame {
 					int index = random.nextInt(9);
 					int randomInt = random.nextInt(11);
 					Stock st = modelSTOCK.get(index);
-					Stock cloneST = new Stock_Food("", 0, 0, "/Stock/bread.png");
+					Stock cloneST = new Stock_Food("", 0, 0, 0, "/Stock/bread.png");
 					if (st instanceof Stock_Medicine) {
 						cloneST = ((Stock_Medicine) st).clone();
 						cloneST.setAmount(randomInt);

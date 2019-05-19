@@ -117,6 +117,7 @@ public class PauseFrame extends JFrame {
 		btnResume.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MyShip.setName(txtShipname.getText());
 				parent.setFocusable(true);
 				parent.setEnabled(true);
 				frame.dispose();
@@ -141,8 +142,8 @@ public class PauseFrame extends JFrame {
 		txtShipname.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtShipname.setBounds(10, 11, 210, 30);
 		txtShipname.setText(MyShip.getVesselName());
-		panelStatus.add(txtShipname);
 		txtShipname.setColumns(10);
+		panelStatus.add(txtShipname);
 		
 		JLabel lblShipvisiual = new JLabel("");
 		lblShipvisiual.setOpaque(true);
@@ -184,12 +185,15 @@ public class PauseFrame extends JFrame {
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
 		ArrayList<Crew> crew = MyShip.getCrewList();
-		for (int i=0; i < 2; i++) {
-			CrewPanel crew1 = new CrewPanel(i*halfX, i*halfY, halfX, halfY, crew.get(2*i), MyShip);
+		int col = 0; int row = 0;
+		for (int i=1; i <= crew.size(); i++) {
+			CrewPanel crew1 = new CrewPanel((i-1-col)*halfX, row*halfY, halfX, halfY, crew.get(i-1), MyShip);
 			panelCrew.add(crew1.contentPan);
 			
-			CrewPanel crew2 = new CrewPanel(i*halfX, (1-i)*halfY, halfX, halfY, crew.get(i*2+1), MyShip);
-			panelCrew.add(crew2.contentPan);
+			if (i%2==0) {
+				col += 2;	
+				row += 1;
+			}
 		}
 		
 		JPanel panelLog = new JPanel();

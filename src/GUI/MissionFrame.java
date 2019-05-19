@@ -26,6 +26,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 /** 
  * This is the second frame, if player choose new game.
@@ -38,8 +40,9 @@ public class MissionFrame {
 	public JFrame frame; 
 	/** Slider to select day of journeys get value in other support method of class.*/
 	private JSlider slideJourneyDay = new JSlider(3, 10, 6);//min, max, initVal
-	/** Variable to support get slideJourneyDay value.*/
 	private int Days = slideJourneyDay.getValue();
+	
+	JSlider slideTotalCrew = new JSlider(2, 4, 4);
 	/** This label tell user how many crew they have selected.*/
 	JLabel lblTotal = new JLabel("");
 	
@@ -54,7 +57,7 @@ public class MissionFrame {
 		frame.setResizable(false);
 		frame.setBounds(0, 0, 1366, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);	
+		frame.getContentPane().setLayout(null);
 		
 		JLabel lblMission = new JLabel("");
 		lblMission.setForeground(new Color(0, 255, 0));
@@ -92,20 +95,46 @@ public class MissionFrame {
 		lblEnterDays.setForeground(Color.WHITE);
 		lblEnterDays.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEnterDays.setFont(new Font("Cambria", Font.BOLD, 18));
-		lblEnterDays.setBounds(928, 52, 221, 22);
+		lblEnterDays.setBounds(852, 52, 221, 22);
 		panelMid.add(lblEnterDays);
 		
 		//Experiment Slider	
 		slideJourneyDay.setSize(221, 43);
-		slideJourneyDay.setLocation(928, 88);
+		slideJourneyDay.setLocation(852, 85);
 		slideJourneyDay.setMajorTickSpacing(3);
 		slideJourneyDay.setMinorTickSpacing(1);
 		slideJourneyDay.setPaintTicks(true);
 		panelMid.add(slideJourneyDay);
 		
+		JLabel lblCrewTotal = new JLabel("CHOOSE 2-4 CREWS");
+		lblCrewTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCrewTotal.setForeground(Color.WHITE);
+		lblCrewTotal.setFont(new Font("Cambria", Font.BOLD, 18));
+		lblCrewTotal.setBounds(1106, 52, 221, 22);
+		panelMid.add(lblCrewTotal);
+		
+		Galaxy.totalCrew = slideTotalCrew.getValue();
+		slideTotalCrew.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg) {
+				for (int i=0; i<6; i++) {
+					Arr[i] = AvatarArr[i];
+					Array[i] = 0;
+					lblTotal.setText("");
+				}
+				avaIndex = 5;
+				
+				Galaxy.totalCrew = slideTotalCrew.getValue();
+			}
+		});
+		slideTotalCrew.setPaintTicks(true);
+		slideTotalCrew.setMinorTickSpacing(1);
+		slideTotalCrew.setMajorTickSpacing(3);
+		slideTotalCrew.setBounds(1106, 85, 221, 43);
+		panelMid.add(slideTotalCrew);
+		
 		//Crew Selection
 		JLabel lblChoosingCrewMembers = new JLabel("");
-		lblChoosingCrewMembers.setText("<html><p>CHOOSING 4 CREW MEMBERS<p>(or right-click to undo)</html>");
+		lblChoosingCrewMembers.setText("<html><p>CHOOSING CREW MEMBERS<p>(or right-click to undo)</html>");
 		lblChoosingCrewMembers.setVerticalAlignment(SwingConstants.TOP);
 		lblChoosingCrewMembers.setForeground(Color.WHITE);
 		lblChoosingCrewMembers.setHorizontalAlignment(SwingConstants.CENTER);
@@ -254,8 +283,8 @@ public class MissionFrame {
 			for (int num:Array) {
 				total += num;
 			}
-			if (total >= 4) {
-				StaticObjects.MessBox("You can have maximum of 4 crew", "Enough Crew", "");
+			if (total >= Galaxy.totalCrew) {
+				StaticObjects.MessBox("You can have maximum of "+Galaxy.totalCrew+" crews", "Enough Crew", "");
 				return;
 			}
 		}

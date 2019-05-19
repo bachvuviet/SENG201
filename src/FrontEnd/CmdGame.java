@@ -43,16 +43,16 @@ public class CmdGame {
 		generateModules();
 		
 		//Stock
-		Stock food1 = new Stock_Food("Burger", 5, 2, "/Stock/burger.png");
-		Stock food2 = new Stock_Food("Bread", 10, 4, "/Stock/bread.png");
-		Stock food3 = new Stock_Food("Pizza", 15, 6, "/Stock/pizza.png");
-		Stock food4 = new Stock_Food("Chicken", 20, 7, "/Stock/Chicken.png");
-		Stock food5 = new Stock_Food("Steak", 25, 8, "/Stock/steak.png");
-		Stock food6 = new Stock_Food("Sushi", 30, 9, "/Stock/sushi.png");
+		Stock food1 = new Stock_Food("Burger", 5, 2, 2, "/Stock/burger.png");
+		Stock food2 = new Stock_Food("Bread", 10, 4, 2, "/Stock/bread.png");
+		Stock food3 = new Stock_Food("Pizza", 15, 6, 2, "/Stock/pizza.png");
+		Stock food4 = new Stock_Food("Chicken", 20, 7, 0, "/Stock/Chicken.png");
+		Stock food5 = new Stock_Food("Steak", 25, 8, 0, "/Stock/steak.png");
+		Stock food6 = new Stock_Food("Sushi", 30, 9, 0, "/Stock/sushi.png");
 		
-		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 20, 10, "/Stock/healpotion.png");
-		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 20, 10, "/Stock/painkiller.png");
-		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, 10, "/Stock/syringe.png");
+		Stock medi1 = new Stock_Medicine("Healing Potion", "Heart", 20, 10, 0, "/Stock/healpotion.png");
+		Stock medi2 = new Stock_Medicine("Pain Killer", "Morale", 20, 10, 0, "/Stock/painkiller.png");
+		Stock medi3 = new Stock_Medicine("Syringe", "Any disease", 10, 10, 0, "/Stock/syringe.png");
 		
 		STOCK.add(food1);STOCK.add(food2);
 		STOCK.add(food3);STOCK.add(food4);
