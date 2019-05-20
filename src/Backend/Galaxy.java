@@ -47,6 +47,9 @@ public class Galaxy implements Serializable {
 		totalCrew = ShipStatic[3];
 		Prestige = ShipStatic[4];
 	}
+	public int[] TestShipStatic() {
+		return ShipStatic;
+	}
 	
 	private String Name;
 	private Spaceship SpaceShip;

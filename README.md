@@ -23,10 +23,21 @@ Remember, you cannot control the ship when Plasma fuel ran out (display in botto
 
 ------------------- Quick tips -------------------------
 Sleep: +30 Morale, -20 Hunger
-Pilot: -30Morale, -30 Hunger
-Repair: -30Morale, -30 Hunger
+Pilot: -30 Morale, -30 Hunger
+Repair: -30 Morale, -30 Hunger
 Use Supplement: Increase HP, Hunger or morale (depends on item)
 
+Stock: ($70 default)
+	Burger: 		 +5 Hunger, Price:  -2$, default Amount: 5
+	Bread: 			+10 Hunger, Price:  -4$, default Amount: 2
+	Pizza: 			+15 Hunger, Price:  -6$, default Amount: 0
+	Chicken: 		+20 Hunger, Price:  -7$, default Amount: 0
+	Steak: 			+25 Hunger, Price:  -8$, default Amount: 0
+	Sushi: 			+30 Hunger, Price:  -9$, default Amount: 2
+	Heal Potion: 	+20 Health, Price: -10$, default Amount: 2
+	Pain Killer: 	+20 Morale, Price: -10$, default Amount: 2
+	Syringe: 		+10 Health, Price: -10$, default Amount: 0, heal desease
+	
 If crew is sick, -50HP per turn
 Crew dies if run out of health
 

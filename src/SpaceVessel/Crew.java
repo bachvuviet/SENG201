@@ -132,24 +132,32 @@ public class Crew implements Serializable {
     	}
 
 		if (stock instanceof Stock_Food) {
-			if (Hunger + boost <= Spaceship.maxCrewHunger)
-				Hunger += boost;
+			Hunger = SupplyEffect(Hunger, boost, Spaceship.maxCrewHunger);
 		}
 		else if (stock instanceof Stock_Medicine) {
 			if (((Stock_Medicine) stock).getHealCategory() == "Health")
-				if (Health + boost <= Spaceship.maxCrewHealth)
-					Health += boost;
-			else if (((Stock_Medicine) stock).getHealCategory() == "Morale")
-				if (Morale + boost <= Spaceship.maxCrewMorale)
-					Morale += boost;
-			else if (Morale + boost <= Spaceship.maxCrewMorale && Health + boost <= Spaceship.maxCrewHealth) {
-				Health += boost;
-				Morale += boost;
+				Health = SupplyEffect(Health, boost, Spaceship.maxCrewHealth);
+			
+			else if (((Stock_Medicine) stock).getHealCategory() == "Morale") 
+				Morale = SupplyEffect(Morale, boost, Spaceship.maxCrewMorale);
+			
+			else {
+				Morale = SupplyEffect(Morale, boost, Spaceship.maxCrewMorale);
+				Health = SupplyEffect(Health, boost, Spaceship.maxCrewHealth);
 				Sick = false;
 			}
 		}
 		crewAction.add("Use Supplement (x2)");  
 		return true;
+    }
+    
+    private int SupplyEffect(int initial, int boost, int max) {
+    	if (initial + boost <= max)
+			initial += boost;
+		else
+			initial = max;
+    	
+    	return initial;
     }
     /**
      * Let Crew sleep to increase Health and Morale, but hungry when wake up
@@ -181,8 +189,9 @@ public class Crew implements Serializable {
      * crew must have action to pilot ship at anytime, otherwise ship cannot move
      */
     public boolean pilotShip() {
-    	if (!checkCrewStat(0, 25, "Pilot Ship")) {
-	    	Morale -= 25;
+    	if (!checkCrewStat(30, 30, "Pilot Ship")) {
+	    	Morale -= 30;
+	    	Hunger -= 30;
 	    	crewAction.add("Pilot");
 	    	return true;
     	} else

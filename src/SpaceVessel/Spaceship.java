@@ -42,7 +42,7 @@ public class Spaceship extends Outpost {
 	
 	//Default
 	private int HullStrength;
-	private int Money = 100;
+	private int Money = 70;
 	
 	//Indexed data	
 	private ArrayList<ShipModule> MODULES = new ArrayList<ShipModule>();
@@ -220,7 +220,10 @@ public class Spaceship extends Outpost {
 	}
 	
 	Random random = new Random();
-	public void EndTurn() {				
+	public void EndTurn() {			
+		if (daysOnMission == Galaxy.maxTurn)
+			return;
+		
 		String[] eventArr = {"Alien Pirates", "Space Plague", "Space Debris/Asteroid belt", "No problem"};
 		String Message = "";
 		int index = random .nextInt(4);

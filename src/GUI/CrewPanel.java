@@ -261,6 +261,7 @@ public class CrewPanel {
 			}
 			break;	
 		default:
+			check = false;
 			break;
 		}
 

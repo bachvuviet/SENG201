@@ -18,7 +18,7 @@ class Crew_Inventory {
 	ArrayList<Stock> STOCK = new ArrayList<Stock>();
 	ArrayList<Crew> tempCrew = new ArrayList<Crew>();
 	@BeforeEach
-	public void init() {
+	void init() {
 		//Crew
 		Galaxy.maxFuel = 800;
 		Galaxy.maxHull = 100;
@@ -61,13 +61,13 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void testGetCrewofShip() {
+	void testGetCrewofShip() {
 		assertEquals(4, testShip.getCrewList().size());
 		assertEquals("Kirk", testShip.getCrewList().get(0).getName());
 	}
 	
 	@Test
-	public void BoostFuel() {
+	void BoostFuel() {
 		Crew newCrew4 = new Crew("Blah", CrewRank.HELMS_MAN, null);
 		tempCrew.add(newCrew4);
 		testShip.CheckCrew();
@@ -77,7 +77,7 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void BoostHull() {	
+	void BoostHull() {	
 		Crew newCrew5 = new Crew("Blah", CrewRank.SCIENTIST, null);
 		tempCrew.add(newCrew5);
 		testShip.CheckCrew();
@@ -87,7 +87,7 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void shipMovement() {	    
+	void shipMovement() {	    
 	    testShip.forward();
 	    assertEquals(195, testShip.getY());
 	    testShip.forward();
@@ -116,12 +116,12 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void TestInventory() {
+	void TestInventory() {
 		assertEquals(9, testShip.getInventory().size());
 	}
 	
 	@Test
-	public void CrewSleep() {
+	void CrewSleep() {
 		Crew cr = testShip.getCrewList().get(0);
 		assertEquals(125, cr.getHunger());
 		assertEquals(125, cr.getMorale());
@@ -135,35 +135,45 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void CrewEat() {
+	void CrewEat() {
 		Crew cr = testShip.getCrewList().get(0);
 		cr.useSupply(5, testShip.getInventory().get(0));//eat
-		assertEquals(150, cr.getHunger());
+		assertEquals(125, cr.getHunger());//Eat when already full
 		assertEquals(125, cr.getHealth());
 		assertEquals(125, cr.getMorale());
+		
+		cr.sleep();
+		cr.useSupply(2, testShip.getInventory().get(0));//eat
+		assertEquals(105, cr.getHunger());//Eat when not full
+		
 	}
 	
 	@Test
-	public void CrewHeal() {
+	void CrewHeal() {
 		Crew cr = testShip.getCrewList().get(0);
 		cr.useSupply(5, testShip.getInventory().get(6));//heal
-		assertEquals(125, cr.getHunger());
-		assertEquals(225, cr.getHealth());
-		assertEquals(125, cr.getMorale());
+		assertEquals(125, cr.getHealth());//Not heal, max health
 		
-		cr.useSupply(5, testShip.getInventory().get(7));//morale
-		assertEquals(125, cr.getHunger());
-		assertEquals(225, cr.getHealth());
-		assertEquals(225, cr.getMorale());
+		cr.useSupply(2, testShip.getInventory().get(7));//morale
+		assertEquals(125, cr.getHealth());//Not heal, max moral
 		
-		cr.useSupply(5, testShip.getInventory().get(8));//any
-		assertEquals(125, cr.getHunger());
-		assertEquals(275, cr.getHealth());
-		assertEquals(275, cr.getMorale());
+		//Test minus action to increase after
+		cr.pilotShip(); cr.pilotShip(); cr.pilotShip();
+		assertEquals(35, cr.getMorale());
+		
+		cr.useSupply(2, testShip.getInventory().get(7));
+		assertEquals(35, cr.getHunger());
+		assertEquals(125, cr.getHealth());
+		assertEquals(75, cr.getMorale());//Heal, not max morale
+		
+		cr.useSupply(2, testShip.getInventory().get(8));//desease cure
+		assertEquals(35, cr.getHunger());
+		assertEquals(125, cr.getHealth());//Not heal, max health
+		assertEquals(95, cr.getMorale());
 	}
 	
 	@Test
-	public void CrewRepair() {
+	void CrewRepair() {
 		Crew cr = testShip.getCrewList().get(0);
 		cr.repair(testShip);
 		// -15 Morale, -20 Hunger
@@ -180,7 +190,7 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void CrewPilot() {
+	void CrewPilot() {
 		Crew cr = testShip.getCrewList().get(0);
 		cr.pilotShip();
 		assertEquals(1, cr.getCrewActivity().size());
@@ -188,7 +198,7 @@ class Crew_Inventory {
 	}
 	
 	@Test
-	public void Trade() {
+	void Trade() {
 		testShip.changeStockAmount(10, STOCK.get(5));
 		assertEquals(15, testShip.getInventory().get(5).getAmount());
 		testShip.changeStockAmount(-5, STOCK.get(4));

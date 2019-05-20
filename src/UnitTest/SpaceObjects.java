@@ -8,17 +8,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Backend.*;
+import CustomUIELmt.StaticObjects;
+import GUI.ScanPlanetFrame;
 import SpaceVessel.*;
 
 class SpaceObjects {
 	Spaceship testShip;
+	Entity en;
 	Galaxy currGalaxy;
 	ArrayList<Galaxy> testGalaList = new ArrayList<Galaxy>();
 	
 	@BeforeEach
 	void init() {
 		//Galaxy
-		testShip = new Spaceship(200,200, "KMS Tirpitz", null);
+		Galaxy.maxTurn = 10;//From Crew_Inventory
+		
 		currGalaxy = new Galaxy("Cadian Galaxy", testShip, "/Background/CadianGalaxy.gif");
 		Galaxy Gala1 = new Galaxy("Orion Galaxy" , null, "/Background/OrionGalaxy.jpg");
 		testGalaList.add(currGalaxy);
@@ -44,8 +48,7 @@ class SpaceObjects {
 		
 		currGalaxy.addSpaceObjects(1, hole1);
 		Gala1.addSpaceObjects(1, hole2);
-	}
-	
+	}	
 	
 	@Test
 	void testJumpGalaxy() {
@@ -56,5 +59,41 @@ class SpaceObjects {
 		assertEquals(null, currGalaxy.getShip());
 		assertNotNull(gala.getShip());
 	}
+	
+	@Test
+	void ScanPlanet() {
+		testShip = new Spaceship(1000, 1000, "KMS Tirpitz", null);
+		en = currGalaxy.getSpaceObjects().get(2);
+		Stock food1 = new Stock_Food("Burger", 5, 2, 5, "/Stock/burger.png");
+		((Planet) en).setTreasure(food1);
+		
+		int scanRad = en.getScanRadius();
+		boolean X = Math.abs(en.getcenterX() - testShip.getcenterX()) <= scanRad;
+		boolean Y = Math.abs(en.getcenterY() - testShip.getcenterY()) <= scanRad;
+		if (X && Y) {
+			if (!((Planet) en).getScan()) {
+				Stock st = ((Planet) en).getTreasure();
+				assertEquals("Found Burger x5", "Found "+ st);
+			} else {
+				assertEquals("Planet Ocean has no more stock.", en.toString()+" has no more stock.");
+			}
+		}
+		
+	}
 
+	@Test 
+	void ScanTradePost() {
+		
+	}
+	
+	@Test
+	void SaveGame() {
+		assertEquals(4, Galaxy.maxTurn);
+		currGalaxy.Save();
+		Galaxy.maxTurn = 4;
+		assertEquals(0, currGalaxy.TestShipStatic()[0]);
+		
+		currGalaxy.Save();
+		assertEquals(4, currGalaxy.TestShipStatic()[0]);
+	}
 }
