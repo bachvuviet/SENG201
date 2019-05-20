@@ -94,10 +94,20 @@ public class Spaceship extends Outpost {
 		mystr = "<html><h1>Modules: " + active + "/" + MODULES.size() + mystr + "</html>";
 		return mystr;
 	}
+	/**
+	 * Quick display of Ship modules list
+	 * @return List of modules
+	 */
 	public ArrayList<ShipModule> getModuleList() {
+	
 		return MODULES;
 	}
+	/**
+	 * Display the Ship modules
+	 * @return Ship modules
+	 */
 	public ShipModule getModule(ShipModule mod) {
+	
 		ShipModule module = new ShipModule();
 		for (ShipModule st: MODULES) {
 			if ((st.getName()).equals(mod.getName())) {
@@ -107,6 +117,10 @@ public class Spaceship extends Outpost {
 		}
 		return module;
 	}
+	
+	/**
+	 * Check the Ship modules
+	 */
 	public void CheckModule() {
 		
 	}
@@ -180,6 +194,10 @@ public class Spaceship extends Outpost {
 	public ArrayList<Crew> getCrewList(){
 		return CREW;
 	}
+	
+	/**
+	 * Get bonus for chosen special crew(s)
+	 */
 
 	public void CheckCrew() {
 		Galaxy.maxHull = 100;
@@ -219,6 +237,9 @@ public class Spaceship extends Outpost {
 		}
 	}
 	
+	/**
+	 * Run random keyEvents and count a new day
+	 */
 	Random random = new Random();
 	public void EndTurn() {			
 		if (daysOnMission == Galaxy.maxTurn)
@@ -241,7 +262,7 @@ public class Spaceship extends Outpost {
 			Message = "Nothing to worry about!";
 			break;
 		}
-		StaticObjects.MessBox(Message+"\nNew Turn biegins", eventArr[index], "Warning");
+		StaticObjects.MessBox(Message+"\nNew Turn begins", eventArr[index], "Warning");
 
 		daysOnMission += 1;
 		setFuel(Galaxy.maxFuel);
@@ -257,6 +278,10 @@ public class Spaceship extends Outpost {
 		}
 	}
 	
+	/**
+	 * Display the AlienPrirates event
+	 * @return Formated String
+	 */
 	String AlienPirates() {
 		String mess = "Alien pirates boarded our ship and stole all of your ";
 		int index = random .nextInt(9);
@@ -267,6 +292,10 @@ public class Spaceship extends Outpost {
 		return mess;
 	}
 	
+	/**
+	 * Display the SpacePlague event
+	 * @return Formated String
+	 */
 	String SpacePlague() {
 		String mess = "A strange plague has not been quarantine. Following crew(s) are currently sick:\n\n";
 		int numSick = random .nextInt(2);
@@ -287,12 +316,20 @@ public class Spaceship extends Outpost {
 		return mess;
 	}
 	
+	/**
+	 * Display the AsteroidBelt event
+	 * @return Formated String
+	 */
 	String AsteroidBelt() {
 		int amount = (int) HullStrength/2;
 		HullStrength -= amount;
 		return "Blame the pilot dude for Sleeping and driving at same time. Ship's hull damaged by "+amount+" points";
 	}
 	
+	/** 
+	 * Check the number of pilots if greater or equal to 2
+	 * @return true if pilotNum >=2 otherwise false
+	 */
 	public boolean enoughPilot() {
 		int pilotNum = 0;
 		
@@ -304,6 +341,11 @@ public class Spaceship extends Outpost {
 		
 		return pilotNum >= 2;
 	}
+	
+	/**
+	 * Set crew's name
+	 * @param name
+	 */
 	public void setName(String name) {
 		Name = name;
 	}

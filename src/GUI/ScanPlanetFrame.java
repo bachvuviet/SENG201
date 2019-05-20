@@ -18,6 +18,13 @@ import CustomUIELmt.StaticObjects;
 public class ScanPlanetFrame {
 	public JFrame frame; 
 	
+	//Constructor
+	/**
+	 * Display a frame when the planet is scanned
+	 * @param Message
+	 * @param path
+	 * @param parent
+	 */
 	public ScanPlanetFrame(String Message, String path, JFrame parent) {
 		int width = 700; int height = 500;
 		

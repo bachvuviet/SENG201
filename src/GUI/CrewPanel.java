@@ -187,6 +187,13 @@ public class CrewPanel {
 
 	boolean check = true;
     String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement (x2)"};
+    
+    /**
+     * Update JComboBox when actions have been chosen 
+     * @param cboSelect
+     * @param cboUpdate
+     * @param ship
+     */
 	void UpdateCbo(JComboBox<String> cboSelect, JComboBox<String> cboUpdate, Spaceship ship) {
 		String choice = "";
 		String choice2 = "";
@@ -209,6 +216,7 @@ public class CrewPanel {
 		}
 		cboUpdate.setSelectedItem(choice2);
 		
+		//call cboSupply when action[4] (Use Supplement (x2)) has been chosen
 		if ((choice.equals(ActionSet[4]) && cboSelect.isEnabled())||(choice2.equals(ActionSet[4]) && cboUpdate.isEnabled())) {
 			if (!cboSupply.isVisible()) {
 				cboSupply.setVisible(true);
