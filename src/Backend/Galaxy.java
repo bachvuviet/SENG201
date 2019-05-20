@@ -7,6 +7,11 @@ import java.util.Collections;
 
 import SpaceVessel.Spaceship;
 
+/**
+ * An object to store multiple Spaceobject (Entity)
+ * @author Bach Vu, Linh Luu
+ *
+ */
 public class Galaxy implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static int maxTurn;
@@ -32,7 +37,7 @@ public class Galaxy implements Serializable {
 			new Tutorial("Lieutenent Linh, tip10", "Yes, we found something. Some planet may have no transporter, some does containing parts to repair our ship and some contain stock.", "Check Ship status now (ESC) to view latest Inventory and Modules status."),
 			new Tutorial("Lieutenent Linh, tip11", "Now let’s head to other planet to find more parts. Remember, you cannot win the game unless all parts are found. If you ran out of Fuel, press Enter to have a rest and the crew will wake you up next day.", "Press Enter to refuel and reset crew action."),
 			new Tutorial("Lieutenent Linh, tip12", "Each crew has 2 tasks to perform per day. Utilise them.<br>Enter the black hole to move to the next galaxy once you have scanned all planets.<br>Space events occur randomly. Keep close eyes to ship stat and crew.<br>If a crew dies, you have less person to perform the action.", "Repair your ship and get back to the fleet.")
-			));
+		));
 	
 	private int[] ShipStatic = {0, 0, 0, 0, 0};
 	
@@ -72,15 +77,15 @@ public class Galaxy implements Serializable {
 		return Name;
 	}
 	/**
-	 * 
-	 * @return
+	 * Get Galaxy Image for Game Environment
+	 * @return background Image path
 	 */
 	public String getBackgroundPath() {
 		return imagePath;
 	}
 	/**
-	 * 
-	 * @return
+	 * Get Ship in Current galaxy
+	 * @return Current Ship of the system (null if ship is in other Galaxy)
 	 */
 	public Spaceship getShip() {
 		return SpaceShip;
@@ -93,16 +98,16 @@ public class Galaxy implements Serializable {
 		return SpaceObjects;
 	}
 	/**
-	 * add entities into the space(frame)
-	 * @param en
+	 * add entities into the space(frame), no prioritise
+	 * @param en Space object to be added
 	 */
 	public void addSpaceObjects(Entity en) {
 		SpaceObjects.add(en);
 	}
 	/**
 	 * add entities and its amount into space
-	 * @param index
-	 * @param en
+	 * @param index Index to add an object (prioritise)
+	 * @param en Space object to be added
 	 */
 	public void addSpaceObjects(int index, Entity en) {
 		SpaceObjects.add(index, en);
@@ -121,7 +126,7 @@ public class Galaxy implements Serializable {
 	}
 	/**
 	 * update ship ...
-	 * @param ship
+	 * @param ship Assign Ship when move to new galaxy (which is null if the ship left)
 	 */
 	public void updateShip(Spaceship ship) {
 		SpaceShip = ship;

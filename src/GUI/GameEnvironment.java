@@ -46,8 +46,8 @@ public class GameEnvironment {
 	 * 
 	 * @param x Width of the frame (always fullscreen)
 	 * @param y Height of the frame (always fullscreen)
-	 * @param ship Receive Spaceship object pass from Mission Frame
-	 * @throws CloneNotSupportedException 
+	 * @param currGala Galaxy prepared by Loading frame now displayed via Game Environment
+	 * @exception CloneNotSupportedException If cannot clone a stock for a reason
 	 */
 	public GameEnvironment(int x, int y, Galaxy currGala) {
 		frame = new JFrame();

@@ -21,9 +21,9 @@ public class ScanPlanetFrame {
 	//Constructor
 	/**
 	 * Display a frame when the planet is scanned
-	 * @param Message
-	 * @param path
-	 * @param parent
+	 * @param Message Scan success return stock status
+	 * @param path Image path depends on planet type
+	 * @param parent Game Environment is disable just like in pause frame
 	 */
 	public ScanPlanetFrame(String Message, String path, JFrame parent) {
 		int width = 700; int height = 500;

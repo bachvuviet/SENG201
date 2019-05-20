@@ -1,5 +1,10 @@
 package Backend;
 
+/**
+ * Tutorial messages
+ * @author Linh Luu
+ *
+ */
 public class Tutorial {
 	private String Title;
 	private String Message;

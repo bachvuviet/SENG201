@@ -48,11 +48,12 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	private Galaxy currGalaxy;
 	
 	/**
-	 * 
+	 * Transparent container in GameEnvironement, process Key events
 	 * @param width Same width as frame
 	 * @param height Same height as frame
 	 * @param frame GameEnvironment frame
 	 * @param game GameEnvironment object to access fields
+	 * @param currGalaxy Current Galaxy the Ship is at
 	 */
 	public SpaceshipController(int width, int height, JFrame frame, Galaxy currGalaxy, GameEnvironment game) {
 		this.frame = frame;
@@ -233,7 +234,21 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * Update Control panel, summary of turn and move to next day, reset fuel and SpaceEvent
 	 */
 	private void EndTurn() {
-		if (Spaceship.daysOnMission < Galaxy.maxTurn) {
+		//Check win game whenever hit enter
+		if (SpaceShip.CheckModule()) {
+			StaticObjects.MessBox("Congrats, you've won", "Ten Ten", "Info");
+			
+			//Code End Frame here
+			WelcomeFrame window = new WelcomeFrame();
+			window.frame.setLocationRelativeTo(null);
+			window.frame.setVisible(true);
+			
+			frame.dispose();
+			
+			return;
+		}
+
+		if (Spaceship.daysOnMission < Galaxy.maxTurn) {	
 			SpaceShip.EndTurn();
 
 			//Update Control Panel

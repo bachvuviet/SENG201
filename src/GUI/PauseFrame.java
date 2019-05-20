@@ -49,6 +49,7 @@ public class PauseFrame extends JFrame {
 	 * Load all data of ship: ship status, stock, crew and modules
 	 * @param parent Galaxy to be paused (disable control in game environment)
 	 * @param MyShip ship Current ship
+	 * @param currGala Use to save Galaxy status
 	 */
 	public PauseFrame(JFrame parent, Spaceship MyShip, Galaxy currGala) {
 		frame = new JFrame();

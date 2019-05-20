@@ -38,9 +38,6 @@ public class Crew implements Serializable {
      * Actual constructor, only called in MissionFrame when player choose crew type
      * @param name Default by button, rename here
      * @param rank Selected by player via button on mission frame
-     * @param health Depends on crew Rank, min 100
-     * @param hunger Depends on crew Rank, min 100
-     * @param morale Depends on crew Rank, min 100
      * @param img Avatar, depends on crew Rank
      */
     public Crew(String name, CrewRank rank, ImageIcon img) {
@@ -106,7 +103,7 @@ public class Crew implements Serializable {
     
     /**
      * Check if crew is sick 
-     * @param sick
+     * @param sick True if crew get infected
      */
     public void Sick(boolean sick) {
     	Sick = sick;
@@ -140,6 +137,7 @@ public class Crew implements Serializable {
      * Order crew to use stock (food, medicine, portion) from Ship Inventory to increase HP, Hunger and morale
      * @param amount amount of stock to use
      * @param stock what stock to use
+     * @return true if sufficient stock to use
      */
     public boolean useSupply(int amount, Stock stock) {
     	int boost = stock.use(amount);
@@ -187,6 +185,7 @@ public class Crew implements Serializable {
     /**
      * Order crew to repair ship
      * @param Ship Ship of the crew
+     * @return True when crew has enough morale and hunger to repair ship
      */
     public boolean repair(Spaceship Ship) {
     	if (!checkCrewStat(20, 15, "Repair Ship")) {
@@ -203,6 +202,7 @@ public class Crew implements Serializable {
     }
     /**
      * crew must have action to pilot ship at anytime, otherwise ship cannot move
+     * @return True if at least 2 crew assigned for pilot the ship
      */
     public boolean pilotShip() {
     	if (!checkCrewStat(30, 30, "Pilot Ship")) {
@@ -243,7 +243,7 @@ public class Crew implements Serializable {
     }
     /**
      * minus the health in case do action or get sick
-     * @param amount
+     * @param amount Amount to be subtract from original
      */
 	public void minusHealth(int amount) {
 		Health -= amount;

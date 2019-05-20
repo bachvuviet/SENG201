@@ -107,6 +107,7 @@ public class Spaceship extends Outpost {
 	}
 	/**
 	 * Display the Ship modules
+	 * @param mod Module to be found
 	 * @return Ship modules
 	 */
 	public ShipModule getModule(ShipModule mod) {
@@ -147,7 +148,7 @@ public class Spaceship extends Outpost {
 	//setter
 	/**
 	 * Add max fuel
-	 * @param amount boost fuel by helmsman
+	 * @param mod Set Initial Module list
 	 */
 	public void setModule(ArrayList<ShipModule> mod) {
 		MODULES = mod;
@@ -169,6 +170,8 @@ public class Spaceship extends Outpost {
 	/**
 	 * Add/Minus certain amount of money via sell/buy item
 	 * @param amount money to be added/minus
+	 * @param st Stock to be purchase/Sell
+	 * @return True if transaction success
 	 */
 	public boolean changeMoney(int amount, Stock st) {
 		if (amount < 0 && Money >= -amount) {
@@ -238,11 +241,6 @@ public class Spaceship extends Outpost {
 	 */
 	Random random = new Random();
 	public void EndTurn() {	
-		//Check win game whenever hit enter
-		if (CheckModule()) {
-			StaticObjects.MessBox("Congrats, you've won", "Ten Ten", "Info");
-		}
-				
 		if (daysOnMission == Galaxy.maxTurn)
 			return;
 		
@@ -280,8 +278,9 @@ public class Spaceship extends Outpost {
 	}
 	/**
 	 * Check the Ship modules
+	 * @return True if all modules are active and win the game
 	 */
-	boolean CheckModule() {
+	public boolean CheckModule() {
 		for (ShipModule mod:MODULES) {
 			if (!mod.isActive())
 				return false;
@@ -339,7 +338,7 @@ public class Spaceship extends Outpost {
 	
 	/** 
 	 * Check the number of pilots if greater or equal to 2
-	 * @return true if pilotNum >=2 otherwise false
+	 * @return true if pilotNum greater or equal otherwise false
 	 */
 	public boolean enoughPilot() {
 		int pilotNum = 0;
@@ -355,7 +354,7 @@ public class Spaceship extends Outpost {
 	
 	/**
 	 * Set crew's name
-	 * @param name
+	 * @param name new Ship name
 	 */
 	public void setName(String name) {
 		Name = name;

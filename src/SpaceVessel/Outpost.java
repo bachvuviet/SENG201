@@ -71,8 +71,8 @@ public class Outpost extends Entity {
 	}
 	/**
 	 * change the stock amount when collect supplement(s) on planet
-	 * @param amount
-	 * @param stock
+	 * @param amount amount change/eat/sell
+	 * @param stock Stock to use
 	 */
 	public void changeStockAmount(int amount, Stock stock) {
 		for (Stock st: INVENTORY) {
@@ -183,7 +183,7 @@ public class Outpost extends Entity {
 	
 	/**
 	 * set fuel to maximum
-	 * @param maxFuel
+	 * @param maxFuel Reset fuel to certain amount (Use at next day)
 	 */
 	public void setFuel(int maxFuel) {
 		Fuel = maxFuel;		

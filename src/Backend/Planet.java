@@ -33,7 +33,7 @@ public class Planet extends Entity implements CelestialBody {
 	}
 	/**
 	 * set the treasure found on the planet
-	 * @param st
+	 * @param st Hidden Stock set
 	 */
 	public void setTreasure(Stock st) {
 	    hiddenStock = st;
