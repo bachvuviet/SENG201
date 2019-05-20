@@ -8,8 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Backend.*;
-import CustomUIELmt.StaticObjects;
-import GUI.ScanPlanetFrame;
 import SpaceVessel.*;
 
 class SpaceObjects {
@@ -21,7 +19,7 @@ class SpaceObjects {
 	@BeforeEach
 	void init() {
 		//Galaxy
-		Galaxy.maxTurn = 10;//From Crew_Inventory
+		Galaxy.maxTurn = 4;//From Crew_Inventory
 		
 		currGalaxy = new Galaxy("Cadian Galaxy", testShip, "/Background/CadianGalaxy.gif");
 		Galaxy Gala1 = new Galaxy("Orion Galaxy" , null, "/Background/OrionGalaxy.jpg");
@@ -52,6 +50,7 @@ class SpaceObjects {
 	
 	@Test
 	void testJumpGalaxy() {
+		testShip = new Spaceship(1000, 1000, "KMS Tirpitz", null);
 		Entity en = currGalaxy.getSpaceObjects().get(1);
 		Galaxy gala = ((BlackHole) en).JumptoGalaxy(testShip);
 		currGalaxy.deleteShip();
@@ -70,30 +69,65 @@ class SpaceObjects {
 		int scanRad = en.getScanRadius();
 		boolean X = Math.abs(en.getcenterX() - testShip.getcenterX()) <= scanRad;
 		boolean Y = Math.abs(en.getcenterY() - testShip.getcenterY()) <= scanRad;
+		//1st Scan
 		if (X && Y) {
 			if (!((Planet) en).getScan()) {
 				Stock st = ((Planet) en).getTreasure();
 				assertEquals("Found Burger x5", "Found "+ st);
-			} else {
-				assertEquals("Planet Ocean has no more stock.", en.toString()+" has no more stock.");
 			}
 		}
 		
+		//2nd Scan
+		if (X && Y) {
+			if (((Planet) en).getScan()) {
+				assertEquals("Earth Planet has no more stock.", en.toString()+" has no more stock.");
+			}
+		}
 	}
-
-	@Test 
-	void ScanTradePost() {
+	
+	@Test
+	void ScanFarObjects() {
+		testShip = new Spaceship(100, 1000, "KMS Tirpitz", null);
+		en = currGalaxy.getSpaceObjects().get(2);
+		Stock food1 = new Stock_Food("Burger", 5, 2, 5, "/Stock/burger.png");
+		((Planet) en).setTreasure(food1);
 		
+		int scanRad = en.getScanRadius();
+		boolean X = Math.abs(en.getcenterX() - testShip.getcenterX()) <= scanRad;
+		boolean Y = Math.abs(en.getcenterY() - testShip.getcenterY()) <= scanRad;
+		assertEquals(false, (X && Y));
 	}
 	
 	@Test
 	void SaveGame() {
 		assertEquals(4, Galaxy.maxTurn);
 		currGalaxy.Save();
-		Galaxy.maxTurn = 4;
-		assertEquals(0, currGalaxy.TestShipStatic()[0]);
 		
-		currGalaxy.Save();
+		//Test Changing static
+		Galaxy.maxTurn = 10;
 		assertEquals(4, currGalaxy.TestShipStatic()[0]);
+		
+		//Save static fields to array
+		currGalaxy.Save();
+		assertEquals(10, currGalaxy.TestShipStatic()[0]);
+		
+		//Load array to Static fields
+		currGalaxy.TestShipStatic()[0] = 5;
+		currGalaxy.Load();
+		assertEquals(5, Galaxy.maxTurn);
+		
+		testShip = new Spaceship(100, 1000, "KMS Tirpitz", null);
+		Spaceship.daysOnMission = 5;
+		
+		//Save to Ship static
+		assertEquals(0, testShip.TestCrewStatic()[3]);
+		testShip.Save();
+		assertEquals(5, testShip.TestCrewStatic()[3]);
+		
+		//Load array to static
+		testShip.TestCrewStatic()[3] = 10;
+		assertEquals(5, Spaceship.daysOnMission);
+		testShip.Load();
+		assertEquals(10, Spaceship.daysOnMission);
 	}
 }

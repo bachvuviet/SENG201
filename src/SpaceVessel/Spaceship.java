@@ -36,6 +36,9 @@ public class Spaceship extends Outpost {
 		maxCrewMorale = ShipStatic[2];
 		daysOnMission = ShipStatic[3];
 	}
+	public int[] TestCrewStatic() {
+		return ShipStatic;
+	}
 	
 	//Attributes by User
 	private final Faction shipFaction = Faction.IMPERIAL_NAVY;
@@ -252,7 +255,7 @@ public class Spaceship extends Outpost {
 			cr.clearActivity();
 			if (cr.isSick())
 				cr.minusHealth(50);
-			if (cr.getHealth() == 0)
+			if (cr.getHealth() <= 0)
 				cr.dead();
 		}
 	}

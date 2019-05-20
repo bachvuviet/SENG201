@@ -206,4 +206,20 @@ class Crew_Inventory {
 		testShip.changeStockAmount(5, STOCK.get(7));
 		assertEquals(10, testShip.getInventory().get(7).getAmount());
 	}
+	
+	@Test
+	void ToStrigs() {
+		assertEquals(false, testShip.enoughPilot());
+		assertNotEquals("", testShip.getModules());
+		assertNotEquals("", testShip.ShipStatus());
+
+		Crew cr = testShip.getCrewList().get(0);
+		assertNotEquals("", cr.toString());
+		
+		Stock st = testShip.getInventory().get(0);
+		assertNotEquals("", st.toString());
+		assertNotEquals("", st.toStringPrice());
+		assertNotEquals("", st.getStockStatus());
+		
+	}
 } 

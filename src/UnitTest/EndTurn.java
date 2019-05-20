@@ -63,18 +63,31 @@ class EndTurn {
 
 	@Test
 	void testTurn(){
+		Galaxy.maxTurn = 10;
+		
 		testShip.EndTurn();
 		assertEquals(2, Spaceship.daysOnMission);
-		
 		testShip.EndTurn();
 		assertEquals(3, Spaceship.daysOnMission);
-		
 		testShip.EndTurn();
 		assertEquals(4, Spaceship.daysOnMission);
+		testShip.EndTurn();
+		assertEquals(5, Spaceship.daysOnMission);
+		testShip.EndTurn();
+		assertEquals(6, Spaceship.daysOnMission);
+		testShip.EndTurn();
+		assertEquals(7, Spaceship.daysOnMission);
+		testShip.EndTurn();
+		assertEquals(8, Spaceship.daysOnMission);
+		testShip.EndTurn();
+		assertEquals(9, Spaceship.daysOnMission);
+		testShip.EndTurn();
+		assertEquals(10, Spaceship.daysOnMission);
+		
 		
 		//Can't move on next day
 		testShip.EndTurn();
-		assertEquals(4, Spaceship.daysOnMission);
+		assertEquals(10, Spaceship.daysOnMission);
 	}
 	
 	@Test

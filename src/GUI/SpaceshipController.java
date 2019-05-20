@@ -248,7 +248,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 			
 			//StaticObjects.MessBox("New turn begin", "End Turn Complete", "");
 		} else {
-			StaticObjects.MessBox("MissionFail", "Time Elapsed", "");
+			StaticObjects.MessBox("Mission Failed", "Time Elapsed", "");
 		}
 	}
 	

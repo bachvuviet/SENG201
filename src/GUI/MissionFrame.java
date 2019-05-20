@@ -235,7 +235,7 @@ public class MissionFrame {
 		int DaysOnMission = Days;
 		if (name == "")
 			name = "KMS Gneisenau";
-		if (tempCrew.size() < 4) {
+		if (tempCrew.size() < Galaxy.totalCrew) {
 			StaticObjects.MessBox("You haven't got enough crew, make more friends captain", "Not enough crew", "Info");
 			return;
 		}
