@@ -121,13 +121,6 @@ public class Spaceship extends Outpost {
 		return module;
 	}
 	
-	/**
-	 * Check the Ship modules
-	 */
-	public void CheckModule() {
-		
-	}
-	
 	//Supply Ship Methods - getter
 	/**
 	 * Get Health of Ship
@@ -244,7 +237,12 @@ public class Spaceship extends Outpost {
 	 * Run random keyEvents and count a new day
 	 */
 	Random random = new Random();
-	public void EndTurn() {			
+	public void EndTurn() {	
+		//Check win game whenever hit enter
+		if (CheckModule()) {
+			StaticObjects.MessBox("Congrats, you've won", "Ten Ten", "Info");
+		}
+				
 		if (daysOnMission == Galaxy.maxTurn)
 			return;
 		
@@ -279,6 +277,16 @@ public class Spaceship extends Outpost {
 			if (cr.getHealth() <= 0)
 				cr.dead();
 		}
+	}
+	/**
+	 * Check the Ship modules
+	 */
+	boolean CheckModule() {
+		for (ShipModule mod:MODULES) {
+			if (!mod.isActive())
+				return false;
+		}
+		return true;
 	}
 	
 	/**
