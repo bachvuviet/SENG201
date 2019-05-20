@@ -38,6 +38,9 @@ public class LoadingFrame {
 	
 	int width, height;
     
+	/**
+	 * Initialize the content of loading frame
+	 */
 	void Initialize() {
 		GraphicsDevice gd[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 		width = gd[0].getDisplayMode().getWidth();
@@ -57,6 +60,11 @@ public class LoadingFrame {
 		frame.getContentPane().add(loadingScreen);
 	}
 	
+	/**
+	 * Load game while galaxy has been changed
+	 * @param gala
+	 * @param LoadGame
+	 */
 	//Change galaxy
 	public LoadingFrame(Galaxy gala, boolean LoadGame) {
 		Initialize();
@@ -73,7 +81,9 @@ public class LoadingFrame {
 		Initialize();
 		SpaceShip = ship;
 	}
-	
+	/**
+	 * Generate a new game
+	 */
 	public void NewMission() {
 		//Ship Default Inventory
 		ArrayList<Stock> modelSTOCK = generateStock();	

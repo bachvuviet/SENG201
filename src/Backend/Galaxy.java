@@ -16,6 +16,9 @@ public class Galaxy implements Serializable {
 	public static int Prestige;//Point
 	public static int currTutorial;
 	
+	/**
+	 * Create the arrayList included tips to play
+	 */
 	public static ArrayList<Tutorial> Tutorial = new ArrayList<Tutorial>(Arrays.asList(
 			new Tutorial("Leutenent Linh, tip1", "Captain, our ship is severely damaged from last battle and now lost contact with the fleet. We must find parts on surrounding planet to replace damaged modules before regroups with battlefleet Silver Dawn. Admiral Venesca Catallia is wounded, you will take chare of the whole ship.", "Press ESC to assess ship situation"),
 			new Tutorial("Leutenent Linh, tip2", "As you can see, some of the modules is not active. Also, inventory is low on stock after the long journey. Come back to this panel anytime you wish to review the latest ship Status.", "Now select Crew tab to visit our crew."),
@@ -61,38 +64,65 @@ public class Galaxy implements Serializable {
 		SpaceShip = ship;
 		imagePath = backGroundPath;
 	}
-	
+	/**
+	 * get the galaxy name
+	 * @return galaxy name
+	 */
 	public String getGalaxyName() {
 		return Name;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getBackgroundPath() {
 		return imagePath;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public Spaceship getShip() {
 		return SpaceShip;
 	}
-	
+	/**
+	 * get list of space objects 
+	 * @return list of space objects
+	 */
 	public ArrayList<Entity> getSpaceObjects(){
 		return SpaceObjects;
 	}
-	
+	/**
+	 * add entities into the space(frame)
+	 * @param en
+	 */
 	public void addSpaceObjects(Entity en) {
 		SpaceObjects.add(en);
 	}
+	/**
+	 * add entities and its amount into space
+	 * @param index
+	 * @param en
+	 */
 	public void addSpaceObjects(int index, Entity en) {
 		SpaceObjects.add(index, en);
 	}
-	
+	/**
+	 * Random the entities in the new galaxy frame
+	 */
 	public void shuffleSpaceObjects() {
 		Collections.shuffle(SpaceObjects);
 	}
-
+	/**
+	 * del ship ...
+	 */
 	public void deleteShip() {
 		SpaceShip = null;		
 	}
-
+	/**
+	 * update ship ...
+	 * @param ship
+	 */
 	public void updateShip(Spaceship ship) {
 		SpaceShip = ship;
 	}

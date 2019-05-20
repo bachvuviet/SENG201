@@ -53,36 +53,45 @@ public class Crew implements Serializable {
     
     //getter
     /** Get crew's name
-     * @return Crew Name*/
+     * @return Crew Name
+     */
     public String getName( ) {
     	return Name;
     }
     /** Get crew's rank
-     * @return CrewRank*/
+     * @return CrewRank
+     */
     public CrewRank getRank() {
     	return Rank;
     }
     /** Get crew's health
-     * @return HP point*/
+     * @return HP point
+     */
     public int getHealth() {
     	return Health;
     }
     /** Get crew's morale
-     * @return Morale point*/
+     * @return Morale point
+     */
     public int getMorale() {
     	return Morale;
     }
     /** Get crew's hunger
-     * @return Hunger point*/
+     * @return Hunger point
+     */
     public int getHunger() {
     	return Hunger;
     }
     /** Get crew's image, to display as label icon
-     * @return Crew Avatar*/
+     * @return Crew Avatar
+     */
     public ImageIcon getAvatar() {
     	return avatar;
     }
-    
+    /**
+     * Check if crew is sick
+     * @return boolean sick
+     */
     public boolean isSick() {
     	return Sick;
     }
@@ -95,10 +104,17 @@ public class Crew implements Serializable {
     	Name = name;
     }
     
+    /**
+     * Check if crew is sick 
+     * @param sick
+     */
     public void Sick(boolean sick) {
     	Sick = sick;
     }
     
+    /**
+     * Set the maximum stats of crew
+     */
     public void MaxStat() {
     	Health = Spaceship.maxCrewHealth;
     	Hunger = Spaceship.maxCrewHunger;
@@ -204,11 +220,15 @@ public class Crew implements Serializable {
     public ArrayList<String> getCrewActivity(){
     	return crewAction;
     }
+    /**
+     * Delete the actions of crew
+     */
 	public void clearActivity() {
 		crewAction.clear();
 	}
     /**
      * Quick output to check Crew status when testing
+     * @return Formated String
      */
     public String toString() {
     	String mystr = "";
@@ -221,11 +241,16 @@ public class Crew implements Serializable {
     	}
     	return mystr;
     }
-    
+    /**
+     * minus the health in case do action or get sick
+     * @param amount
+     */
 	public void minusHealth(int amount) {
 		Health -= amount;
 	}
-	
+	/**
+	 * crew(s) die when health = 0
+	 */
 	public void dead() {
 		Real = false;		
 	}

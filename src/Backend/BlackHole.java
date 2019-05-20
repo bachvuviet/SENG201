@@ -18,12 +18,15 @@ public class BlackHole extends Entity implements CelestialBody {
 		super(x, y, w, h, Name, "", new ArrayList<String>(Arrays.asList("/Celestial/Hole1.png","/Celestial/Hole2.png")));
 		Destination = gala;
 	}
-
+	
 	public Galaxy JumptoGalaxy(Spaceship ship) {
 		Destination.updateShip(ship);
 		return Destination;
 	}
-	
+	/**
+	 * Display the destination of the galaxy the ship supposed to jump
+	 * @return Formated String
+	 */
 	@Override
 	public String toString() {
 		return "Ready to jump to "+Destination.getGalaxyName()+"!";

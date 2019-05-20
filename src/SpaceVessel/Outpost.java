@@ -64,12 +64,16 @@ public class Outpost extends Entity {
     
 	@Override
 	/**
-	 * @return String representqtion of outpost
+	 * @return String representation of outpost
 	 */
 	public String toString() {
 		return "Welcome to " + Name;
 	}
-	
+	/**
+	 * change the stock amount when collect supplement(s) on planet
+	 * @param amount
+	 * @param stock
+	 */
 	public void changeStockAmount(int amount, Stock stock) {
 		for (Stock st: INVENTORY) {
 			if ((st.getName()).equals(stock.getName())) {
@@ -177,6 +181,10 @@ public class Outpost extends Entity {
 		return Fuel;
 	}
 	
+	/**
+	 * set fuel to maximum
+	 * @param maxFuel
+	 */
 	public void setFuel(int maxFuel) {
 		Fuel = maxFuel;		
 	}

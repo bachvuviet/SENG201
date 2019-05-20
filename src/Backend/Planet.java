@@ -24,19 +24,32 @@ public class Planet extends Entity implements CelestialBody {
 	public String getBackgroundPath() {
 		return backgroundPath;
 	}
-	
+	/**
+	 * get the scan of the planet
+	 * @return scanned
+	 */
 	public boolean getScan() {
 		return Scanned;
 	}
+	/**
+	 * set the treasure found on the planet
+	 * @param st
+	 */
 	public void setTreasure(Stock st) {
 	    hiddenStock = st;
 	}
 	
+	/**
+	 * get the treasure found on the planet
+	 * @return hiddenStock
+	 */
 	public Stock getTreasure() {
 		Scanned = true;
 		return hiddenStock;
 	}
-	
+	/**
+	 * @return name of the planet the ship lands on
+	 */
 	public String toString() {
 		return Name + " Planet";
 	}
