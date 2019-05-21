@@ -236,13 +236,43 @@ public class Spaceship extends Outpost {
 		}
 	}
 	
+	public void CalculatePrestige() {		
+		//Plus all alive crews' stat
+		for (Crew cr:CREW) {
+			if (cr.Real) {
+				Galaxy.Prestige += cr.getHealth();
+				Galaxy.Prestige += cr.getHunger();
+				Galaxy.Prestige += cr.getMorale();				
+			}
+		}
+		
+		//Plus values of stock
+		for (Stock st:INVENTORY) {
+			Galaxy.Prestige += st.getPrice();
+		}
+		
+		//Plus 100 point for each active modules
+		for (int i=0; i<MODULES.size(); i++) {
+			Galaxy.Prestige += 100;
+		}
+		
+	}
+	
 	/**
 	 * Run random keyEvents and count a new day
 	 */
 	Random random = new Random();
+	/**
+	 * Calculate new Point.
+	 * <br>Do Space Events at random.
+	 * <br>Update Crew stat at turn end, reset crew action.
+	 * Do none of above if turn exceed
+	 */
 	public void EndTurn() {	
 		if (daysOnMission == Galaxy.maxTurn)
 			return;
+		
+		CalculatePrestige();
 		
 		String[] eventArr = {"Alien Pirates", "Space Plague", "Space Debris/Asteroid belt", "No problem"};
 		String Message = "";

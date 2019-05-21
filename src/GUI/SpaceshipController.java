@@ -45,6 +45,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	private JProgressBar Hull;
 	private JLabel Days;
 	private JLabel Tutorial;
+	private JLabel Prestige;
 	private Galaxy currGalaxy;
 	
 	/**
@@ -56,7 +57,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * @param currGalaxy Current Galaxy the Ship is at
 	 */
 	public SpaceshipController(int width, int height, JFrame frame, Galaxy currGalaxy, GameEnvironment game) {
-		this.frame = frame;
+		this.frame = game.frame;
 		this.width = width;
 		this.height = height;
 		
@@ -64,6 +65,7 @@ public class SpaceshipController extends JPanel implements KeyListener{
 		this.Hull = game.Hull;
 		this.Days = game.lblDay;
 		this.Tutorial = game.lblTutorial;
+		this.Prestige = game.lblPrestige;
 		this.currGalaxy = currGalaxy;
 		this.SpaceObjects = currGalaxy.getSpaceObjects();
 		
@@ -233,10 +235,14 @@ public class SpaceshipController extends JPanel implements KeyListener{
 	 * Press Enter
 	 * Update Control panel, summary of turn and move to next day, reset fuel and SpaceEvent
 	 */
-	private void EndTurn() {
+	private void EndTurn() {		
 		//Check win game whenever hit enter
 		if (SpaceShip.CheckModule()) {
-			StaticObjects.MessBox("Congrats, you've won", "Ten Ten", "Info");
+			Galaxy.Prestige += 10000;
+			SpaceShip.CalculatePrestige();
+			StaticObjects.MessBox("Captain, we have found enough parts to fully repair our ship.\n"
+					+ "Your total Prestige for looking after your ship and crews: "+ Galaxy.Prestige +"\n"
+					+ "Let warp back to Imperial Head Quarter to promote your rank.", "Mission Complete", "Info");
 			
 			//Code End Frame here
 			WelcomeFrame window = new WelcomeFrame();
@@ -263,8 +269,12 @@ public class SpaceshipController extends JPanel implements KeyListener{
 			
 			//StaticObjects.MessBox("New turn begin", "End Turn Complete", "");
 		} else {
-			StaticObjects.MessBox("Mission Failed", "Time Elapsed", "");
+			StaticObjects.MessBox("Time Elapsed, we have failed to repair our ship in time. We can no longer sustain life in this vessel.\n"
+					+ "Your total Prestige for looking after your ship and crews: "+ Galaxy.Prestige +"\n"
+					+ "See you in the afterlife", "Mission Failed", "Error");
 		}
+		
+		Prestige.setText("Prestige: "+Galaxy.Prestige);
 	}
 	
 	/**

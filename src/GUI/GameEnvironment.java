@@ -35,7 +35,8 @@ public class GameEnvironment {
 	public JProgressBar Hull;
 	public JButton btnEndTurn;
 	public JLabel lblDay = new JLabel("");
-	public JLabel lblTutorial;
+	public JLabel lblTutorial = new JLabel("");
+	public JLabel lblPrestige = new JLabel("");
 	
 	/** Spaceship generated from MissionFrame*/
 
@@ -90,9 +91,14 @@ public class GameEnvironment {
 		Hull.setForeground(Color.RED);
 		
 		lblDay.setText("Day on mission: "+Spaceship.daysOnMission+"/"+Galaxy.maxTurn);
-		lblDay.setBounds(10, 70, 330, 20);
+		lblDay.setBounds(10, 70, 160, 20);
 		lblDay.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblDay.setFont(new Font("Cambria", Font.BOLD, 14));
+		
+		lblPrestige.setText("Prestige: "+Galaxy.Prestige);
+		lblPrestige.setBounds(170, 70, 160, 20);
+		lblPrestige.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblPrestige.setFont(new Font("Cambria", Font.BOLD, 14));
 				
 		btnEndTurn = new JButton("Next Day (Enter)");
 		btnEndTurn.setBounds(10, 110, 330, 30);
@@ -103,10 +109,10 @@ public class GameEnvironment {
 		controlPan.add(lblHull);
 		controlPan.add(Hull);
 		controlPan.add(lblDay);
+		controlPan.add(lblPrestige);
 		controlPan.add(btnEndTurn);
 		
 		//Tutorial
-		lblTutorial = new JLabel("");
 		lblTutorial.setBounds(0, y-250, 500, 230);
 		lblTutorial.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		lblTutorial.setVerticalAlignment(SwingConstants.TOP);
