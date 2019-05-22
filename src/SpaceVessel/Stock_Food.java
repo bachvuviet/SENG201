@@ -57,7 +57,7 @@ public class Stock_Food implements Stock, Cloneable {
 		return amount +"x " +Name + " (Food):<p> --> Effect: Crew Hunger +" +boostValue;
 	}
 	public String toStringPrice() {
-		return Name + " x5: "+ Price + "$ each";
+		return Name + ": "+ Price + "$ each";
 	}
 	public String toString() {
 		return Name +" x"+ amount;

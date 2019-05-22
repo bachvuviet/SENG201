@@ -67,7 +67,7 @@ public class Stock_Medicine implements Stock, Cloneable {
 		return amount +"x "+ Name + " (MED for " + healCategory +"):<p> --> Effect: Crew HP +" +boostValue;
 	}
 	public String toStringPrice() {
-		return Name + " x5: "+ Price + "$ each.";
+		return Name + ": "+ Price + "$ each.";
 	}
 	public String toString() {
 		return Name + " x"+ amount;

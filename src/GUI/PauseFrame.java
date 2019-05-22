@@ -181,7 +181,6 @@ public class PauseFrame extends JFrame {
 		
 		int halfX = (int) 760/2;
 		int halfY = (int) 530/2;
-		//System.out.println(halfX + " " + halfY);
 		
 		tabbedPane.addTab("Crew Status", null, panelCrew, null);
 		
@@ -196,9 +195,6 @@ public class PauseFrame extends JFrame {
 				row += 1;
 			}
 		}
-		
-		JPanel panelLog = new JPanel();
-		tabbedPane.addTab("Mission Log", null, panelLog, null);
 	}
 }
 

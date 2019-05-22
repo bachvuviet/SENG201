@@ -186,7 +186,7 @@ public class CrewPanel {
 	}
 
 	boolean check = true;
-    String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement (x2)"};
+    String[] ActionSet = {"", "Sleep", "Repair", "Pilot", "Use Supplement (x1)"};
     
     /**
      * Update JComboBox when actions have been chosen 
@@ -216,7 +216,7 @@ public class CrewPanel {
 		}
 		cboUpdate.setSelectedItem(choice2);
 		
-		//call cboSupply when action[4] (Use Supplement (x2)) has been chosen
+		//call cboSupply when action[4] (Use Supplement (x1)) has been chosen
 		if ((choice.equals(ActionSet[4]) && cboSelect.isEnabled())||(choice2.equals(ActionSet[4]) && cboUpdate.isEnabled())) {
 			if (!cboSupply.isVisible()) {
 				cboSupply.setVisible(true);
@@ -257,11 +257,11 @@ public class CrewPanel {
 	    		check = false;
 			}
 			break;
-		case "Use Supplement (x2)": 
+		case "Use Supplement (x1)": 
 			for (Stock st:ship.getInventory()) {
 				if (cboSupply.getSelectedItem().equals(st)) {
-					if(!crew.useSupply(2, st)) {
-						StaticObjects.MessBox("Have less than 2x "+st.getName(), "Not enough Stock", "Error");
+					if(!crew.useSupply(1, st)) {
+						StaticObjects.MessBox("Have less than 1x "+st.getName(), "Not enough Stock", "Error");
 						check = false;
 					} else
 						cboSupply.setVisible(false);

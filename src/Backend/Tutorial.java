@@ -41,6 +41,6 @@ public class Tutorial {
 	 * @return formated string
 	 */
 	public String toString() {
-		return "";
+		return "<html><h2>"+Title+"<p>"+Message+"<p>"+PS+"</html>";
 	}
 }

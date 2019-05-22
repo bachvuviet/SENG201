@@ -161,7 +161,7 @@ public class OutpostTrade {
 	 * @param mode 1 is buy, -1 is sell
 	 */
 	void updateStockAmount(Stock st, int index, int mode) {
-		int amountToTrade = 5; //buy or sell
+		int amountToTrade = 1; //buy or sell
 		if (ship.changeMoney(-st.getPrice() * (amountToTrade * mode), st)) {
 			st.setAmount(st.getAmount()+amountToTrade * mode);
 			lblInventory.setText("You have "+ship.getMoney()+"$"); 

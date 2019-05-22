@@ -81,16 +81,6 @@ public class SpaceshipController extends JPanel implements KeyListener{
 		this.SpaceShip = currGalaxy.getShip();
 		Fuel.setToolTipText(Fuel.getMaximum() + "/" + Fuel.getMaximum());
 		Hull.setToolTipText(SpaceShip.getHull() + "/" + SpaceShip.getHull());
-		
-		/*
-		btnEndTurn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//EndTurn();
-				contentPane.setOpaque(true);
-				contentPane.setFocusable(true);
-				contentPane.requestFocus();
-			}
-		});*/
 	}
 	
 	//KeyListener Action
