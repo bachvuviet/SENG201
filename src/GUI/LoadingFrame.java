@@ -223,11 +223,11 @@ public class LoadingFrame {
 		Outpost post1 = new Outpost(200, 300, 100, 100, "Eldar TradePost", "/Ship/EldarSpaceStation.png");
 		Outpost post2 = new Outpost(700, 800, 100, 100, "SpaceMarine Shipyard", "/Ship/SpaceMarineStation.png");
 		
-		BlackHole hole1a = new BlackHole(20, 30, 150, 150, "MegaBlack", Gala1);
-		BlackHole hole1b = new BlackHole(20, 30, 150, 150, "MegaBlack", currGalaxy);
+		BlackHole hole1a = new BlackHole(1450, 500, 150, 150, "MegaBlack", Gala1);
+		BlackHole hole1b = new BlackHole(1450, 500, 150, 150, "MegaBlack", currGalaxy);
 		
-		BlackHole hole2a = new BlackHole(1450, 700, 200, 200, "MediumBlue", Gala2);
-		BlackHole hole2b = new BlackHole(1450, 700, 200, 200, "MediumBlue", Gala1);
+		BlackHole hole2a = new BlackHole(50, 600, 200, 200, "MediumBlue", Gala2);
+		BlackHole hole2b = new BlackHole(50, 600, 200, 200, "MediumBlue", Gala1);
 		
 		BlackHole hole3a = new BlackHole(1450, 100, 200, 200, "MediumBlue", currGalaxy);
 		BlackHole hole3b = new BlackHole(1450, 100, 200, 200, "MediumBlue", Gala2);

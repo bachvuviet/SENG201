@@ -174,10 +174,10 @@ public class Spaceship extends Outpost {
 	 * @return True if transaction success
 	 */
 	public boolean changeMoney(int amount, Stock st) {
-		if (amount < 0 && Money >= -amount) {
+		if (amount < 0 && Money >= -amount) {//Buy
 			Money += amount;
 			return true;
-		} else if (amount > 0 && st.getAmount() >= 5) {
+		} else if (amount > 0 && st.getAmount() >= 1) {//Sell
 			Money += amount;
 			return true;
 		} else

@@ -166,7 +166,7 @@ public class Crew implements Serializable {
     }
     
     private int SupplyEffect(int initial, int boost, int max) {
-    	if (initial + boost <= max)
+    	if ((initial + boost) < max)
 			initial += boost;
 		else
 			initial = max;
@@ -177,9 +177,13 @@ public class Crew implements Serializable {
      * Let Crew sleep to increase Health and Morale, but hungry when wake up
      */
     public void sleep() {
-    	Health += 5;
-    	Morale += 25;
-    	Hunger -= 20;
+    	Health = SupplyEffect(Health, 5, Spaceship.maxCrewHealth);
+    	Morale = SupplyEffect(Morale, 25, Spaceship.maxCrewMorale);
+    	System.out.println(Hunger);
+    	if (Hunger >= 20)
+    		Hunger -= 20;
+    	else
+    		Hunger = 0;
     	crewAction.add("Sleep");
     }
     /**

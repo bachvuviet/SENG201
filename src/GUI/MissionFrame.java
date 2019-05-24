@@ -39,7 +39,7 @@ import javax.swing.event.ChangeEvent;
 public class MissionFrame {
 	public JFrame frame; 
 	/** Slider to select day of journeys get value in other support method of class.*/
-	private JSlider slideJourneyDay = new JSlider(3, 10, 6);//min, max, initVal
+	private JSlider slideJourneyDay = new JSlider(3, 10, 4);//min, max, initVal
 	private int Days = slideJourneyDay.getValue();
 	
 	JSlider slideTotalCrew = new JSlider(2, 4, 4);

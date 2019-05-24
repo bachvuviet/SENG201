@@ -96,7 +96,7 @@ public class GameEnvironment {
 		lblDay.setFont(new Font("Cambria", Font.BOLD, 14));
 		
 		lblPrestige.setText("Prestige: "+Galaxy.Prestige);
-		lblPrestige.setBounds(170, 70, 160, 20);
+		lblPrestige.setBounds(185, 70, 160, 20);
 		lblPrestige.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblPrestige.setFont(new Font("Cambria", Font.BOLD, 14));
 				
