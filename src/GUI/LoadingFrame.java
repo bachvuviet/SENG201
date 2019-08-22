@@ -99,7 +99,7 @@ public class LoadingFrame {
 	    try {
 			hideStock(modelSTOCK);
 		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
+			e.printStackTrace();//bach
 		}
 	    makeSpaceStations();
 	    try {
