@@ -249,6 +249,11 @@ public class LoadingFrame {
 		}	
 	}
 
+	/**
+	 * 
+	 * @param modelSTOCK
+	 * @throws CloneNotSupportedException
+	 */
 	private void hideStock(ArrayList<Stock> modelSTOCK) throws CloneNotSupportedException {
 		//Hide modules of ship
 		ArrayList<ShipModule> missingModule = new ArrayList<ShipModule>();
