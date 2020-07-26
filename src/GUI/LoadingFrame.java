@@ -112,7 +112,8 @@ public class LoadingFrame {
 	
 	private void PlayIntroVideo() throws Exception {
 		Desktop dt = Desktop.getDesktop();
-    	File movie = new File(LoadingFrame.class.getProtectionDomain().getCodeSource().getLocation().getPath()+"/GameIntro.mp4");
+    	//File movie = new File(LoadingFrame.class.getProtectionDomain().getCodeSource().getLocation().getPath()+"GameIntro.mp4");
+		File movie = new File("C:\\Users\\User\\OneDrive\\myUC data\\Courses\\SENG201 code\\SpaceExplorer\\GameData\\GameIntro.mp4");
 		dt.open(movie);
 		Thread.sleep(3000);
 	}
