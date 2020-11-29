@@ -38,8 +38,8 @@ Use Supplement: Increase HP, Hunger or morale (depends on item)
 	Chicken: 		+20 Hunger, Price:  -7$, default Amount: 0
 	Steak: 			+25 Hunger, Price:  -8$, default Amount: 0
 	Sushi: 			+30 Hunger, Price:  -9$, default Amount: 0
-	Heal Potion: 	+20 Health, Price: -10$, default Amount: 1
-	Pain Killer: 	+20 Morale, Price: -10$, default Amount: 1
+	Heal Potion: 		+20 Health, Price: -10$, default Amount: 1
+	Pain Killer: 		+20 Morale, Price: -10$, default Amount: 1
 	Syringe: 		+10 Health, Price: -10$, default Amount: 1, heal desease
 	
 - If crew is sick, -50HP per turn
